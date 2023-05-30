@@ -7,7 +7,7 @@
 	$: currentPage = $page.route.id;
 </script>
 
-<AppBar background="variant-glass-primary">
+<AppBar background="variant-ghost-surface">
 	<svelte:fragment slot="lead">
 		<HomeButton />
 	</svelte:fragment>
@@ -16,20 +16,29 @@
 		<nav>
 			<ul class="flex gap-2 items-center">
 				<li>
-					<a class="btn btn-md variant-ghost" href="/work" data-sveltekit-preload-data="hover"
-						>Work</a
+					<a
+						class="btn btn-md variant-ghost"
+						class:variant-filled={currentPage === 'work'}
+						href="/work"
+						data-sveltekit-preload-data="hover">Work</a
 					>
 				</li>
 
 				<li>
-					<a class="btn btn-md variant-ghost" href="/blog" data-sveltekit-preload-data="hover"
-						>Blog</a
+					<a
+						class="btn btn-md variant-ghost"
+						class:variant-filled={currentPage === 'blog'}
+						href="/blog"
+						data-sveltekit-preload-data="hover">Blog</a
 					>
 				</li>
 
 				<li>
-					<a class="btn btn-md variant-ghost" href="/about" data-sveltekit-preload-data="hover"
-						>About</a
+					<a
+						class="btn btn-md variant-ghost"
+						class:variant-filled={currentPage === 'about'}
+						href="/about"
+						data-sveltekit-preload-data="hover">About</a
 					>
 				</li>
 

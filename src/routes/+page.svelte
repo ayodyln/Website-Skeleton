@@ -14,6 +14,7 @@
 			let work = await fetch('api/projects');
 			let work_res = await work.json();
 			featuredWork = work_res.filter((project: any) => project.tags.includes('Featured'));
+			console.log(featuredWork)
 		} catch (error) {
 			console.log(error);
 		}
@@ -23,9 +24,8 @@
 <section>
 	<Hero />
 
-	<div class="min-h-[1116px] max-w-5xl m-auto">
-		<section class="w-full m-auto py-6 h-fit">
-			<h2 class="text-2xl font-bold text-current opacity-50 mb-4">Featured Projects</h2>
+	<div class=" max-w-5xl m-auto">
+		<section>
 			<DisplayWork work={featuredWork} />
 		</section>
 	</div>

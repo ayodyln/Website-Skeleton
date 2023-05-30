@@ -15,16 +15,10 @@
 	<svelte:fragment slot="header">
 		<Header />
 	</svelte:fragment>
-	<!-- (sidebarLeft) -->
-	<!-- (sidebarRight) -->
-	<!-- (pageHeader) -->
-	<!-- Router Slot -->
-	<main class="flex-grow">
+	<main class="flex-grow mb-20">
 		<slot />
 	</main>
-	<!-- ---- / ---- -->
 	<svelte:fragment slot="pageFooter">
 		<Footer />
 	</svelte:fragment>
-	<!-- (footer) -->
 </AppShell>

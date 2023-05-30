@@ -1,4 +1,4 @@
-<div class="h-[60vh] flex flex-col items-center">
+<div class="h-[85vh] flex flex-col items-center">
 	<div class="max-w-5xl m-auto space-y-4">
 		<h1 class="text-9xl">
 			<span

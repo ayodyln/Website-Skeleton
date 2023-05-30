@@ -4,29 +4,29 @@
 	import NoImage from './NoImage.svelte';
 
 	export let work: Project[];
-
-	onMount(() => {});
 </script>
 
-<ul class="">
+<ul class="w-full space-y-4">
 	{#each work as project, i}
-		<a href="/" class="block flex">
-			<section id="workCardImage">
-				{#if project.feature_image}
-					<img src={project.feature_image} alt={project.title} class="h-full w-full" />
+		<a
+			href={project.path}
+			data-sveltekit-preload-data="hover"
+			class="block flex {i % 2 === 0 ? 'justify-end' : 'justify-start'} relative"
+		>
+			<figure class="w-2/3 overflow-hidden flex items-center justify-center">
+				{#if project.hero_image}
+					<img
+						src={project.hero_image}
+						alt={project.title}
+						class="object-cover object-center w-full h-auto"
+					/>
 				{:else}
 					<NoImage />
 				{/if}
-			</section>
+			</figure>
 
-			<div id="content" class="variant-ghost-surface">
-				<div class="space-y-2">
-					<h2 class="font-bold font-mono text-2xl">{project.title}</h2>
-
-					<p class="">
-						{project.blurb}
-					</p>
-				</div>
+			<div class="bg-surface-800 absolute {i % 2 === 0 ? 'left-0 ' : 'right-0'} h-full w-1/3 p-2">
+				<h2>{project.title}</h2>
 			</div>
 		</a>
 	{/each}
