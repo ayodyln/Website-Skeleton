@@ -3,19 +3,11 @@
 	import { AppBar } from '@skeletonlabs/skeleton'
 	import { LightSwitch } from '@skeletonlabs/skeleton'
 	import HomeButton from './HomeButton.svelte'
-	import { theme } from '$lib/stores'
 	import { onMount } from 'svelte'
 
 	$: currentPage = $page.route.id
 
-	function themeHandler(event: any) {
-		const lightSwitch = document.querySelector('[aria-label="Light Switch"]')
-		$theme = $theme === 'dark' ? 'light' : 'dark'
-	}
-
-	onMount(() => {
-		const lightSwitch: any = document.querySelector('[aria-label="Light Switch"]')
-	})
+	onMount(() => {})
 </script>
 
 <AppBar background="variant-ghost-surface">
@@ -54,7 +46,9 @@
 				</li>
 
 				<li class="ml-4">
-					<LightSwitch on:click={themeHandler} />
+					<LightSwitch
+						
+					/>
 				</li>
 			</ul>
 		</nav>

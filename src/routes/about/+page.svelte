@@ -1,4 +1,4 @@
-<script lang="ts">
+<!-- <script lang="ts">
 	import AboutHero from '../../components/pages/about/AboutHero.svelte'
 	import TechnologyCollapse from '../../components/pages/about/TechnologyCollapse.svelte'
 	import ContactForm from '../../components/pages/about/ContactForm.svelte'
@@ -69,4 +69,4 @@
 	</div>
 
 	<ContactForm />
-</section>
+</section> -->
