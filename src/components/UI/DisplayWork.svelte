@@ -25,7 +25,11 @@
 				{/if}
 			</figure>
 
-			<div class="bg-surface-800 absolute {i % 2 === 0 ? 'left-0 ' : 'right-0'} h-full w-1/3 p-2">
+			<div
+				class="backdrop-blur-sm bg-white/60 absolute {i % 2 === 0
+					? 'left-0 '
+					: 'right-0'} h-full w-2/3 p-2"
+			>
 				<h2>{project.title}</h2>
 			</div>
 		</a>

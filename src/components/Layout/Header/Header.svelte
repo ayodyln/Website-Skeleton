@@ -1,10 +1,21 @@
 <script lang="ts">
-	import { page } from '$app/stores';
-	import { AppBar } from '@skeletonlabs/skeleton';
-	import { LightSwitch } from '@skeletonlabs/skeleton';
-	import HomeButton from './HomeButton.svelte';
+	import { page } from '$app/stores'
+	import { AppBar } from '@skeletonlabs/skeleton'
+	import { LightSwitch } from '@skeletonlabs/skeleton'
+	import HomeButton from './HomeButton.svelte'
+	import { theme } from '$lib/stores'
+	import { onMount } from 'svelte'
 
-	$: currentPage = $page.route.id;
+	$: currentPage = $page.route.id
+
+	function themeHandler(event: any) {
+		const lightSwitch = document.querySelector('[aria-label="Light Switch"]')
+		$theme = $theme === 'dark' ? 'light' : 'dark'
+	}
+
+	onMount(() => {
+		const lightSwitch: any = document.querySelector('[aria-label="Light Switch"]')
+	})
 </script>
 
 <AppBar background="variant-ghost-surface">
@@ -43,7 +54,7 @@
 				</li>
 
 				<li class="ml-4">
-					<LightSwitch />
+					<LightSwitch on:click={themeHandler} />
 				</li>
 			</ul>
 		</nav>

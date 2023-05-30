@@ -7,6 +7,7 @@
 	import '../app.postcss';
 
 	import { AppShell } from '@skeletonlabs/skeleton';
+
 	import Header from '../components/Layout/Header/Header.svelte';
 	import Footer from '../components/Layout/Footer/Footer.svelte';
 </script>
