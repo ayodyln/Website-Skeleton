@@ -11,13 +11,14 @@
 
 	onMount(async () => {
 		const projects = data.projects
-		starredProject = projects.find((post: { tags: any[] }) => post.tags.find((tag: any) => tag === 'Star'))
+		starredProject = projects.find((post: { tags: any[] }) =>
+			post.tags.find((tag: any) => tag === 'Star')
+		)
 		featured = projects.filter(
 			(project: { tags: string | string[]; id: any }) =>
 				project.tags.includes('Featured') && project.id !== starredProject.id
 		)
 	})
-
 </script>
 
 <div class="my-8">
@@ -27,15 +28,18 @@
 				<div
 					id="article_hero"
 					class="bg-neutral max-h-96 h-full rounded-lg bg-cover bg-no-repeat bg-center shadow-lg mx-auto text-start relative"
-					style={`background-image: url(${starredProject.hero_image});`}
+					style={`background-image: url(${starredProject.hero_image}); background-position: right;`}
 				>
 					<span
-						class="absolute bottom-0 left-0 w-full p-4 bg-gradient-to-t from-neutral to-transparent h-60 flex justify-between items-end rounded-b-md text-white"
+						class="absolute bottom-0 left-0 w-full p-4 bg-gradient-to-t from-surface-900 to-transparent h-60 flex justify-between items-end rounded-b-md text-white"
 					>
 						<div class="w-3/4">
-							<div class="badge badge-sm badge-outline mb-2">Featured Project</div>
+							<div
+								class="badge badge-sm badge-outline mb-2 bg-gradient-to-br variant-gradient-warning-error"
+							>
+								Featured Project
+							</div>
 							<p class="text-3xl font-mono">{starredProject.title}</p>
-							<p class="font-mono">{format(new Date(starredProject.publish_date), 'MMMM do, yyyy')}</p>
 						</div>
 					</span>
 				</div>
