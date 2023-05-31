@@ -488,17 +488,21 @@ export const projects: Project[] = [
 	},
 	{
 		id: 2,
-		tags: ['Project', 'School'],
+		tags: ['Project', 'School', 'Featured'],
 		tech: [
 			{
 				name: 'NextJS',
 				URI: 'https://nextjs.org/'
+			},
+			{
+				name: 'TailWindCSS',
+				URI: 'https://tailwindcss.com/'
 			}
 		],
 		path: `/work/nextjs-pokedex-demo`,
 		blogURI: ``,
-		URI: '',
-		github_URI: '',
+		URI: `http://next-pokedex.dylan-portfolio.dev/`,
+		github_URI: 'https://github.com/ayodyln/next-pokeapi',
 		title: 'NextJS Pokedex Demo',
 		publish_date: `2023-04-10T19:20:40.909Z`,
 		read_time: NaN,

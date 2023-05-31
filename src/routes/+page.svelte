@@ -2,7 +2,7 @@
 	import Hero from '../components/pages/home/Hero.svelte'
 	import DisplayWork from '../components/UI/DisplayWork.svelte'
 	import { onMount } from 'svelte'
-	import LatestPosts from '../components/pages/home/LatestPosts.svelte';
+	import LatestPosts from '../components/pages/home/LatestPosts.svelte'
 
 	let mostRecent: any = []
 	let featuredWork: any[] = []
@@ -26,6 +26,7 @@
 
 	<div class="max-w-5xl m-auto">
 		<section class="min-h-[835px]">
+			<h2 class="h2 opacity-50 mb-8">Featured Work</h2>
 			{#if featuredWork.length > 0}
 				<DisplayWork work={featuredWork} />
 			{:else}
