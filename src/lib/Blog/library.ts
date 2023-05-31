@@ -26,7 +26,8 @@ export const library: Post[] = [
 		hero_image: '/articles/blog/ghostlab/GL-outline.png',
 		feature_image: '',
 		image: '/articles/blog/ghostlab/GL-outline.png',
-		blurb: 'Testing responsive designs accross devices is a key for quality assurance of your product.',
+		blurb:
+			'Testing responsive designs accross devices is a key for quality assurance of your product.',
 		summary:
 			'This article is for developers who are interested in improving their responsive web designs and need to integrate quality assurance into their workflow via Ghostlab. Which was developed with the goal in mind to make a tool that provides tangible evidence of how one’s responsive web design functions across devices. The software enables someone to test on any device, as long as they have a computer, internet, and devices that they want to test with. So, I’ll be detailing how to quickly set up this amazing tool and kickstart your path down perfecting the practice of responsive web design.',
 		html: `
@@ -411,9 +412,10 @@ export const library: Post[] = [
 export interface Project {
 	id: number
 	tags: string[] // MAX 3 Featured Projects
-	tech: string[]
+	tech: techTag[]
 	path: string
 	blogURI: string
+	URI: string
 	github_URI: string
 	title: string
 	publish_date: string
@@ -426,13 +428,24 @@ export interface Project {
 	html: string
 }
 
+export interface techTag {
+	name: string
+	URI: string
+}
+
 export const projects: Project[] = [
 	{
 		id: 0,
 		tags: ['Project', 'Work', 'Featured', 'Star'],
-		tech: [],
+		tech: [
+			{
+				name: 'NextJS',
+				URI: 'https://nextjs.org/'
+			}
+		],
 		path: '/projects/dgm-inventory-manager',
 		blogURI: ``,
+		URI: '',
 		github_URI: '',
 		title: 'UVU Digital Media Inventory Manager',
 		publish_date: '2023-05-10T19:20:40.909Z',
@@ -448,10 +461,20 @@ export const projects: Project[] = [
 	{
 		id: 1,
 		tags: ['Project', 'School', 'Featured'],
-		tech: ['NextJS', 'AWS Amplify'],
+		tech: [
+			{
+				name: 'SvelteKit',
+				URI: 'https://kit.svelte.dev/'
+			},
+			{
+				name: 'AWS Amplify',
+				URI: 'https://docs.amplify.aws/'
+			}
+		],
 		path: `/work/aws-sveltekit-demo`,
 		blogURI: `/blog/sveltekit-aws`,
-		github_URI: '',
+		URI: 'https://sveltekit4790.dylan-portfolio.dev/',
+		github_URI: 'https://github.com/ayodyln/4790-Project/tree/master',
 		title: 'AWS Amplify // SvelteKit Demo App',
 		publish_date: `2023-05-02T19:20:40.909Z`,
 		read_time: NaN,
@@ -465,10 +488,16 @@ export const projects: Project[] = [
 	},
 	{
 		id: 2,
-		tags: ['Project', 'School', 'Featured'],
-		tech: ['NextJS'],
+		tags: ['Project', 'School'],
+		tech: [
+			{
+				name: 'NextJS',
+				URI: 'https://nextjs.org/'
+			}
+		],
 		path: `/work/nextjs-pokedex-demo`,
 		blogURI: ``,
+		URI: '',
 		github_URI: '',
 		title: 'NextJS Pokedex Demo',
 		publish_date: `2023-04-10T19:20:40.909Z`,

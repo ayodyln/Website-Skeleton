@@ -2,7 +2,7 @@
 	<div class="max-w-5xl m-auto space-y-4">
 		<h1 class="text-9xl">
 			<span
-				class="bg-gradient-to-br variant-gradient-primary-tertiary bg-clip-text text-transparent box-decoration-clone font-bold"
+				class="bg-gradient-to-br variant-gradient-tertiary-secondary bg-clip-text text-transparent box-decoration-clone font-bold"
 			>
 				Dylan Smith
 			</span>
