@@ -2,7 +2,7 @@
 	import Hero from '../components/pages/home/Hero.svelte'
 	import DisplayWork from '../components/UI/DisplayWork.svelte'
 	import { onMount } from 'svelte'
-	// import LatestPosts from '../components/pages/home/LatestPosts.svelte';
+	import LatestPosts from '../components/pages/home/LatestPosts.svelte';
 
 	let mostRecent: any = []
 	let featuredWork: any[] = []
