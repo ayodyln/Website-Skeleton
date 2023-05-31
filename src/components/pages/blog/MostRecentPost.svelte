@@ -13,10 +13,14 @@
 				style={`background-image: url(${mostRecent.hero_image})`}
 			>
 				<span
-					class="absolute bottom-0 left-0 w-full p-4 bg-gradient-to-t from-neutral to-transparent h-60 flex justify-between items-end rounded-b-md text-white"
+					class="absolute bottom-0 left-0 w-full p-4 bg-gradient-to-t from-surface-900 to-transparent h-60 flex justify-between items-end rounded-b-md text-white"
 				>
 					<div class="w-3/4">
-						<div class="badge badge-sm badge-outline mb-2">Latest Post</div>
+						<div
+							class="badge badge-sm badge-outline mb-2 bg-gradient-to-br variant-gradient-warning-error"
+						>
+							Latest Post
+						</div>
 						<p class="text-3xl font-mono">{mostRecent.title}</p>
 						<p class="font-mono">{format(new Date(mostRecent.publish_date), 'MMMM do, yyyy')}</p>
 					</div>

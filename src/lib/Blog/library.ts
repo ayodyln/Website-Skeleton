@@ -17,7 +17,7 @@ export interface Post {
 export const library: Post[] = [
 	{
 		id: 0,
-		tags: ['Development', 'Testing', 'Blog'],
+		tags: ['Development', 'Testing'],
 		tech: [],
 		path: '/blog/ghostlab',
 		title: 'Responsive Development w/ Ghostlab',
@@ -227,7 +227,7 @@ export const library: Post[] = [
 	},
 	{
 		id: 1,
-		tags: ['Development', 'Blog'],
+		tags: ['Development'],
 		tech: [],
 		path: '/blog/sveltekit-aws',
 		title: 'Pairing SvelteKit with AWS',

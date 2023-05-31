@@ -6,7 +6,7 @@
 	import { onMount } from 'svelte'
 
 	$: currentPage = $page.route.id
-
+	$: console.log(currentPage)
 	onMount(() => {})
 </script>
 
@@ -20,8 +20,8 @@
 			<ul class="flex gap-2 items-center">
 				<li>
 					<a
-						class="btn btn-md variant-ghost"
-						class:variant-filled={currentPage === 'work'}
+						class="btn btn-md"
+						class:variant-glass-surface={currentPage === '/work'}
 						href="/work"
 						data-sveltekit-preload-data="hover">Work</a
 					>
@@ -29,8 +29,8 @@
 
 				<li>
 					<a
-						class="btn btn-md variant-ghost"
-						class:variant-filled={currentPage === 'blog'}
+						class="btn btn-md"
+						class:variant-glass-surface={currentPage === '/blog'}
 						href="/blog"
 						data-sveltekit-preload-data="hover">Blog</a
 					>
@@ -38,17 +38,15 @@
 
 				<li>
 					<a
-						class="btn btn-md variant-ghost"
-						class:variant-filled={currentPage === 'about'}
+						class="btn btn-md"
+						class:variant-glass-surface={currentPage === '/about'}
 						href="/about"
 						data-sveltekit-preload-data="hover">About</a
 					>
 				</li>
 
 				<li class="ml-4">
-					<LightSwitch
-						
-					/>
+					<LightSwitch />
 				</li>
 			</ul>
 		</nav>

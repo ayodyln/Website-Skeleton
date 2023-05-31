@@ -1,12 +1,8 @@
 <script lang="ts">
-	import { goto } from '$app/navigation'
 	import { Avatar } from '@skeletonlabs/skeleton'
 	import { format } from 'date-fns'
-	import { onMount } from 'svelte'
 
 	export let mostRecent: any[]
-
-	onMount(() => {})
 </script>
 
 <ul class="flex w-full gap-4">
@@ -20,7 +16,7 @@
 				class="h-full w-full block flex items-end rounded-lg overflow-hidden"
 			>
 				<div
-					class="bg-gradient-to-t from-slate-950 w-full h-2/3 flex flex-col justify-end relative"
+					class="bg-gradient-to-t from-surface-900 w-full h-2/3 flex flex-col justify-end relative"
 				>
 					<section class="p-4 space-y-2">
 						<h3 class="text-md">
