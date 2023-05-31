@@ -1,49 +1,45 @@
 <script lang="ts">
 	import { goto } from '$app/navigation'
+	import { Avatar } from '@skeletonlabs/skeleton'
 	import { format } from 'date-fns'
+	import { onMount } from 'svelte'
 
 	export let mostRecent: any[]
 
-	function checkHeroID(id: number, direction: boolean) {
-		if (direction) return id + 1
-		if (!direction) return id - 1
-	}
+	onMount(() => {
+		console.log(mostRecent)
+	})
 </script>
 
-<div class="carousel rounded-box h-96 max-w-5xl w-full m-auto">
+<ul class="flex w-full gap-4">
 	{#each mostRecent as recent, i}
-		<div id="slide{i}" class="carousel-item relative w-full bg-base-100">
-			<img src={recent.hero_image} alt="Project Hero" class="h-full w-full" />
-
-			<span
-				class="absolute bottom-0 left-0 w-full p-4 bg-gradient-to-t from-neutral to-transparent h-56 flex justify-between items-end text-white"
+		<li
+			class="w-1/3 h-96 rounded-lg overflow-hidden card card-hover bg-gradient-to-br variant-gradient-secondary-primary"
+		>
+			<a
+				href={recent.path}
+				style="background: url({recent.hero_image}) center no-repeat;"
+				class="h-full w-full block flex items-end rounded-b-xl"
 			>
-				<div>
-					{#if i === 0}
-						<div class="badge badge-sm badge-outline mb-2">Latest Post</div>
-					{/if}
+				<div
+					class="bg-gradient-to-t from-slate-950 w-full h-2/3 flex flex-col justify-end relative"
+				>
+					<section class="p-4 space-y-2">
+						<h3 class="text-md">
+							{recent.title}
+						</h3>
 
-					<p class="text-3xl font-mono">{recent.title}</p>
+						<div class="flex justify-between items-end">
+							<span class="flex items-end gap-3 text-md">
+								<Avatar initials="DS" background="bg-primary-500" width="w-8" />
+								Dylan Smith
+							</span>
 
-					<p class="font-mono">
-						{format(new Date(recent.publish_date), 'MMMM do, yyyy')}
-					</p>
+							<p>{format(new Date(recent.publish_date), 'MMM do, yyyy')}</p>
+						</div>
+					</section>
 				</div>
-
-				<div>
-					<button class="link" on:click={() => goto(recent.path)}>Read Article</button>
-				</div>
-			</span>
-
-			<div class="absolute transform -translate-y-1/2 left-5 right-5 top-1/2">
-				{#if i !== 0}
-					<a href="#slide{checkHeroID(i, false)}" class="btn btn-circle absolute left-0">❮</a>
-				{/if}
-
-				{#if i !== mostRecent.length - 1}
-					<a href="#slide{checkHeroID(i, true)}" class="btn btn-circle absolute right-0">❯</a>
-				{/if}
-			</div>
-		</div>
+			</a>
+		</li>
 	{/each}
-</div>
+</ul>

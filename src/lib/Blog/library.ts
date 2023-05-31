@@ -20,7 +20,7 @@ export const library: Post[] = [
 		tags: ['Development', 'Testing', 'Blog'],
 		tech: [],
 		path: '/blog/ghostlab',
-		title: 'Responsive Web Development with Ghostlab',
+		title: 'Responsive Development w/ Ghostlab',
 		publish_date: '2022-11-12T07:00:00.000Z',
 		read_time: 8,
 		hero_image: '/articles/blog/ghostlab/GL-outline.png',
