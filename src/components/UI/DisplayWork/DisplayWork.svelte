@@ -1,24 +1,9 @@
 <script lang="ts">
 	import type { Project } from '$lib/Blog/library'
-	import NoImage from './NoImage.svelte'
-	import { modeOsPrefers, modeUserPrefers, modeCurrent } from '@skeletonlabs/skeleton'
+	import NoImage from '../NoImage.svelte'
+	import { techChip } from './'
 
 	export let work: Project[]
-
-	function techChip(tech: string) {
-		switch (tech) {
-			case 'NextJS':
-				return 'variant-filled-tertiary'
-			case 'AWS Amplify':
-				return 'variant-filled-warning'
-			case 'SvelteKit':
-				return 'bg-orange-600 text-black'
-			case 'TailWindCSS':
-				return 'bg-sky-400 text-black'
-			default:
-				return 'variant-filled'
-		}
-	}
 </script>
 
 <ul class="w-full space-y-8">

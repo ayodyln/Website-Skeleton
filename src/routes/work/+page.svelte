@@ -1,8 +1,7 @@
 <script lang="ts">
-	import { format } from 'date-fns'
 	import { onMount } from 'svelte'
-	import DisplayWork from '../../components/UI/DisplayWork.svelte'
-
+	import DisplayWork from '../../components/UI/DisplayWork/DisplayWork.svelte'
+	import { techChip } from '../../components/UI/DisplayWork'
 	let unfeaturedProjects: any[] = []
 	let starredProject: any
 	let featured: any[]
@@ -33,13 +32,20 @@
 					<span
 						class="absolute bottom-0 left-0 w-full p-4 bg-gradient-to-t from-surface-900 to-transparent h-60 flex justify-between items-end rounded-b-md text-white"
 					>
-						<div class="w-3/4">
+						<div class="w-3/4 space-y-1">
 							<div
 								class="badge badge-sm badge-outline mb-2 bg-gradient-to-br variant-gradient-warning-error"
 							>
 								Featured Project
 							</div>
-							<p class="text-3xl font-mono">{starredProject.title}</p>
+							<h2 class="text-3xl font-mono">{starredProject.title}</h2>
+							<ul class="space-x-2">
+								{#each starredProject.tech as tech}
+									<a href={tech.URI} target="_blank" class="chip {techChip(tech.name)}"
+										>{tech.name}</a
+									>
+								{/each}
+							</ul>
 						</div>
 					</span>
 				</div>
@@ -76,7 +82,7 @@
 				{/each}
 			</div>
 		{:else}
-			<!-- <div class="grid grid-cols-4 grid-rows-auto gap-2 animate-pulse">
+			<div class="grid grid-cols-4 grid-rows-auto gap-2 animate-pulse">
 				{#each Array(10) as project}
 					<div class="bg-neutral rounded-xl h-56 shadow-lg">
 						<div>
@@ -85,7 +91,7 @@
 						</div>
 					</div>
 				{/each}
-			</div> -->
+			</div>
 		{/if}
 	</section>
 </section>
