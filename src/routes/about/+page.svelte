@@ -1,7 +1,8 @@
 <script lang="ts">
-	import AboutHero from '../../components/pages/about/AboutHero.svelte'
 	import TechnologyCollapse from '../../components/pages/about/TechnologyCollapse.svelte'
 	import ContactForm from '../../components/pages/about/ContactForm.svelte'
+	import { AppRail, AppRailAnchor, AppRailTile } from '@skeletonlabs/skeleton'
+	import es from 'date-fns/locale/es'
 
 	const tech: { title: string; content: string }[] = [
 		{
@@ -26,8 +27,35 @@
 			I have experience with other servies and comfortable to use anything because AWS has helped me grow as a developer.`
 		}
 	]
+
+	let currentTile: string = 'about'
 </script>
 
-<section class="py-8 max-w-5xl m-auto">
-	<AboutHero />
-</section>
+<div id="aboutLayout" class="flex gap-4 my-4">
+	<AppRail width="w-32" gap="">
+		<AppRailTile bind:group={currentTile} name="about" value="about">
+			<svelte:fragment slot="lead">About</svelte:fragment>
+		</AppRailTile>
+		<AppRailTile bind:group={currentTile} name="tile-2" value={1}>
+			<svelte:fragment slot="lead">(icon)</svelte:fragment>
+			<span>Tile 2</span>
+		</AppRailTile>
+		<AppRailTile bind:group={currentTile} name="tile-3" value={2}>
+			<svelte:fragment slot="lead">(icon)</svelte:fragment>
+			<span>Tile 3</span>
+		</AppRailTile>
+	</AppRail>
+
+	<section class="space-y-4 w-full">
+		{#if currentTile === 'about'}
+			<p>
+				I am a web and app developer and UI/UX designer. My passion has been to bring rich
+				applications to life that is not only beautiful but accessible to everyone. The application
+				design and development process is my specialization and I love to embrace the latest web
+				technologies.
+			</p>
+		{:else}
+			<p>error</p>
+		{/if}
+	</section>
+</div>
