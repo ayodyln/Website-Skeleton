@@ -16,7 +16,7 @@
 	<svelte:fragment slot="header">
 		<Header />
 	</svelte:fragment>
-	<main class="flex-grow mb-20">
+	<main class="flex-grow mb-20 ">
 		<slot />
 	</main>
 	<svelte:fragment slot="pageFooter">

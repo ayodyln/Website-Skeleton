@@ -1,4 +1,5 @@
 <script lang="ts">
+	import type { PageData } from './$types'
 	import { onMount } from 'svelte'
 	import DisplayWork from '../../components/UI/DisplayWork/DisplayWork.svelte'
 	import { techChip } from '../../components/UI/DisplayWork'
@@ -6,7 +7,7 @@
 	let starredProject: any
 	let featured: any[]
 
-	export let data: any
+	export let data: PageData
 
 	onMount(async () => {
 		const projects = data.projects
@@ -71,7 +72,7 @@
 
 	<section id="featuredWork" class="max-w-5xl w-full m-auto space-y-4 h-auto">
 		<!-- Unfeatured projects -->
-		{#if unfeaturedProjects.length > 0}
+		<!-- {#if unfeaturedProjects.length > 0}
 			<h2>All Projects</h2>
 			<div class="grid grid-cols-4 grid-rows-auto gap-2">
 				{#each unfeaturedProjects as project}
@@ -92,6 +93,6 @@
 					</div>
 				{/each}
 			</div>
-		{/if}
+		{/if} -->
 	</section>
 </section>

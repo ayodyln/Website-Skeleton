@@ -28,3 +28,6 @@
 	]
 </script>
 
+<section class="py-8 max-w-5xl m-auto">
+	<AboutHero />
+</section>
