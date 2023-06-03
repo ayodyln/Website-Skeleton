@@ -5,9 +5,9 @@
 		{
 			title: `JavaScript`,
 			icon: `
-				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" class="w-16">
-					<path fill="#ffd600" d="M6,42V6h36v36H6z" />
-					<path fill="#000001"
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" class="w-16 fill-warning-500">
+					<path d="M6,42V6h36v36H6z" />
+					<path class="fill-black"
 						d="M29.538 32.947c.692 1.124 1.444 2.201 3.037 2.201 1.338 0 2.04-.665 2.04-1.585 0-1.101-.726-1.492-2.198-2.133l-.807-.344c-2.329-.988-3.878-2.226-3.878-4.841 0-2.41 1.845-4.244 4.728-4.244 2.053 0 3.528.711 4.592 2.573l-2.514 1.607c-.553-.988-1.151-1.377-2.078-1.377-.946 0-1.545.597-1.545 1.377 0 .964.6 1.354 1.985 1.951l.807.344C36.452 29.645 38 30.839 38 33.523 38 36.415 35.716 38 32.65 38c-2.999 0-4.702-1.505-5.65-3.368L29.538 32.947zM17.952 33.029c.506.906 1.275 1.603 2.381 1.603 1.058 0 1.667-.418 1.667-2.043V22h3.333v11.101c0 3.367-1.953 4.899-4.805 4.899-2.577 0-4.437-1.746-5.195-3.368L17.952 33.029z" />
 				</svg>
 			`,
@@ -53,9 +53,9 @@
 						<style>.cls-1{fill:#8d8d93;}.cls-2{fill:#4a4a55;}.cls-3{fill:#ff3e00;}.cls-4{fill:#fff;}</style>
 					</defs>
 					<g id="horizontal">
-						<path id="kit" class="cls-1"
+						<path id="kit" class="fill-current"
 							d="M547.528,99.316,530.741,68.127,520.173,80.91V99.316h-8.862V39.664h8.862V68.553l23.009-28.889h10.226l-16.7,20.964,21.218,38.688Zm29.569,0V39.664h8.862V99.316Zm55.049-51.13v51.13h-8.863V48.186H606.411V39.664h42.607v8.522Z" />
-						<path id="svelte-2" data-name="svelte" class="cls-2"
+						<path id="svelte-2" data-name="svelte" class="fill-current"
 							d="M172.442,100.338a24.076,24.076,0,0,1-13.719-3.877,19.876,19.876,0,0,1-8.011-10.609l8.351-3.068a15.41,15.41,0,0,0,5.455,6.6,14.366,14.366,0,0,0,8.266,2.429,12.137,12.137,0,0,0,7.882-2.386,8.277,8.277,0,0,0,2.94-6.817,7.461,7.461,0,0,0-.81-3.452,10.314,10.314,0,0,0-1.832-2.6,12.342,12.342,0,0,0-3.153-2.088q-2.132-1.063-3.537-1.619t-4.133-1.491q-3.408-1.193-5.112-1.874a38.492,38.492,0,0,1-4.474-2.259,16.522,16.522,0,0,1-4.176-3.153,15.277,15.277,0,0,1-2.513-4.133,14.766,14.766,0,0,1,4-16.787q5.113-4.516,13.889-4.517,7.329,0,12.059,3.238a15.658,15.658,0,0,1,6.348,8.608l-8.18,2.726a9.521,9.521,0,0,0-3.963-4.388,13.306,13.306,0,0,0-6.945-1.663,10.706,10.706,0,0,0-6.69,1.875,6.29,6.29,0,0,0-2.428,5.284,5.511,5.511,0,0,0,1.874,4.09,12.869,12.869,0,0,0,3.92,2.642q2.048.852,6.222,2.3,2.554.939,3.791,1.406t3.622,1.576a25.1,25.1,0,0,1,3.664,2,32.066,32.066,0,0,1,2.983,2.429,12.706,12.706,0,0,1,2.6,3.11,17.342,17.342,0,0,1,1.533,3.834,17.58,17.58,0,0,1,.64,4.816q0,8.352-5.71,13.08T172.442,100.338Zm54.623-1.022L206.613,39.664h9.545L229.707,81.25a64.791,64.791,0,0,1,1.875,6.818,63.829,63.829,0,0,1,1.875-6.818l13.378-41.586h9.459L235.927,99.316Zm47.294,0V39.664h36.984v8.352H283.222V64.377h18.151v8.352H283.222V90.964h30v8.352Zm61.44,0V39.664h8.864v51.13h29.143v8.522Zm71.41-51.13v51.13h-8.863V48.186H381.474V39.664h42.608v8.522ZM442.4,99.316V39.664h36.984v8.352H451.266V64.377h18.15v8.352h-18.15V90.964h30v8.352Z" />
 						<g id="logo">
 							<path id="orange" class="cls-3"
@@ -72,11 +72,7 @@
 			title: `AWS Services`,
 			icon: `
 				<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-						viewBox="0 0 304 182" class="w-20" xml:space="preserve">
-					<style type="text/css">
-						.st0{fill:#252F3E;}
-						.st1{fill-rule:evenodd;clip-rule:evenodd;fill:#FF9900;}
-					</style>
+						viewBox="0 0 304 182" class="w-20 fill-current" xml:space="preserve">
 					<g>
 						<path class="st0" d="M86.4,66.4c0,3.7,0.4,6.7,1.1,8.9c0.8,2.2,1.8,4.6,3.2,7.2c0.5,0.8,0.7,1.6,0.7,2.3c0,1-0.6,2-1.9,3l-6.3,4.2
 							c-0.9,0.6-1.8,0.9-2.6,0.9c-1,0-2-0.5-3-1.4C76.2,90,75,88.4,74,86.8c-1-1.7-2-3.6-3.1-5.9c-7.8,9.2-17.6,13.8-29.4,13.8
@@ -114,7 +110,7 @@
 	]
 </script>
 
-<section class="max-w-2xl m-auto space-y-4 text-xl">
+<section class="max-w-2xl m-auto flex flex-col gap-4 text-xl">
 	<p>
 		I am a web and app developer and UI/UX designer. My passion has been to bring rich applications
 		to life that is not only beautiful, but accessible to everyone. The application design and
@@ -128,7 +124,14 @@
 		industry is high.
 	</p>
 
-	<Accordion hover="hover:bg-white/50" autocollapse={true} duration={200} spacing="space-y-2" class="rounded-lg bg-surface-200 shadow-lg text-surface-900">
+	<h3 class="opacity-50 text-2xl">Technologies I use:</h3>
+	<Accordion
+		hover="hover:bg-white/50"
+		autocollapse={true}
+		duration={200}
+		spacing="space-y-2"
+		class="rounded-lg card shadow-lg "
+	>
 		{#each tech as { title, icon, content }, i}
 			<AccordionItem open={i === 0 ? true : false}>
 				<svelte:fragment slot="lead">
@@ -145,4 +148,19 @@
 			</AccordionItem>
 		{/each}
 	</Accordion>
+
+	<form action="?/contact" class="mt-10 card p-3 space-y-6 flex flex-col">
+		<h2 class="text-3xl opacity-50 font-mono">Contact Me</h2>
+
+		<label class="input-group input-group-divider grid-cols-[auto_1fr_auto]">
+			<div class="input-group-shim">Email</div>
+			<input name="email" type="email" placeholder="foo@bar.com" />
+		</label>
+		<label class="input-group input-group-divider grid-cols-[auto_1fr_auto]">
+			<div class="input-group-shim">Subject</div>
+			<input name="subject" type="text" />
+		</label>
+		<textarea name="message" class="textarea resize-none" rows="4" placeholder="Your Message..." />
+		<button class="variant-filled-secondary btn" type="submit">Submit</button>
+	</form>
 </section>
