@@ -4,6 +4,9 @@
 	import { onMount } from 'svelte'
 	import LatestPosts from '../components/pages/home/LatestPosts.svelte'
 
+	export let data
+	$: console.log(data)
+
 	let mostRecent: any[] = []
 	let featuredWork: any[] = []
 

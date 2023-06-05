@@ -133,7 +133,7 @@
 		class="rounded-lg card shadow-lg "
 	>
 		{#each tech as { title, icon, content }, i}
-			<AccordionItem open={i === 0 ? true : false}>
+			<AccordionItem>
 				<svelte:fragment slot="lead">
 					{@html icon}
 				</svelte:fragment>
@@ -149,7 +149,7 @@
 		{/each}
 	</Accordion>
 
-	<form action="?/contact" class="mt-10 card p-3 space-y-6 flex flex-col">
+	<form action="?/contact" class="mt-10 card p-3 space-y-6 flex flex-col" method="POST">
 		<h2 class="text-3xl opacity-50 font-mono">Contact Me</h2>
 
 		<label class="input-group input-group-divider grid-cols-[auto_1fr_auto]">
