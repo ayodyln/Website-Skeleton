@@ -4,6 +4,11 @@
 	import { onMount } from 'svelte'
 	import LatestPosts from '../components/pages/home/LatestPosts.svelte'
 
+	export let data
+
+	let { supabase, session } = data
+	$: ({ supabase, session } = data)
+
 	let mostRecent: any[] = []
 	let featuredWork: any[] = []
 
@@ -17,6 +22,9 @@
 		} catch (error) {
 			console.log(error)
 		}
+
+		const { data, error } = await supabase.from('countries').select()
+		console.log(data)
 	})
 </script>
 

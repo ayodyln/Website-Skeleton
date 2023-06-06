@@ -1,13 +1,15 @@
 <script lang="ts">
 	import { enhance } from '$app/forms'
 	import { onMount } from 'svelte'
+	import { fetchDataTable } from '$lib/supabase/functions'
+
 	export let data
 	let { supabase } = data
 	$: ({ supabase } = data)
 
-	onMount(() => {
+	onMount(async () => {
 		console.log('Auth Page Mounted')
-		// console.log({ supabase })
+		console.log(await fetchDataTable('countries', supabase))
 	})
 </script>
 
@@ -17,7 +19,12 @@
 			<h2 class="h2">Admin Login</h2>
 		</header>
 		<section class="p-4 h-full">
-			<form action="?/adminLogin" method="POST" class="flex flex-col justify-between h-full" use:enhance>
+			<form
+				action="?/adminLogin"
+				method="POST"
+				class="flex flex-col justify-between h-full"
+				use:enhance
+			>
 				<div class="space-y-8">
 					<label class="label" for="email">
 						<span>Email</span>

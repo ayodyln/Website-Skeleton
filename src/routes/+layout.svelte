@@ -8,13 +8,14 @@
 
 	import { invalidate } from '$app/navigation'
 	import { onMount } from 'svelte'
-
+	import { page } from '$app/stores'
 	import { AppShell } from '@skeletonlabs/skeleton'
-
 	import Header from '../components/Layout/Header/Header.svelte'
 	import Footer from '../components/Layout/Footer/Footer.svelte'
 
 	export let data
+
+	$: currentPage = $page.route.id
 
 	let { supabase, session } = data
 	$: ({ supabase, session } = data)
@@ -32,12 +33,14 @@
 
 <AppShell>
 	<svelte:fragment slot="header">
-		<Header />
+		<Header {session} />
 	</svelte:fragment>
 	<div class="flex-grow mb-20 h-full">
 		<slot />
 	</div>
 	<svelte:fragment slot="pageFooter">
-		<Footer />
+		{#if currentPage !== '/auth/admin'}
+			<Footer />
+		{/if}
 	</svelte:fragment>
 </AppShell>

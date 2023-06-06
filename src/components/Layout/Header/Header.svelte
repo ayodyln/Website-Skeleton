@@ -3,8 +3,10 @@
 	import { AppBar } from '@skeletonlabs/skeleton'
 	import { LightSwitch } from '@skeletonlabs/skeleton'
 	import HomeButton from './HomeButton.svelte'
-
+	import { Avatar } from '@skeletonlabs/skeleton'
 	$: currentPage = $page.route.id
+
+	export let session: any
 </script>
 
 <AppBar background="variant-ghost-surface">
@@ -45,6 +47,14 @@
 				<li class="ml-4">
 					<LightSwitch />
 				</li>
+
+				{#if session}
+					<li class="ml-4">
+						<a href="/auth/admin">
+							<Avatar width="w-10" initials="DS" background="bg-primary-500" />
+						</a>
+					</li>
+				{/if}
 			</ul>
 		</nav>
 	</svelte:fragment>

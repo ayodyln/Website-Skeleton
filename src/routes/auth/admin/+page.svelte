@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { goto } from '$app/navigation'
 	import { onMount } from 'svelte'
+	import { fetchDataTable, insertData } from '$lib/supabase/functions'
 
 	export let data
 
@@ -17,13 +18,12 @@
 	}
 
 	onMount(async () => {
-		console.log('Admin Page Mounted')
-
-		const { data, error } = await supabase.auth.getSession()
 		console.log(data)
 	})
 </script>
 
-<p>Admin</p>
+<section class="border">
+	<p>Admin</p>
 
-<button class="btn variant-filled-error" on:click={logoutHandler}>Logout</button>
+	<button class="btn variant-filled-error" on:click={logoutHandler}> Logout </button>
+</section>
