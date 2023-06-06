@@ -3,11 +3,8 @@
 	import { AppBar } from '@skeletonlabs/skeleton'
 	import { LightSwitch } from '@skeletonlabs/skeleton'
 	import HomeButton from './HomeButton.svelte'
-	import { onMount } from 'svelte'
 
 	$: currentPage = $page.route.id
-	$: console.log(currentPage)
-	onMount(() => {})
 </script>
 
 <AppBar background="variant-ghost-surface">

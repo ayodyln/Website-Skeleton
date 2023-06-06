@@ -4,9 +4,6 @@
 	import { onMount } from 'svelte'
 	import LatestPosts from '../components/pages/home/LatestPosts.svelte'
 
-	export let data
-	$: console.log(data)
-
 	let mostRecent: any[] = []
 	let featuredWork: any[] = []
 
@@ -17,7 +14,6 @@
 			let work = await fetch('api/projects')
 			let work_res = await work.json()
 			featuredWork = work_res.filter((project: any) => project.tags.includes('Featured'))
-			console.log(featuredWork)
 		} catch (error) {
 			console.log(error)
 		}
