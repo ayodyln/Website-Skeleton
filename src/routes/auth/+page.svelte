@@ -8,12 +8,11 @@
 	$: ({ supabase } = data)
 
 	onMount(async () => {
-		console.log('Auth Page Mounted')
 		console.log(await fetchDataTable('countries', supabase))
 	})
 </script>
 
-<section id="loginPage" class="h-full flex justify-center items-center">
+<section id="loginPage" class=" flex justify-center items-center h-full">
 	<div class="card w-96 h-full max-h-[28em] flex flex-col">
 		<header class="card-header">
 			<h2 class="h2">Admin Login</h2>

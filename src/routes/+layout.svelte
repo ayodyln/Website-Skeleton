@@ -33,13 +33,13 @@
 
 <AppShell>
 	<svelte:fragment slot="header">
-		<Header {session} />
+		<Header {session} {supabase} />
 	</svelte:fragment>
-	<div class="flex-grow mb-20 h-full">
+	<div class="flex-grow mb-20 h-full flex flex-col">
 		<slot />
 	</div>
 	<svelte:fragment slot="pageFooter">
-		{#if currentPage !== '/auth/admin'}
+		{#if currentPage !== '/auth/admin' && currentPage !== '/auth/admin/documents'}
 			<Footer />
 		{/if}
 	</svelte:fragment>

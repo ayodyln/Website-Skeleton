@@ -1,3 +1,6 @@
+import { goto } from '$app/navigation'
+
+// Database
 const fetchDataTable = async (table: string, supabase: any) => {
 	const { data, error } = await supabase.from(table).select('*')
 	if (error) {
@@ -14,4 +17,14 @@ const insertData = async (table: string, data: any, supabase: any) => {
 	return true
 }
 
-export { fetchDataTable, insertData }
+// AUTH
+const logoutHandler = async (supabase: any) => {
+	const { error } = await supabase.auth.signOut()
+	if (error) {
+		throw new Error(error.message)
+	}
+
+	goto('/')
+}
+
+export { fetchDataTable, insertData, logoutHandler }

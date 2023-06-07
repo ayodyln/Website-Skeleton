@@ -3,10 +3,22 @@
 	import { AppBar } from '@skeletonlabs/skeleton'
 	import { LightSwitch } from '@skeletonlabs/skeleton'
 	import HomeButton from './HomeButton.svelte'
-	import { Avatar } from '@skeletonlabs/skeleton'
+	import { logoutHandler } from '$lib/supabase/functions'
+	import { Avatar, popup, storePopup } from '@skeletonlabs/skeleton'
+	import type { PopupSettings } from '@skeletonlabs/skeleton'
+	import { computePosition, autoUpdate, offset, shift, flip, arrow } from '@floating-ui/dom'
+
 	$: currentPage = $page.route.id
 
-	export let session: any
+	export let supabase: any, session: any
+
+	storePopup.set({ computePosition, autoUpdate, offset, shift, flip, arrow })
+
+	const popupClick: PopupSettings = {
+		event: 'click',
+		target: 'popupClick',
+		placement: 'top'
+	}
 </script>
 
 <AppBar background="variant-ghost-surface">
@@ -50,12 +62,24 @@
 
 				{#if session}
 					<li class="ml-4">
-						<a href="/auth/admin">
-							<Avatar width="w-10" initials="DS" background="bg-primary-500" />
-						</a>
+						<button use:popup={popupClick}>
+							<Avatar class="card-hover" width="w-10" initials="DS" background="bg-primary-500" />
+						</button>
 					</li>
 				{/if}
 			</ul>
 		</nav>
 	</svelte:fragment>
 </AppBar>
+
+<div class="card variant-filled-surface p-3" data-popup="popupClick">
+	<ul class="space-y-4">
+		<li><a href="/auth/admin" class="btn variant-ghost">Dashboard</a></li>
+		<li>
+			<button class="btn variant-filled-tertiary block w-full" on:click={() => logoutHandler(supabase)}
+				>Logout</button
+			>
+		</li>
+	</ul>
+	<div class="arrow variant-filled-surface" />
+</div>

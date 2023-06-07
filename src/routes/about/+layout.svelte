@@ -1,4 +1,4 @@
-<div id="aboutWrapper" class="max-w-5xl m-auto my-8 space-y-4">
+<div id="aboutWrapper" class="max-w-6xl w-full m-auto my-8 space-y-4">
 	<div class="variant-glass card overflow-hidden">
 		<div
 			class="h-96 w-full overflow-hidden p-4 flex flex-col justify-between"
