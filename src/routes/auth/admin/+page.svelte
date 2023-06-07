@@ -7,9 +7,7 @@
 	let { supabase, session } = data
 	$: ({ supabase, session } = data)
 
-	onMount(async () => {
-		console.log(data)
-	})
+	onMount(async () => {})
 </script>
 
 <section class="p-4">

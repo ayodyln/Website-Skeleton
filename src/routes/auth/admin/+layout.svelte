@@ -3,8 +3,6 @@
 	import { page } from '$app/stores'
 
 	$: myBreadcrumbs = $page.url.pathname.split('/').filter((s) => s !== 'auth')
-	$: console.log(myBreadcrumbs)
-	$: console.log($page.url.pathname)
 
 	function routeHandler(str: string) {
 		switch (str) {
