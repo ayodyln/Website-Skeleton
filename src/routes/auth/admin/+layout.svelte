@@ -4,6 +4,7 @@
 
 	$: myBreadcrumbs = $page.url.pathname.split('/').filter((s) => s !== 'auth')
 	$: console.log(myBreadcrumbs)
+	$: console.log($page.url.pathname)
 
 	function routeHandler(str: string) {
 		switch (str) {
@@ -22,10 +23,24 @@
 		<div id="adminSideNav" class="w-56 h-full card rounded-none variant-soft-secondary p-2">
 			<ul class="space-y-4">
 				<li>
-					<a class="block btn variant-glass-secondary" href="/auth/admin">Dashboard</a>
+					<a
+						class="block btn"
+						class:variant-glass-primary={$page.url.pathname === '/auth/admin' ? true : false}
+						class:variant-glass-secondary={$page.url.pathname !== '/auth/admin' ? true : false}
+						href="/auth/admin">Dashboard</a
+					>
 				</li>
 				<li>
-					<a class="block btn variant-glass-secondary" href="/auth/admin/documents">Documents</a>
+					<a
+						class="block btn variant-glass-secondary"
+						class:variant-glass-primary={$page.url.pathname === '/auth/admin/documents'
+							? true
+							: false}
+						class:variant-glass-secondary={$page.url.pathname !== '/auth/admin/documents'
+							? true
+							: false}
+						href="/auth/admin/documents">Documents</a
+					>
 				</li>
 			</ul>
 		</div>
