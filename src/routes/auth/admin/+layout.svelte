@@ -2,14 +2,24 @@
 	import { AppShell } from '@skeletonlabs/skeleton'
 	import { page } from '$app/stores'
 
-	$: currentPage = $page.route.id
-	$: breadCrumb = currentPage?.split('/').slice(2)
-	$: lastItem = breadCrumb?.slice(-1)[0]
+	$: myBreadcrumbs = $page.url.pathname.split('/').filter((s) => s !== 'auth')
+	$: console.log(myBreadcrumbs)
+
+	function routeHandler(str: string) {
+		switch (str) {
+			case 'admin':
+				return '/auth/admin'
+			case 'documents':
+				return '/auth/admin/documents'
+			default:
+				break
+		}
+	}
 </script>
 
 <AppShell>
 	<svelte:fragment slot="sidebarLeft">
-		<div id="adminSideNav" class="w-56 h-full card rounded-none variant-glass-secondary p-2">
+		<div id="adminSideNav" class="w-56 h-full card rounded-none variant-soft-secondary p-2">
 			<ul class="space-y-4">
 				<li>
 					<a class="block btn variant-glass-secondary" href="/auth/admin">Dashboard</a>
@@ -23,19 +33,15 @@
 	<!-- ---- / ---- -->
 	<svelte:fragment slot="pageHeader">
 		<div id="adminHeader" class="p-4">
-			<ol class="breadcrumb">
-				{#if breadCrumb}
-					{#each breadCrumb as crumb, i}
-						{#if i === breadCrumb.length - 1}
-							<li class="crumb capitalize">{lastItem}</li>
-						{:else}
-							<li class="crumb">
-								<a class="anchor capitalize" href={`/auth/${crumb}`}>{crumb}</a>
-							</li>
-							<li class="crumb-separator" aria-hidden>/</li>
-						{/if}
-					{/each}
-				{/if}
+			<ol class="breadcrumb capitalize">
+				{#each myBreadcrumbs as crumb, i}
+					{#if i < myBreadcrumbs.length - 1}
+						<li class="crumb"><a class="anchor" href={routeHandler(crumb)}>{crumb}</a></li>
+						<li class="crumb-separator" aria-hidden>/</li>
+					{:else}
+						<li class="crumb">{crumb === 'admin' ? 'dashboard' : crumb}</li>
+					{/if}
+				{/each}
 			</ol>
 		</div>
 	</svelte:fragment>

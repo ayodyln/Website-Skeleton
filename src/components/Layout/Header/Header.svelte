@@ -21,7 +21,7 @@
 	}
 </script>
 
-<AppBar background="variant-ghost-surface">
+<AppBar background="variant-soft-surface">
 	<svelte:fragment slot="lead">
 		<HomeButton />
 	</svelte:fragment>
@@ -76,8 +76,9 @@
 	<ul class="space-y-4">
 		<li><a href="/auth/admin" class="btn variant-ghost">Dashboard</a></li>
 		<li>
-			<button class="btn variant-filled-tertiary block w-full" on:click={() => logoutHandler(supabase)}
-				>Logout</button
+			<button
+				class="btn variant-filled-tertiary block w-full"
+				on:click={() => logoutHandler(supabase)}>Logout</button
 			>
 		</li>
 	</ul>

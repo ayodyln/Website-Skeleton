@@ -1,7 +1,6 @@
 <script lang="ts">
+	import { goto } from '$app/navigation'
 	import { Table, tableMapperValues } from '@skeletonlabs/skeleton'
-	import type { TableSource } from '@skeletonlabs/skeleton'
-	import { library } from '$lib/Blog/library'
 	import { onMount } from 'svelte'
 
 	export let data
@@ -21,29 +20,12 @@
 		foot: ['Total', '', `<code class="code">${sourceData.length}</code>`]
 	}
 
-	const addDocuments = () => {
-		library.forEach(async (doc) => {
-			const { error } = await supabase.from('documents').insert([
-				{
-					title: doc.title,
-					url: doc.path,
-					html: JSON.stringify(doc.html),
-					read_time: doc.read_time,
-					hero_image: doc.hero_image,
-					feature_image: doc.feature_image,
-					image: doc.image,
-					blurb: doc.blurb,
-					summary: doc.summary
-				}
-			])
-			console.log(error)
-		})
-	}
-
 	const fetchData = async () => {
 		const { data, error } = await supabase.from('documents').select('*')
 		sourceData = data
 	}
+
+	const pathStrHandler = (str: string) => str.split('/').filter((s) => s !== '' && s !== 'blog')
 
 	onMount(async () => {
 		await fetchData()
@@ -54,5 +36,12 @@
 <section class="p-4 space-y-4">
 	<h2 class="h2">Documents</h2>
 	<!-- Responsive Container (recommended) -->
-	<Table source={tableSimple} />
+	<Table
+		source={tableSimple}
+		interactive={true}
+		on:selected={async (event) => {
+			const [path] = pathStrHandler(event.detail[2])
+			await goto(`/auth/admin/documents/${path}`)
+		}}
+	/>
 </section>

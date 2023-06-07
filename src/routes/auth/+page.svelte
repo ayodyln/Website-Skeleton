@@ -1,29 +1,10 @@
-<script lang="ts">
-	import { enhance } from '$app/forms'
-	import { onMount } from 'svelte'
-	import { fetchDataTable } from '$lib/supabase/functions'
-
-	export let data
-	let { supabase } = data
-	$: ({ supabase } = data)
-
-	onMount(async () => {
-		console.log(await fetchDataTable('countries', supabase))
-	})
-</script>
-
 <section id="loginPage" class=" flex justify-center items-center h-full">
 	<div class="card w-96 h-full max-h-[28em] flex flex-col">
 		<header class="card-header">
 			<h2 class="h2">Admin Login</h2>
 		</header>
 		<section class="p-4 h-full">
-			<form
-				action="?/adminLogin"
-				method="POST"
-				class="flex flex-col justify-between h-full"
-				use:enhance
-			>
+			<form action="?/adminLogin" method="POST" class="flex flex-col justify-between h-full">
 				<div class="space-y-8">
 					<label class="label" for="email">
 						<span>Email</span>
