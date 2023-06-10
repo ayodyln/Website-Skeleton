@@ -5,7 +5,6 @@
 	import { Autocomplete, popup } from '@skeletonlabs/skeleton'
 	import type { AutocompleteOption, PopupSettings } from '@skeletonlabs/skeleton'
 	import type { Article } from '$lib/types'
-	import type { bool } from 'aws-sdk/clients/signer'
 
 	export let data
 
@@ -19,7 +18,7 @@
 		size: sourceData.length,
 		amounts: [1, 2, 5, 10]
 	}
-	let checkedItems = [] as string[]
+	let checkedItems: string[] = []
 
 	const fetchData = async () => {
 		const { data, error } = await supabase.from('documents').select('*')
@@ -32,16 +31,16 @@
 		})
 	}
 
-	let flavorOptions: AutocompleteOption[]
+	let documentOptions: AutocompleteOption[]
 
 	let popupSettings: PopupSettings = {
 		event: 'focus-click',
 		target: 'popupAutocomplete',
 		placement: 'bottom'
 	}
-	let inputPopupDemo: string = ''
+	let autocompletePopUp: string = ''
 	function onPopupDemoSelect(event: any): void {
-		inputPopupDemo = event.detail.label
+		autocompletePopUp = event.detail.label
 	}
 
 	const checkAll = (event: { target: { checked: boolean; dataset: { id: string } } }) => {
@@ -56,7 +55,7 @@
 		}
 	}
 
-	const singleCheck = (event: any) =>
+	const singleCheck = (event: { target: { checked: any; dataset: { id: string } } }) =>
 		event.target.checked
 			? (checkedItems = [...checkedItems, event.target.dataset.id])
 			: (checkedItems = checkedItems.filter((id: string) => id !== event.target.dataset.id))
@@ -85,7 +84,7 @@
 			)
 			.subscribe()
 
-		flavorOptions = sourceData.map((doc: Article) => {
+		documentOptions = sourceData.map((doc: Article) => {
 			return {
 				label: doc.title,
 				value: doc.id
@@ -105,14 +104,14 @@
 				class="input autocomplete"
 				type="search"
 				name="autocomplete-search"
-				bind:value={inputPopupDemo}
+				bind:value={autocompletePopUp}
 				placeholder="Search..."
 				use:popup={popupSettings}
 			/>
 			<div data-popup="popupAutocomplete" class="card max-w-lg w-full shadow-xl p-1">
 				<Autocomplete
-					bind:input={inputPopupDemo}
-					options={flavorOptions}
+					bind:input={autocompletePopUp}
+					options={documentOptions}
 					on:selection={onPopupDemoSelect}
 				/>
 			</div>
