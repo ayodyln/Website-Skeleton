@@ -5,6 +5,7 @@
 	import { Autocomplete, popup } from '@skeletonlabs/skeleton'
 	import type { AutocompleteOption, PopupSettings } from '@skeletonlabs/skeleton'
 	import type { Article } from '$lib/types'
+	import type { bool } from 'aws-sdk/clients/signer'
 
 	export let data
 
@@ -18,7 +19,7 @@
 		size: sourceData.length,
 		amounts: [1, 2, 5, 10]
 	}
-	let checkedItems: unknown[]
+	let checkedItems = [] as string[]
 
 	const fetchData = async () => {
 		const { data, error } = await supabase.from('documents').select('*')
@@ -42,6 +43,23 @@
 	function onPopupDemoSelect(event: any): void {
 		inputPopupDemo = event.detail.label
 	}
+
+	const checkAll = (event: { target: { checked: boolean; dataset: { id: string } } }) => {
+		const checkAllInput = event.target.checked
+		const checkInputs: NodeListOf<HTMLInputElement> = document.querySelectorAll('#documentCheck')
+		if (checkAllInput) {
+			checkInputs.forEach((input) => (input.checked = true))
+			checkedItems = [...checkedItems, event.target.dataset.id]
+		} else {
+			checkInputs.forEach((input) => (input.checked = false))
+			checkedItems = []
+		}
+	}
+
+	const singleCheck = (event: any) =>
+		event.target.checked
+			? (checkedItems = [...checkedItems, event.target.dataset.id])
+			: (checkedItems = checkedItems.filter((id: string) => id !== event.target.dataset.id))
 
 	onMount(async () => {
 		sourceData = await fetchData()
@@ -101,10 +119,14 @@
 		</div>
 
 		<div class="flex gap-4">
-			<button class="btn">Delete</button>
+			<button
+				class="btn variant-filled-error {checkedItems.length < 1
+					? 'pointer-events-none opacity-50'
+					: ''}">Delete</button
+			>
 			<button class="btn variant-filled-primary"> New Document </button>
 		</div>
 	</section>
 
-	<AdminTable {sourceData} {page} {checkedItems} />
+	<AdminTable {sourceData} {page} {checkAll} {singleCheck} />
 </section>

@@ -9,11 +9,10 @@
 			size: number
 			amounts: number[]
 		},
-		checkedItems: unknown[]
+		checkAll: any,
+		singleCheck: any
 
 	const pathStrHandler = (str: string) => str.split('/').filter((s) => s !== '' && s !== 'blog')
-
-	const checkAll = () => {}
 
 	$: paginatedSource = sourceData.slice(
 		page.offset * page.limit, // start
@@ -49,15 +48,9 @@
 					>
 						<td class="w-12 flex items-center justify-center">
 							<input
+								data-id={row.id}
 								id="documentCheck"
-								on:click|stopPropagation={(event) => {
-									if (event.currentTarget.checked) {
-										checkedItems.push(row.id)
-									} else {
-										checkedItems = checkedItems.filter((item) => item !== row.id)
-									}
-									console.log(checkedItems)
-								}}
+								on:click|stopPropagation={singleCheck}
 								class="checkbox"
 								type="checkbox"
 							/>
