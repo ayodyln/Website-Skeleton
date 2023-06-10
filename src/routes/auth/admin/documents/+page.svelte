@@ -1,48 +1,29 @@
 <script lang="ts">
-	import { goto } from '$app/navigation'
-	import { Table, tableMapperValues } from '@skeletonlabs/skeleton'
 	import { onMount } from 'svelte'
 	import { format } from 'date-fns'
-	import { library } from '$lib/Blog/library'
+	import AdminTable from '../../../../components/pages/admin/AdminTable.svelte'
+	import { Autocomplete, popup } from '@skeletonlabs/skeleton'
+	import type { AutocompleteOption, PopupSettings } from '@skeletonlabs/skeleton'
+	import type { Article } from '$lib/types'
 
 	export let data
+
 	let { supabase } = data
 	$: ({ supabase } = data)
 
 	let sourceData: any = []
-
-	$: tableSimple = {
-		head: ['ID', 'Title', 'tech', 'tags', 'Publish Date'],
-		body: tableMapperValues(sourceData, ['id', 'title', 'tech', 'tags', 'inserted_at']),
-		meta: tableMapperValues(sourceData, [
-			'id',
-			'title',
-			'inserted_at',
-			'updated_at',
-			'html',
-			'read_time',
-			'hero_image',
-			'feature_image',
-			'image',
-			'summary',
-			'tags',
-			'tech',
-			'url'
-		]),
-		foot: ['Total', '', `<code class="code">${sourceData.length}</code>`]
+	$: page = {
+		offset: 0,
+		limit: 5,
+		size: sourceData.length,
+		amounts: [1, 2, 5, 10]
 	}
-
-	// $: console.log(sourceData)
+	let checkedItems: unknown[]
 
 	const fetchData = async () => {
 		const { data, error } = await supabase.from('documents').select('*')
-
-		if (error) {
-			console.error(error)
-			return
-		}
-
-		sourceData = data?.map((doc) => {
+		if (error) return
+		return data?.map((doc) => {
 			return {
 				...doc,
 				inserted_at: format(new Date(doc.inserted_at), 'dd/MM/yyyy')
@@ -50,51 +31,80 @@
 		})
 	}
 
-	const pathStrHandler = (str: string) => str.split('/').filter((s) => s !== '' && s !== 'blog')
+	let flavorOptions: AutocompleteOption[]
 
-	const loadDB = async () => {
-		library.forEach(async (doc) => {
-			console.log(doc)
-			const { error } = await supabase.from('documents').insert({
-				title: doc.title,
-				html: JSON.stringify(doc.html),
-				summary: doc.summary,
-				tags: JSON.stringify(doc.tags),
-				tech: JSON.stringify(doc.tech),
-				url: doc.path,
-				read_time: doc.read_time,
-				hero_image: doc.hero_image,
-				feature_image: doc.feature_image,
-				image: doc.image
-			})
-		})
+	let popupSettings: PopupSettings = {
+		event: 'focus-click',
+		target: 'popupAutocomplete',
+		placement: 'bottom'
+	}
+	let inputPopupDemo: string = ''
+	function onPopupDemoSelect(event: any): void {
+		inputPopupDemo = event.detail.label
 	}
 
 	onMount(async () => {
-		console.log(library)
-		await fetchData()
+		sourceData = await fetchData()
 
 		const documents = supabase
 			.channel('custom-all-channel')
-			.on('postgres_changes', { event: '*', schema: 'public', table: 'documents' }, (payload) => {
-				console.log('Change received!', payload)
-			})
+			.on(
+				'postgres_changes',
+				{ event: '*', schema: 'public', table: 'documents' },
+				(payload: any) => {
+					console.log('Change received!', payload)
+
+					if (Object.keys(payload.new).length > 0) {
+						console.log('New document added!')
+						sourceData = [...sourceData, payload.new]
+					} else if (Object.keys(payload.old).length > 0) {
+						console.log('Document deleted!')
+						sourceData = sourceData.filter((doc: { id: any }) => doc.id !== payload.old.id)
+					} else {
+						console.log('Document updated!')
+					}
+				}
+			)
 			.subscribe()
-		console.log(documents)
+
+		flavorOptions = sourceData.map((doc: Article) => {
+			return {
+				label: doc.title,
+				value: doc.id
+			}
+		})
+
+		return () => documents.unsubscribe()
 	})
 </script>
 
-<section class="p-4 space-y-4">
+<section class="p-4 pt-0 h-full flex flex-col space-y-4">
 	<h2 class="h2">Documents</h2>
-	<button on:click={loadDB}>Load</button>
-	<!-- Responsive Container (recommended) -->
-	<Table
-		source={tableSimple}
-		interactive={true}
-		on:selected={async (event) => {
-			console.log(event.detail)
-			const [path] = pathStrHandler(event.detail[event.detail.length - 1])
-			await goto(`/auth/admin/documents/${path}`)
-		}}
-	/>
+
+	<section class="card p-2 flex justify-between items-center">
+		<div class="max-w-lg w-full">
+			<input
+				class="input autocomplete"
+				type="search"
+				name="autocomplete-search"
+				bind:value={inputPopupDemo}
+				placeholder="Search..."
+				use:popup={popupSettings}
+			/>
+			<div data-popup="popupAutocomplete" class="card max-w-lg w-full shadow-xl p-1">
+				<Autocomplete
+					bind:input={inputPopupDemo}
+					options={flavorOptions}
+					on:selection={onPopupDemoSelect}
+				/>
+			</div>
+		</div>
+
+		<div class="flex gap-4">
+			<button class="btn">Delete</button>
+			<button class="btn variant-filled-primary"> New Document </button>
+		</div>
+	</section>
+
+	<AdminTable {sourceData} {page} {checkedItems} />
 </section>

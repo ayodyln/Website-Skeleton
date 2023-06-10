@@ -72,12 +72,12 @@
 	</svelte:fragment>
 </AppBar>
 
-<div class="card variant-filled-surface p-3" data-popup="popupClick">
+<div class="card variant-glass-surface p-3" data-popup="popupClick">
 	<ul class="space-y-4">
 		<li><a href="/auth/admin" class="btn variant-ghost">Dashboard</a></li>
 		<li>
 			<button
-				class="btn variant-filled-tertiary block w-full"
+				class="btn variant-filled-warning block w-full"
 				on:click={() => logoutHandler(supabase)}>Logout</button
 			>
 		</li>
