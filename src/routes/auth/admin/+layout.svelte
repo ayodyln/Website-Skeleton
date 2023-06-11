@@ -16,7 +16,11 @@
 	}
 </script>
 
-<AppShell>
+<AppShell
+	regionPage="h-[calc(100vh-5rem)]"
+	slotSidebarLeft="h-[calc(100vh-5rem)]"
+	slotPageHeader="p-4 h-14"
+>
 	<svelte:fragment slot="sidebarLeft">
 		<div id="adminSideNav" class="w-56 h-full card rounded-none variant-soft-secondary p-2">
 			<ul class="space-y-4">
@@ -45,18 +49,16 @@
 	</svelte:fragment>
 	<!-- ---- / ---- -->
 	<svelte:fragment slot="pageHeader">
-		<div id="adminHeader" class="p-4">
-			<ol class="breadcrumb capitalize">
-				{#each myBreadcrumbs as crumb, i}
-					{#if i < myBreadcrumbs.length - 1}
-						<li class="crumb"><a class="anchor" href={routeHandler(crumb)}>{crumb}</a></li>
-						<li class="crumb-separator" aria-hidden>/</li>
-					{:else}
-						<li class="crumb">{crumb === 'admin' ? 'dashboard' : crumb}</li>
-					{/if}
-				{/each}
-			</ol>
-		</div>
+		<ol class="breadcrumb capitalize h-full">
+			{#each myBreadcrumbs as crumb, i}
+				{#if i < myBreadcrumbs.length - 1}
+					<li class="crumb"><a class="anchor" href={routeHandler(crumb)}>{crumb}</a></li>
+					<li class="crumb-separator" aria-hidden>/</li>
+				{:else}
+					<li class="crumb">{crumb === 'admin' ? 'dashboard' : crumb}</li>
+				{/if}
+			{/each}
+		</ol>
 	</svelte:fragment>
 	<!-- ---- / ---- -->
 	<slot />

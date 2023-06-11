@@ -2,27 +2,19 @@
 	import { goto } from '$app/navigation'
 	import type { Article } from '$lib/types'
 	import { Paginator } from '@skeletonlabs/skeleton'
-	export let sourceData: Article[],
-		page: {
-			offset: number
-			limit: number
-			size: number
-			amounts: number[]
-		},
-		checkAll: any,
-		singleCheck: any
-
-	const pathStrHandler = (str: string) => str.split('/').filter((s) => s !== '' && s !== 'blog')
+	export let sourceData: Article[], checkAll: any, singleCheck: any, page: any
 
 	$: paginatedSource = sourceData.slice(
 		page.offset * page.limit, // start
 		page.offset * page.limit + page.limit // end
 	)
+
+	const pathStrHandler = (str: string) => str.split('/').filter((s) => s !== '' && s !== 'blog')
 </script>
 
 {#if sourceData.length > 0}
-	<div class="table-container h-full">
-		<table class="table table-hover shadow-lg">
+	<div class="h-auto overflow-auto">
+		<table class="table table-auto table-hover shadow-lg">
 			<thead>
 				<tr>
 					<th class="w-12">
@@ -39,7 +31,7 @@
 					<th>Published</th>
 				</tr>
 			</thead>
-			<tbody>
+			<tbody class="">
 				{#each paginatedSource as row, i}
 					<tr
 						class="cursor-pointer"
@@ -55,7 +47,9 @@
 								type="checkbox"
 							/>
 						</td>
-						<td>{row.id}</td>
+						<td>
+							{row.id}
+						</td>
 						<td>{row.title}</td>
 						<td class="space-x-1">
 							{#each row.tags as tag}
@@ -67,8 +61,14 @@
 				{/each}
 			</tbody>
 		</table>
-		<div class="mt-4">
-			<Paginator bind:settings={page} showFirstLastButtons={false} showPreviousNextButtons={true} />
-		</div>
+	</div>
+
+	<div class="mt-4">
+		<Paginator bind:settings={page} showFirstLastButtons={false} showPreviousNextButtons={true} />
+	</div>
+{:else}
+	<div class="flex flex-col items-center justify-center h-full">
+		<h1 class="text-2xl font-bold">No documents found</h1>
+		<p class="text-gray-500">Create a new document to get started</p>
 	</div>
 {/if}

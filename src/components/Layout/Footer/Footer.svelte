@@ -2,7 +2,7 @@
 	import { AppBar } from '@skeletonlabs/skeleton';
 </script>
 
-<AppBar>
+<AppBar class="mt-20">
 	<svelte:fragment slot="lead">
 		<div class="items-center grid-flow-col">
 			<p>Copyright © 2023 - All right reserved</p>

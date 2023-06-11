@@ -1,10 +1,12 @@
 <script lang="ts">
+	import type { Article } from '$lib/types'
+	import type { AutocompleteOption, PopupSettings } from '@skeletonlabs/skeleton'
 	import { onMount } from 'svelte'
-	import { format } from 'date-fns'
+
 	import AdminTable from '../../../../components/pages/admin/AdminTable.svelte'
 	import { Autocomplete, popup } from '@skeletonlabs/skeleton'
-	import type { AutocompleteOption, PopupSettings } from '@skeletonlabs/skeleton'
-	import type { Article } from '$lib/types'
+	import { deleteHandler, fetchDocumentsData } from '$lib/pages/admin/documents'
+	import { goto } from '$app/navigation'
 
 	export let data
 
@@ -12,24 +14,15 @@
 	$: ({ supabase } = data)
 
 	let sourceData: any = []
+
 	$: page = {
 		offset: 0,
 		limit: 5,
 		size: sourceData.length,
 		amounts: [1, 2, 5, 10]
 	}
-	let checkedItems: string[] = []
 
-	const fetchData = async () => {
-		const { data, error } = await supabase.from('documents').select('*')
-		if (error) return
-		return data?.map((doc) => {
-			return {
-				...doc,
-				inserted_at: format(new Date(doc.inserted_at), 'dd/MM/yyyy')
-			}
-		})
-	}
+	let checkedItems: string[] = []
 
 	let documentOptions: AutocompleteOption[]
 
@@ -38,17 +31,21 @@
 		target: 'popupAutocomplete',
 		placement: 'bottom'
 	}
+
 	let autocompletePopUp: string = ''
+
 	function onPopupDemoSelect(event: any): void {
 		autocompletePopUp = event.detail.label
 	}
 
 	const checkAll = (event: { target: { checked: boolean; dataset: { id: string } } }) => {
-		const checkAllInput = event.target.checked
 		const checkInputs: NodeListOf<HTMLInputElement> = document.querySelectorAll('#documentCheck')
+		const checkAllInput = event.target.checked
 		if (checkAllInput) {
-			checkInputs.forEach((input) => (input.checked = true))
-			checkedItems = [...checkedItems, event.target.dataset.id]
+			checkInputs.forEach((input: HTMLInputElement) => {
+				input.checked = true
+				checkedItems = [...checkedItems, String(input.dataset.id)]
+			})
 		} else {
 			checkInputs.forEach((input) => (input.checked = false))
 			checkedItems = []
@@ -61,7 +58,7 @@
 			: (checkedItems = checkedItems.filter((id: string) => id !== event.target.dataset.id))
 
 	onMount(async () => {
-		sourceData = await fetchData()
+		sourceData = await fetchDocumentsData(supabase)
 
 		const documents = supabase
 			.channel('custom-all-channel')
@@ -95,7 +92,7 @@
 	})
 </script>
 
-<section class="p-4 pt-0 h-full flex flex-col space-y-4">
+<section class="adminPageContent flex flex-col gap-4 overflow-hidden p-4 pt-0">
 	<h2 class="h2">Documents</h2>
 
 	<section class="card p-2 flex justify-between items-center">
@@ -121,11 +118,28 @@
 			<button
 				class="btn variant-filled-error {checkedItems.length < 1
 					? 'pointer-events-none opacity-50'
-					: ''}">Delete</button
+					: ''}"
+				on:click={() => {
+					deleteHandler(supabase, checkedItems)
+				}}>Delete</button
 			>
-			<button class="btn variant-filled-primary"> New Document </button>
+			<button
+				class="btn variant-filled-primary"
+				on:click={async () => {
+					console.log('New document')
+					await goto('/auth/admin/documents/create-document')
+				}}
+			>
+				Create Document
+			</button>
 		</div>
 	</section>
 
 	<AdminTable {sourceData} {page} {checkAll} {singleCheck} />
 </section>
+
+<style>
+	.adminPageContent {
+		height: calc((100vh - 5rem) - 3.5rem);
+	}
+</style>

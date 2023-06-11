@@ -62,7 +62,7 @@
 
 				{#if session}
 					<li class="ml-4">
-						<button use:popup={popupClick}>
+						<button use:popup={popupClick} on:click|stopPropagation>
 							<Avatar class="card-hover" width="w-10" initials="DS" background="bg-primary-500" />
 						</button>
 					</li>
@@ -72,7 +72,7 @@
 	</svelte:fragment>
 </AppBar>
 
-<div class="card variant-glass-surface p-3" data-popup="popupClick">
+<div class="card p-3" data-popup="popupClick">
 	<ul class="space-y-4">
 		<li><a href="/auth/admin" class="btn variant-ghost">Dashboard</a></li>
 		<li>

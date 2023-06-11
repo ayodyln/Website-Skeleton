@@ -31,15 +31,15 @@
 	})
 </script>
 
-<AppShell>
+<AppShell slotHeader="h-20">
 	<svelte:fragment slot="header">
 		<Header {session} {supabase} />
 	</svelte:fragment>
-	<div class="flex-grow mb-20 h-full flex flex-col">
+	<div class="flex-grow">
 		<slot />
 	</div>
 	<svelte:fragment slot="pageFooter">
-		{#if currentPage !== '/auth/admin' && currentPage !== '/auth/admin/documents'}
+		{#if !currentPage?.includes('/auth/admin')}
 			<Footer />
 		{/if}
 	</svelte:fragment>
