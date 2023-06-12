@@ -1,5 +1,4 @@
 import type { SupabaseClient } from '@supabase/supabase-js'
-import { library } from '$lib/Blog/library'
 
 export const fetchDocumentsData = async (supabase: SupabaseClient<any, 'public', any>) => {
 	const { data, error } = await supabase.from('documents').select('*')
@@ -17,8 +16,6 @@ export const fetchDocumentsData = async (supabase: SupabaseClient<any, 'public',
 		}
 	})
 }
-
-
 
 export const deleteHandler = async (
 	supabase: SupabaseClient<any, 'public', any>,
