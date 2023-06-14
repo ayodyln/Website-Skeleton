@@ -12,6 +12,9 @@
 	import { AppShell } from '@skeletonlabs/skeleton'
 	import Header from '../components/Layout/Header/Header.svelte'
 	import Footer from '../components/Layout/Footer/Footer.svelte'
+	import { computePosition, autoUpdate, offset, shift, flip, arrow } from '@floating-ui/dom'
+	import { storePopup } from '@skeletonlabs/skeleton'
+	storePopup.set({ computePosition, autoUpdate, offset, shift, flip, arrow })
 
 	export let data
 

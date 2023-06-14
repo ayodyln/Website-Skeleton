@@ -18,34 +18,23 @@
 
 <AppShell
 	regionPage="h-[calc(100vh-5rem)]"
-	slotSidebarLeft="h-[calc(100vh-5rem)]"
+	slotSidebarLeft="max-h-[calc(100vh-5rem)] w-56 card rounded-none variant-soft-secondary p-2 space-y-4"
 	slotPageHeader="p-4 h-14"
 >
 	<svelte:fragment slot="sidebarLeft">
-		<div id="adminSideNav" class="w-56 h-full card rounded-none variant-soft-secondary p-2">
-			<ul class="space-y-4">
-				<li>
-					<a
-						class="block btn"
-						class:variant-glass-primary={$page.url.pathname === '/auth/admin' ? true : false}
-						class:variant-glass-secondary={$page.url.pathname !== '/auth/admin' ? true : false}
-						href="/auth/admin">Dashboard</a
-					>
-				</li>
-				<li>
-					<a
-						class="block btn variant-glass-secondary"
-						class:variant-glass-primary={$page.url.pathname === '/auth/admin/documents'
-							? true
-							: false}
-						class:variant-glass-secondary={$page.url.pathname !== '/auth/admin/documents'
-							? true
-							: false}
-						href="/auth/admin/documents">Documents</a
-					>
-				</li>
-			</ul>
-		</div>
+		<a
+			class="block btn"
+			class:variant-glass-primary={$page.url.pathname === '/auth/admin' ? true : false}
+			class:variant-glass-secondary={$page.url.pathname !== '/auth/admin' ? true : false}
+			href="/auth/admin">Dashboard</a
+		>
+
+		<a
+			class="block btn variant-glass-secondary"
+			class:variant-glass-primary={$page.url.pathname === '/auth/admin/documents' ? true : false}
+			class:variant-glass-secondary={$page.url.pathname !== '/auth/admin/documents' ? true : false}
+			href="/auth/admin/documents">Documents</a
+		>
 	</svelte:fragment>
 	<!-- ---- / ---- -->
 	<svelte:fragment slot="pageHeader">

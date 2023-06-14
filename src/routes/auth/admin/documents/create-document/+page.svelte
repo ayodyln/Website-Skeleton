@@ -2,9 +2,8 @@
 	import { onMount } from 'svelte'
 	import SvelteHtmlEditor from '../../../../../components/SvelteHTMLEditor/SvelteHTMLEditor.svelte'
 	import { draft } from '$lib/stores'
-	import { Toast, toastStore } from '@skeletonlabs/skeleton'
-	import type { ToastSettings } from '@skeletonlabs/skeleton'
-	import { AppShell } from '@skeletonlabs/skeleton'
+	import { Toast, toastStore, AppShell, popup } from '@skeletonlabs/skeleton'
+	import type { ToastSettings, PopupSettings } from '@skeletonlabs/skeleton'
 	import { goto } from '$app/navigation'
 
 	// This is a custom Svelte component that I made with assistance of GitHub Copilot.
@@ -12,7 +11,10 @@
 	// elements. I don't need a full-fledged WYSIWYG editor like TinyMCE or CKEditor--especially
 	// since I'm using SvelteKit and not a framework like Vue or React.
 
-	let value: string = !$draft ? '' : JSON.parse($draft)
+	let value: { title: string; content: string } = {
+		title: '',
+		content: ''
+	}
 	let mouseDown: boolean = false
 	let left: any
 	let parent: HTMLElement
@@ -21,9 +23,14 @@
 	let editorPane: HTMLTextAreaElement
 
 	onMount(() => {
+		value = JSON.parse($draft)
+
 		const interval = setInterval(() => {
 			toastStore.trigger(autoSaveToast)
-			$draft = JSON.stringify(value)
+			$draft = JSON.stringify({
+				title: '',
+				content: value.content
+			})
 		}, 1000 * 60)
 
 		return () => clearInterval(interval)
@@ -39,11 +46,18 @@
 		background: 'variant-ghost-primary'
 	}
 
+	const popupFeatured: PopupSettings = {
+		event: 'click',
+		target: 'popupFeatured',
+		placement: 'right'
+	}
+
 	function insertImage() {
 		// GitHub Copilot Function
 		const cursorPosition = editorPane.selectionStart
 		const imageString = '<img src="https://picsum.photos/200/300" alt="random image" />'
-		value = value.slice(0, cursorPosition) + imageString + value.slice(cursorPosition)
+		value.content =
+			value.content.slice(0, cursorPosition) + imageString + value.content.slice(cursorPosition)
 		editorPane.selectionStart = cursorPosition + imageString.length
 		editorPane.selectionEnd = cursorPosition + imageString.length
 		editorPane.focus()
@@ -52,33 +66,60 @@
 
 <section class="h-[calc(100vh-8.5rem)]">
 	<AppShell
-		slotHeader="card rounded-none p-2 flex justify-end gap-2"
-		slotSidebarLeft="card rounded-none p-2"
-		slotPageHeader="card rounded-none p-2"
-		slotFooter="flex justify-end p-2 card rounded-none"
+		slotHeader="card rounded-none p-2 flex justify-between items-center gap-2"
+		slotSidebarLeft="card rounded-none p-2 flex flex-col gap-2"
+		slotFooter="flex justify-end p-2 card rounded-none space-x-2"
 	>
 		<svelte:fragment slot="header">
-			<button
-				class="btn variant-ghost-error rounded-lg"
-				on:click={async () => {
-					$draft = ''
-					await goto('/auth/admin/documents')
-				}}
-				>Discard
-			</button>
+			<section class="w-1/2">
+				<div
+					class="input-group input-group-divider grid-cols-[auto_1fr_auto] max-w-xl w-full variant-ghost"
+				>
+					<div class="input-group-shim">Title</div>
+					{#if value}
+						<input
+							type="text"
+							class="input input-bordered rounded-l-none rounded-lg"
+							placeholder="Title"
+							bind:value={value.title}
+						/>
+					{:else}
+						<input
+							type="text"
+							class="input input-bordered rounded-l-none rounded-lg"
+							placeholder="Title"
+							bind:value
+						/>
+					{/if}
+				</div>
+			</section>
 
-			<button
-				class="btn variant-ghost-primary rounded-lg"
-				on:click={() => {
-					$draft = JSON.stringify(value)
-					toastStore.trigger(saveToast)
-				}}
-				>Save
-			</button>
+			<section class="space-x-2">
+				<button
+					class="btn variant-ghost-error rounded-lg"
+					on:click={async () => {
+						$draft = ''
+						await goto('/auth/admin/documents')
+					}}
+					>Discard
+				</button>
+
+				<button
+					class="btn variant-ghost-primary rounded-lg"
+					on:click={() => {
+						$draft = JSON.stringify({
+							title: '',
+							content: value.content
+						})
+						toastStore.trigger(saveToast)
+					}}
+					>Save
+				</button>
+			</section>
 		</svelte:fragment>
 
 		<svelte:fragment slot="sidebarLeft">
-			<button on:click={insertImage} class="btn rounded-lg variant-ghost-surface fill-current">
+			<button use:popup={popupFeatured} class="btn rounded-lg variant-ghost-surface fill-current">
 				<span class="icon">
 					<svg xmlns="http://www.w3.org/2000/svg" class="h-5" viewBox="0 0 512 512">
 						<!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
@@ -88,13 +129,17 @@
 					</svg>
 				</span>
 			</button>
-		</svelte:fragment>
 
-		<svelte:fragment slot="pageHeader">
-			<div class="input-group input-group-divider grid-cols-[auto_1fr_auto] max-w-lg variant-ghost">
-				<div class="input-group-shim">Title</div>
-				<input type="search" placeholder="Document Title" />
-			</div>
+			<button use:popup={popupFeatured} class="btn rounded-lg variant-ghost-surface fill-current">
+				<span class="icon">
+					<svg xmlns="http://www.w3.org/2000/svg" class="h-5" viewBox="0 0 640 512">
+						<!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+						<path
+							d="M45.6 32C20.4 32 0 52.4 0 77.6V434.4C0 459.6 20.4 480 45.6 480c5.1 0 10-.8 14.7-2.4C74.6 472.8 177.6 440 320 440s245.4 32.8 259.6 37.6c4.7 1.6 9.7 2.4 14.7 2.4c25.2 0 45.6-20.4 45.6-45.6V77.6C640 52.4 619.6 32 594.4 32c-5 0-10 .8-14.7 2.4C565.4 39.2 462.4 72 320 72S74.6 39.2 60.4 34.4C55.6 32.8 50.7 32 45.6 32zM96 160a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zm272 0c7.9 0 15.4 3.9 19.8 10.5L512.3 353c5.4 8 5.6 18.4 .4 26.5s-14.7 12.3-24.2 10.7C442.7 382.4 385.2 376 320 376c-65.6 0-123.4 6.5-169.3 14.4c-9.8 1.7-19.7-2.9-24.7-11.5s-4.3-19.4 1.9-27.2L197.3 265c4.6-5.7 11.4-9 18.7-9s14.2 3.3 18.7 9l26.4 33.1 87-127.6c4.5-6.6 11.9-10.5 19.8-10.5z"
+						/>
+					</svg>
+				</span>
+			</button>
 		</svelte:fragment>
 
 		<!-- Router Slot -->
@@ -116,7 +161,7 @@
 			<SvelteHtmlEditor bind:value bind:editorPane />
 
 			<div
-				class="split__bar w-2 card hover:bg-surface-900 rounded-none variant-filled-surface flex items-center justify-center cursor-col-resize"
+				class="w-2.5 card hover:bg-surface-900 rounded-none flex items-center justify-center cursor-col-resize"
 				on:mousedown={() => {
 					mouseDown = true
 				}}
@@ -124,28 +169,33 @@
 					left.style.width = '50%'
 				}}
 			>
-				<span class="select-none"> | </span>
+				<span class="select-none"> || </span>
 			</div>
 
 			<div
 				bind:this={previewPane}
-				class="flex-1 card rounded-none h-full break-all overflow-y-auto"
+				class="flex-1 bg-surface-900 rounded-none h-full break-all overflow-y-auto p-2"
 			>
-				{#if !value}
+				{#if !value.content}
 					<div class="flex items-center justify-center h-full">
 						<p class="text-2xl text-gray-400">Nothing to preview</p>
 					</div>
 				{:else}
-					{@html value}
+					{@html value.content}
 				{/if}
 			</div>
 		</section>
 		<!-- ---- / ---- -->
 
 		<svelte:fragment slot="footer">
-			<button class="btn variant-ghost-primary">Upload Document</button>
+			<button class="btn variant-ghost-tertiary rounded-lg">Create Draft</button>
+			<button class="btn variant-ghost-primary rounded-lg">Upload Document</button>
 		</svelte:fragment>
 	</AppShell>
 </section>
 
 <Toast />
+
+<div class="card variant-ghost p-4 w-72 shadow-xl" data-popup="popupFeatured">
+	<div><p>Demo Content</p></div>
+</div>
