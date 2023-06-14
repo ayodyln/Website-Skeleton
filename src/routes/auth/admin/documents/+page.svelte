@@ -7,6 +7,7 @@
 	import { Autocomplete, popup } from '@skeletonlabs/skeleton'
 	import { deleteHandler, fetchDocumentsData } from '$lib/pages/admin/documents'
 	import { goto } from '$app/navigation'
+	import { draft } from '$lib/stores'
 
 	export let data
 
@@ -126,7 +127,7 @@
 			<button
 				class="btn variant-filled-primary"
 				on:click={async () => {
-					console.log('New document')
+					$draft = JSON.stringify('')
 					await goto('/auth/admin/documents/create-document')
 				}}
 			>
