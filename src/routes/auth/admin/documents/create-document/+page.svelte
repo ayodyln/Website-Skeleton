@@ -2,23 +2,32 @@
 	import { onMount } from 'svelte'
 	import SvelteHtmlEditor from '../../../../../components/SvelteHTMLEditor/SvelteHTMLEditor.svelte'
 	import { draft } from '$lib/stores'
-	import { Toast, toastStore, AppShell, popup, modeCurrent } from '@skeletonlabs/skeleton'
+	import {
+		Toast,
+		toastStore,
+		AppShell,
+		popup,
+		modeCurrent,
+		FileDropzone
+	} from '@skeletonlabs/skeleton'
 	import type { ToastSettings, PopupSettings } from '@skeletonlabs/skeleton'
 	import { goto } from '$app/navigation'
 
 	import { basicSetup, EditorView } from 'codemirror'
 	import { markdown } from '@codemirror/lang-markdown'
 	import { languages } from '@codemirror/language-data'
-	import { placeholder } from '@codemirror/view'
+	import { indentWithTab } from '@codemirror/commands'
+	import { placeholder, keymap } from '@codemirror/view'
 
 	// This is a custom Svelte component that I made with assistance of GitHub Copilot.
 	// All I need is a HTML editor that is simple and has widgets for common article UI
 	// elements. I don't need a full-fledged WYSIWYG editor like TinyMCE or CKEditor--especially
 	// since I'm using SvelteKit and not a framework like Vue or React.
 
-	let value: { title: string; content: string } = {
+	let value: { title: string; content: string; files: any[] } = {
 		title: '',
-		content: ''
+		content: '',
+		files: []
 	}
 	let mouseDown: boolean = false
 	let left: any
@@ -27,11 +36,11 @@
 	let previewPane: HTMLElement
 	let editorPane: HTMLTextAreaElement
 	let view: any = {}
+	let files: FileList
+	let tempImg: string
 
 	onMount(() => {
 		value = JSON.parse($draft)
-		console.log(value)
-
 		view = new EditorView({
 			extensions: [
 				basicSetup,
@@ -42,6 +51,9 @@
 					},
 					'&.cm-focused': {
 						outline: 'none'
+					},
+					'&.cm-focused .cm-cursor': {
+						borderLeftColor: $modeCurrent ? 'var(--surface-200)' : 'var(--surface-900)'
 					},
 					'.cm-gutters': {
 						backgroundColor: 'transparent'
@@ -56,13 +68,14 @@
 						backgroundColor: 'transparent'
 					}
 				}),
-				placeholder('Start typing document in HTML and TailWindCSS/SkeletonUI...')
+				placeholder('Start typing document in HTML and TailWindCSS/SkeletonUI...'),
+				keymap.of([indentWithTab])
 			],
 			parent: document.getElementById('editor') as HTMLElement
 		})
 
 		const interval = setInterval(() => {
-			toastStore.trigger(autoSaveToast)
+			toastStore.trigger(toasts.autoSaveToast)
 			$draft = JSON.stringify({
 				title: '',
 				content: value.content
@@ -72,20 +85,44 @@
 		return () => clearInterval(interval)
 	})
 
-	const autoSaveToast: ToastSettings = {
-		message: 'Auto Saving Draft...',
-		background: 'variant-ghost-primary'
+	interface ToastSettingsMap {
+		[key: string]: ToastSettings
+	}
+	const toasts: ToastSettingsMap = {
+		autoSaveToast: {
+			message: 'Auto Saving Draft...',
+			background: 'variant-ghost-primary',
+			callback: () => {
+				console.log('Auto Save Toast')
+			}
+		},
+		saveToast: {
+			message: 'Saving Draft...',
+			background: 'variant-ghost-primary',
+			callback: () => {
+				console.log('Saving Toast')
+			}
+		}
 	}
 
-	const saveToast: ToastSettings = {
-		message: 'Saving Draft...',
-		background: 'variant-ghost-primary'
+	interface PopupSettingsMap {
+		[key: string]: PopupSettings
 	}
-
-	const popupFeatured: PopupSettings = {
-		event: 'click',
-		target: 'popupFeatured',
-		placement: 'right'
+	const popups: PopupSettingsMap = {
+		insertImage: {
+			event: 'click',
+			target: 'insertImage',
+			placement: 'right',
+			state(event) {
+				console.log(event)
+			}
+		},
+		insertHero: {
+			event: 'click',
+			target: 'insertHero',
+			placement: 'right',
+			state(event) {}
+		}
 	}
 
 	function insertImage() {
@@ -147,13 +184,15 @@
 							const state = view.state.doc.toString()
 							$draft = JSON.stringify({
 								title: '',
-								content: state
+								content: state,
+								files: []
 							})
 							value = {
 								title: '',
-								content: state
+								content: state,
+								files: []
 							}
-							toastStore.trigger(saveToast)
+							toastStore.trigger(toasts.saveToast)
 						}
 					}}
 					>Save
@@ -162,7 +201,10 @@
 		</svelte:fragment>
 
 		<svelte:fragment slot="sidebarLeft">
-			<button use:popup={popupFeatured} class="btn rounded-lg variant-ghost-surface fill-current">
+			<button
+				use:popup={popups.insertImage}
+				class="btn rounded-lg variant-ghost-surface fill-current"
+			>
 				<span class="icon">
 					<svg xmlns="http://www.w3.org/2000/svg" class="h-5" viewBox="0 0 512 512">
 						<!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
@@ -173,7 +215,10 @@
 				</span>
 			</button>
 
-			<button use:popup={popupFeatured} class="btn rounded-lg variant-ghost-surface fill-current">
+			<button
+				use:popup={popups.insertHero}
+				class="btn rounded-lg variant-ghost-surface fill-current"
+			>
 				<span class="icon">
 					<svg xmlns="http://www.w3.org/2000/svg" class="h-5" viewBox="0 0 640 512">
 						<!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
@@ -204,9 +249,7 @@
 			<SvelteHtmlEditor bind:value bind:editorPane {view} />
 
 			<div
-				class="w-2.5 {$modeCurrent
-					? 'bg-surface-300'
-					: 'bg-surface-700'} rounded-none flex items-center justify-center cursor-col-resize"
+				class="w-2.5 p-2 btn variant-filled-surface rounded-none flex items-center justify-center cursor-col-resize"
 				on:mousedown={() => {
 					mouseDown = true
 				}}
@@ -217,11 +260,9 @@
 				<span class="select-none"> || </span>
 			</div>
 
-			<div
+			<article
 				bind:this={previewPane}
-				class="flex-1 {$modeCurrent
-					? 'bg-surface-200'
-					: 'bg-surface-900'} rounded-none h-full break-all overflow-y-auto p-2"
+				class="flex-1 card rounded-none h-full break-all overflow-y-auto p-2"
 			>
 				{#if !value.content}
 					<div class="flex items-center justify-center h-full">
@@ -230,7 +271,7 @@
 				{:else}
 					{@html value.content}
 				{/if}
-			</div>
+			</article>
 		</section>
 		<!-- ---- / ---- -->
 
@@ -243,6 +284,49 @@
 
 <Toast />
 
-<div class="card variant-ghost p-4 w-72 shadow-xl" data-popup="popupFeatured">
-	<div><p>Demo Content</p></div>
+<div class="card card-hover p-4 w-72 shadow-xl" data-popup="insertImage">
+	<div class="space-y-4">
+		<h4 class="h4">Insert Image</h4>
+
+		{#if !tempImg}
+			<FileDropzone
+				name="files"
+				class="w-full h-32"
+				bind:files
+				on:change={(event) => {
+					console.log(files)
+					const file = files[0]
+					tempImg = URL.createObjectURL(file)
+				}}
+			/>
+
+			<section class="w-full flex opacity-50 pointer-events-none gap-1">
+				<button class="btn variant-ghost rounded-lg w-1/2">Cancel</button>
+				<button class="btn variant-ghost-primary rounded-lg w-1/2">Insert</button>
+			</section>
+		{:else}
+			<figure class="w-full h-32 flex justify-center card">
+				<img src={tempImg} alt="Temp" class="h-full w-auto" />
+			</figure>
+
+			<section class="w-full flex gap-1">
+				<button class="btn variant-ghost rounded-lg w-1/2">Cancel</button>
+				<button
+					class="btn variant-ghost-primary rounded-lg w-1/2"
+					on:click={() => {
+						// create a function that will insert the image from tempImg into my editor state on the same line as a image tag, the src attr will equal the tempImg
+						// then clear the tempImg
+						// then close the popup
+
+						console.log(view)
+						view.dispatch({
+							changes: { from: 0, insert: 'Hello World' }
+						})
+					}}>Insert</button
+				>
+			</section>
+		{/if}
+
+		<div class="arrow card" />
+	</div>
 </div>

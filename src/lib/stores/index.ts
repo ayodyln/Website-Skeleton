@@ -6,7 +6,8 @@ const defaultValue = browser
 	? window.localStorage.getItem('draft')
 	: {
 			title: '',
-			content: ''
+			content: '',
+			files: []
 	  }
 
 const draft: Writable<string> = localStorageStore('draft', JSON.stringify(defaultValue))
