@@ -115,7 +115,11 @@
 			target: 'insertImage',
 			placement: 'right',
 			state(event) {
-				console.log(event)
+				if (event.state) {
+					console.log(true)
+				} else {
+					console.log(false)
+				}
 			}
 		},
 		insertHero: {
@@ -270,7 +274,6 @@
 				class="w-full h-32"
 				bind:files
 				on:change={(event) => {
-					console.log(files)
 					const file = files[0]
 					tempImg = URL.createObjectURL(file)
 				}}
@@ -288,17 +291,22 @@
 			<section class="w-full flex gap-1">
 				<button class="btn variant-ghost rounded-lg w-1/2">Cancel</button>
 				<button
-					class="btn variant-ghost-primary rounded-lg w-1/2"
 					on:click={() => {
-						// create a function that will insert the image from tempImg into my editor state on the same line as a image tag, the src attr will equal the tempImg
-						// then clear the tempImg
-						// then close the popup
-
-						console.log(view)
+						const pos = view.state.selection.main.head
 						view.dispatch({
-							changes: { from: 0, insert: 'Hello World' }
+							changes: {
+								from: pos,
+								to: pos,
+								insert: `<img src="${tempImg}" alt="Temp" />`
+							}
 						})
-					}}>Insert</button
+						$draft = JSON.stringify({
+							...JSON.parse($draft),
+							content: view.state.doc.toString()
+						})
+						value = JSON.parse($draft)
+					}}
+					class="btn variant-ghost-primary rounded-lg w-1/2">Insert</button
 				>
 			</section>
 		{/if}
