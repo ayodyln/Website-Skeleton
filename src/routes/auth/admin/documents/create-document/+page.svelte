@@ -18,6 +18,7 @@
 	import { languages } from '@codemirror/language-data'
 	import { indentWithTab } from '@codemirror/commands'
 	import { placeholder, keymap } from '@codemirror/view'
+	import Widgets from '../../../../../components/SvelteHTMLEditor/Widgets.svelte'
 
 	// This is a custom Svelte component that I made with assistance of GitHub Copilot.
 	// All I need is a HTML editor that is simple and has widgets for common article UI
@@ -202,33 +203,7 @@
 		</svelte:fragment>
 
 		<svelte:fragment slot="sidebarLeft">
-			<button
-				use:popup={popups.insertImage}
-				class="btn rounded-lg variant-ghost-surface fill-current"
-			>
-				<span class="icon">
-					<svg xmlns="http://www.w3.org/2000/svg" class="h-5" viewBox="0 0 512 512">
-						<!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
-						<path
-							d="M0 96C0 60.7 28.7 32 64 32H448c35.3 0 64 28.7 64 64V416c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V96zM323.8 202.5c-4.5-6.6-11.9-10.5-19.8-10.5s-15.4 3.9-19.8 10.5l-87 127.6L170.7 297c-4.6-5.7-11.5-9-18.7-9s-14.2 3.3-18.7 9l-64 80c-5.8 7.2-6.9 17.1-2.9 25.4s12.4 13.6 21.6 13.6h96 32H424c8.9 0 17.1-4.9 21.2-12.8s3.6-17.4-1.4-24.7l-120-176zM112 192a48 48 0 1 0 0-96 48 48 0 1 0 0 96z"
-						/>
-					</svg>
-				</span>
-			</button>
-
-			<button
-				use:popup={popups.insertHero}
-				class="btn rounded-lg variant-ghost-surface fill-current"
-			>
-				<span class="icon">
-					<svg xmlns="http://www.w3.org/2000/svg" class="h-5" viewBox="0 0 640 512">
-						<!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
-						<path
-							d="M45.6 32C20.4 32 0 52.4 0 77.6V434.4C0 459.6 20.4 480 45.6 480c5.1 0 10-.8 14.7-2.4C74.6 472.8 177.6 440 320 440s245.4 32.8 259.6 37.6c4.7 1.6 9.7 2.4 14.7 2.4c25.2 0 45.6-20.4 45.6-45.6V77.6C640 52.4 619.6 32 594.4 32c-5 0-10 .8-14.7 2.4C565.4 39.2 462.4 72 320 72S74.6 39.2 60.4 34.4C55.6 32.8 50.7 32 45.6 32zM96 160a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zm272 0c7.9 0 15.4 3.9 19.8 10.5L512.3 353c5.4 8 5.6 18.4 .4 26.5s-14.7 12.3-24.2 10.7C442.7 382.4 385.2 376 320 376c-65.6 0-123.4 6.5-169.3 14.4c-9.8 1.7-19.7-2.9-24.7-11.5s-4.3-19.4 1.9-27.2L197.3 265c4.6-5.7 11.4-9 18.7-9s14.2 3.3 18.7 9l26.4 33.1 87-127.6c4.5-6.6 11.9-10.5 19.8-10.5z"
-						/>
-					</svg>
-				</span>
-			</button>
+			<Widgets {popups} />
 		</svelte:fragment>
 
 		<!-- Router Slot -->
