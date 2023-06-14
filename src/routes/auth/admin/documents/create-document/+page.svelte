@@ -141,6 +141,7 @@
 	<AppShell
 		slotHeader="card rounded-none p-2 flex justify-between items-center gap-2"
 		slotSidebarLeft="card rounded-none p-2 flex flex-col gap-2"
+		slotPageContent="card rounded-none border-none outline-none"
 		slotFooter="flex justify-end p-2 card rounded-none space-x-2"
 	>
 		<svelte:fragment slot="header">
