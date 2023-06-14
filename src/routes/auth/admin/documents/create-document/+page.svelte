@@ -2,9 +2,14 @@
 	import { onMount } from 'svelte'
 	import SvelteHtmlEditor from '../../../../../components/SvelteHTMLEditor/SvelteHTMLEditor.svelte'
 	import { draft } from '$lib/stores'
-	import { Toast, toastStore, AppShell, popup } from '@skeletonlabs/skeleton'
+	import { Toast, toastStore, AppShell, popup, modeCurrent } from '@skeletonlabs/skeleton'
 	import type { ToastSettings, PopupSettings } from '@skeletonlabs/skeleton'
 	import { goto } from '$app/navigation'
+
+	import { basicSetup, EditorView } from 'codemirror'
+	import { markdown } from '@codemirror/lang-markdown'
+	import { languages } from '@codemirror/language-data'
+	import { placeholder } from '@codemirror/view'
 
 	// This is a custom Svelte component that I made with assistance of GitHub Copilot.
 	// All I need is a HTML editor that is simple and has widgets for common article UI
@@ -21,9 +26,40 @@
 	let minWidth: number = 500
 	let previewPane: HTMLElement
 	let editorPane: HTMLTextAreaElement
+	let view: any = {}
 
 	onMount(() => {
 		value = JSON.parse($draft)
+		console.log(value)
+
+		view = new EditorView({
+			extensions: [
+				basicSetup,
+				markdown({ codeLanguages: languages }),
+				EditorView.baseTheme({
+					'.cm-editor': {
+						border: 'none'
+					},
+					'&.cm-focused': {
+						outline: 'none'
+					},
+					'.cm-gutters': {
+						backgroundColor: 'transparent'
+					},
+					'.cm-gutter': {
+						backgroundColor: 'transparent'
+					},
+					'.cm-gutterElement': {
+						backgroundColor: 'transparent'
+					},
+					'.cm-activeLine.cm-line': {
+						backgroundColor: 'transparent'
+					}
+				}),
+				placeholder('Start typing document in HTML and TailWindCSS/SkeletonUI...')
+			],
+			parent: document.getElementById('editor') as HTMLElement
+		})
 
 		const interval = setInterval(() => {
 			toastStore.trigger(autoSaveToast)
@@ -106,12 +142,19 @@
 
 				<button
 					class="btn variant-ghost-primary rounded-lg"
-					on:click={() => {
-						$draft = JSON.stringify({
-							title: '',
-							content: value.content
-						})
-						toastStore.trigger(saveToast)
+					on:click={async () => {
+						if (Object.keys(view).length > 0) {
+							const state = view.state.doc.toString()
+							$draft = JSON.stringify({
+								title: '',
+								content: state
+							})
+							value = {
+								title: '',
+								content: state
+							}
+							toastStore.trigger(saveToast)
+						}
 					}}
 					>Save
 				</button>
@@ -158,10 +201,12 @@
 				mouseDown = false
 			}}
 		>
-			<SvelteHtmlEditor bind:value bind:editorPane />
+			<SvelteHtmlEditor bind:value bind:editorPane {view} />
 
 			<div
-				class="w-2.5 card hover:bg-surface-900 rounded-none flex items-center justify-center cursor-col-resize"
+				class="w-2.5 {$modeCurrent
+					? 'bg-surface-300'
+					: 'bg-surface-700'} rounded-none flex items-center justify-center cursor-col-resize"
 				on:mousedown={() => {
 					mouseDown = true
 				}}
@@ -174,7 +219,9 @@
 
 			<div
 				bind:this={previewPane}
-				class="flex-1 bg-surface-900 rounded-none h-full break-all overflow-y-auto p-2"
+				class="flex-1 {$modeCurrent
+					? 'bg-surface-200'
+					: 'bg-surface-900'} rounded-none h-full break-all overflow-y-auto p-2"
 			>
 				{#if !value.content}
 					<div class="flex items-center justify-center h-full">
