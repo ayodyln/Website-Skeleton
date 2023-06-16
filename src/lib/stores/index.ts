@@ -14,7 +14,12 @@ const draft: Writable<string> = localStorageStore('draft', JSON.stringify(defaul
 
 draft.subscribe((value) => {
 	if (value === 'undefined' || value === 'null') {
-		value = ''
+		value = JSON.stringify({
+			title: '',
+			content: '',
+			files: []
+		})
+
 		return
 	}
 

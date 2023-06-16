@@ -67,7 +67,7 @@
 		<Paginator bind:settings={page} showFirstLastButtons={false} showPreviousNextButtons={true} />
 	</div>
 {:else}
-	<div class="flex flex-col items-center justify-center h-full">
+	<div class="flex flex-col items-center justify-center h-full card">
 		<h1 class="text-2xl font-bold">No documents found</h1>
 		<p class="text-gray-500">Create a new document to get started</p>
 	</div>

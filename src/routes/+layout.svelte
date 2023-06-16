@@ -37,13 +37,13 @@
 	})
 </script>
 
-<AppShell slotHeader="h-20">
+<AppShell slotPageContent="flex-grow flex flex-col" slotHeader="h-fit">
 	<svelte:fragment slot="header">
 		<Header {session} {supabase} />
 	</svelte:fragment>
-	<div class="flex-grow">
-		<slot />
-	</div>
+
+	<slot />
+
 	<svelte:fragment slot="pageFooter">
 		{#if !currentPage?.includes('/auth/admin')}
 			<Footer />

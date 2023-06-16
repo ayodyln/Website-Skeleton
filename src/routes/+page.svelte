@@ -28,7 +28,7 @@
 	})
 </script>
 
-<section>
+<section class="pb-10">
 	<Hero />
 
 	<section class="space-y-20">

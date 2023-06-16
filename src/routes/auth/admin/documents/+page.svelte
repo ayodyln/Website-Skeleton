@@ -128,7 +128,7 @@
 				class="btn variant-filled-primary"
 				on:click={async () => {
 					$draft = JSON.stringify('')
-					await goto('/auth/admin/documents/create-document')
+					await goto('/auth/admin/documents/editor')
 				}}
 			>
 				Create Document

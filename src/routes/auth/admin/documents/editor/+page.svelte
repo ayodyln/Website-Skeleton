@@ -2,14 +2,7 @@
 	import { onMount } from 'svelte'
 	import SvelteHtmlEditor from '../../../../../components/SvelteHTMLEditor/SvelteHTMLEditor.svelte'
 	import { draft } from '$lib/stores'
-	import {
-		Toast,
-		toastStore,
-		AppShell,
-		popup,
-		modeCurrent,
-		FileDropzone
-	} from '@skeletonlabs/skeleton'
+	import { Toast, toastStore, AppShell, modeCurrent, FileDropzone } from '@skeletonlabs/skeleton'
 	import type { ToastSettings, PopupSettings } from '@skeletonlabs/skeleton'
 	import { goto } from '$app/navigation'
 
@@ -17,8 +10,11 @@
 	import { markdown } from '@codemirror/lang-markdown'
 	import { languages } from '@codemirror/language-data'
 	import { indentWithTab } from '@codemirror/commands'
+	import { syntaxHighlighting } from '@codemirror/language'
 	import { placeholder, keymap } from '@codemirror/view'
 	import Widgets from '../../../../../components/SvelteHTMLEditor/Widgets.svelte'
+	import { tags } from '@lezer/highlight'
+	import { HighlightStyle } from '@codemirror/language'
 
 	// This is a custom Svelte component that I made with assistance of GitHub Copilot.
 	// All I need is a HTML editor that is simple and has widgets for common article UI
@@ -40,8 +36,17 @@
 	let files: FileList
 	let tempImg: string
 
+	const myHighlightStyle = HighlightStyle.define([
+		{ tag: tags.keyword, color: '#fc6' },
+		{ tag: tags.comment, color: '#f5d', fontStyle: 'italic' },
+		{ tag: tags.attributeName, color: 'red', fontStyle: 'italic' },
+		{ tag: tags.name, color: 'grey' },
+		{ tag: tags.angleBracket, color: 'red' }
+	])
+
 	onMount(() => {
 		value = JSON.parse($draft)
+		console.log(value)
 		view = new EditorView({
 			extensions: [
 				basicSetup,
@@ -70,7 +75,8 @@
 					}
 				}),
 				placeholder('Start typing document in HTML and TailWindCSS/SkeletonUI...'),
-				keymap.of([indentWithTab])
+				keymap.of([indentWithTab]),
+				syntaxHighlighting(myHighlightStyle)
 			],
 			parent: document.getElementById('editor') as HTMLElement
 		})
@@ -129,17 +135,6 @@
 			state(event) {}
 		}
 	}
-
-	function insertImage() {
-		// GitHub Copilot Function
-		const cursorPosition = editorPane.selectionStart
-		const imageString = '<img src="https://picsum.photos/200/300" alt="random image" />'
-		value.content =
-			value.content.slice(0, cursorPosition) + imageString + value.content.slice(cursorPosition)
-		editorPane.selectionStart = cursorPosition + imageString.length
-		editorPane.selectionEnd = cursorPosition + imageString.length
-		editorPane.focus()
-	}
 </script>
 
 <section class="h-[calc(100vh-8.5rem)]">
@@ -177,7 +172,11 @@
 				<button
 					class="btn variant-ghost-error rounded-lg"
 					on:click={async () => {
-						$draft = ''
+						$draft = JSON.stringify({
+							title: '',
+							content: '',
+							files: []
+						})
 						await goto('/auth/admin/documents')
 					}}
 					>Discard
@@ -297,7 +296,7 @@
 							changes: {
 								from: pos,
 								to: pos,
-								insert: `<img src="${tempImg}" alt="Temp" />`
+								insert: `<figure>\n\t<img src="${tempImg}" alt="Temp" />\n</figure>`
 							}
 						})
 						$draft = JSON.stringify({
