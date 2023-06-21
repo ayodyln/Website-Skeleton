@@ -14,9 +14,9 @@
 
 	storePopup.set({ computePosition, autoUpdate, offset, shift, flip, arrow })
 
-	const popupClick: PopupSettings = {
+	const profileClick: PopupSettings = {
 		event: 'click',
-		target: 'popupClick',
+		target: 'profileClick',
 		placement: 'top'
 	}
 </script>
@@ -62,7 +62,7 @@
 
 				{#if session}
 					<li class="ml-4">
-						<button use:popup={popupClick} on:click|stopPropagation>
+						<button use:popup={profileClick} on:click|stopPropagation>
 							<Avatar class="card-hover" width="w-10" initials="DS" background="bg-primary-500" />
 						</button>
 					</li>
@@ -72,7 +72,7 @@
 	</svelte:fragment>
 </AppBar>
 
-<div class="card p-3" data-popup="popupClick">
+<div class="card p-3" data-popup="profileClick">
 	<ul class="space-y-4">
 		<li><a href="/auth/admin" class="btn variant-ghost">Dashboard</a></li>
 		<li>

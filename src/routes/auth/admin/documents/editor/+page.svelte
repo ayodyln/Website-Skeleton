@@ -1,20 +1,17 @@
 <script lang="ts">
 	import { onMount } from 'svelte'
-	import SvelteHtmlEditor from '../../../../../components/SvelteHTMLEditor/SvelteHTMLEditor.svelte'
 	import { draft } from '$lib/stores'
-	import { Toast, toastStore, AppShell, modeCurrent, FileDropzone } from '@skeletonlabs/skeleton'
-	import type { ToastSettings, PopupSettings } from '@skeletonlabs/skeleton'
-	import { goto } from '$app/navigation'
-
-	import { basicSetup, EditorView } from 'codemirror'
-	import { markdown } from '@codemirror/lang-markdown'
-	import { languages } from '@codemirror/language-data'
-	import { indentWithTab } from '@codemirror/commands'
-	import { syntaxHighlighting } from '@codemirror/language'
-	import { placeholder, keymap } from '@codemirror/view'
-	import Widgets from '../../../../../components/SvelteHTMLEditor/Widgets.svelte'
-	import { tags } from '@lezer/highlight'
-	import { HighlightStyle } from '@codemirror/language'
+	import {
+		Toast,
+		toastStore,
+		AppShell,
+		FileDropzone,
+		popup,
+		type PopupSettings
+	} from '@skeletonlabs/skeleton'
+	import SvelteHtmlEditor from '../../../../../components/SvelteHTMLEditor/SvelteHTMLEditor.svelte'
+	import { svelteHTMLEditor, toasts } from '$lib/pages/admin/Editor'
+	import EditorHeader from '../../../../../components/SvelteHTMLEditor/EditorHeader.svelte'
 
 	// This is a custom Svelte component that I made with assistance of GitHub Copilot.
 	// All I need is a HTML editor that is simple and has widgets for common article UI
@@ -36,105 +33,33 @@
 	let files: FileList
 	let tempImg: string
 
-	const myHighlightStyle = HighlightStyle.define([
-		{ tag: tags.keyword, color: '#fc6' },
-		{ tag: tags.comment, color: '#f5d', fontStyle: 'italic' },
-		{ tag: tags.attributeName, color: 'red', fontStyle: 'italic' },
-		{ tag: tags.name, color: 'grey' },
-		{ tag: tags.angleBracket, color: 'red' }
-	])
+	let popupClick: PopupSettings = {
+		event: 'click',
+		target: 'popupClick',
+		placement: 'top'
+	}
 
 	onMount(() => {
 		value = JSON.parse($draft)
-		console.log(value)
-		view = new EditorView({
-			extensions: [
-				basicSetup,
-				markdown({ codeLanguages: languages }),
-				EditorView.baseTheme({
-					'.cm-editor': {
-						border: 'none'
-					},
-					'&.cm-focused': {
-						outline: 'none'
-					},
-					'&.cm-focused .cm-cursor': {
-						borderLeftColor: $modeCurrent ? 'var(--surface-200)' : 'var(--surface-900)'
-					},
-					'.cm-gutters': {
-						backgroundColor: 'transparent'
-					},
-					'.cm-gutter': {
-						backgroundColor: 'transparent'
-					},
-					'.cm-gutterElement': {
-						backgroundColor: 'transparent'
-					},
-					'.cm-activeLine.cm-line': {
-						backgroundColor: 'transparent'
-					}
-				}),
-				placeholder('Start typing document in HTML and TailWindCSS/SkeletonUI...'),
-				keymap.of([indentWithTab]),
-				syntaxHighlighting(myHighlightStyle)
-			],
-			parent: document.getElementById('editor') as HTMLElement
-		})
+		view = svelteHTMLEditor()
+		
+		popupClick = {
+			event: 'click',
+			target: 'popupClick',
+			placement: 'top'
+		}
 
 		const interval = setInterval(() => {
 			toastStore.trigger(toasts.autoSaveToast)
 			$draft = JSON.stringify({
-				title: '',
-				content: value.content
+				title: value.title,
+				content: value.content,
+				files: value.files
 			})
 		}, 1000 * 60)
 
 		return () => clearInterval(interval)
 	})
-
-	interface ToastSettingsMap {
-		[key: string]: ToastSettings
-	}
-	const toasts: ToastSettingsMap = {
-		autoSaveToast: {
-			message: 'Auto Saving Draft...',
-			background: 'variant-ghost-primary',
-			callback: () => {
-				console.log('Auto Save Toast')
-			}
-		},
-		saveToast: {
-			message: 'Saving Draft...',
-			background: 'variant-ghost-primary',
-			callback: () => {
-				console.log('Saving Toast')
-			}
-		}
-	}
-
-	interface PopupSettingsMap {
-		[key: string]: PopupSettings
-	}
-	const popups: PopupSettingsMap = {
-		insertImage: {
-			event: 'click',
-			target: 'insertImage',
-			placement: 'right',
-			state(event) {
-				if (event.state) {
-					console.log(true)
-				} else {
-					console.log(false)
-				}
-			}
-		},
-		insertHero: {
-			event: 'click',
-			target: 'insertHero',
-			placement: 'right',
-			state(event) {}
-		}
-	}
 </script>
 
 <section class="h-[calc(100vh-8.5rem)]">
@@ -145,68 +70,12 @@
 		slotFooter="flex justify-end p-2 card rounded-none space-x-2"
 	>
 		<svelte:fragment slot="header">
-			<section class="w-1/2">
-				<div
-					class="input-group input-group-divider grid-cols-[auto_1fr_auto] max-w-xl w-full variant-ghost"
-				>
-					<div class="input-group-shim">Title</div>
-					{#if value}
-						<input
-							type="text"
-							class="input input-bordered rounded-l-none rounded-lg"
-							placeholder="Title"
-							bind:value={value.title}
-						/>
-					{:else}
-						<input
-							type="text"
-							class="input input-bordered rounded-l-none rounded-lg"
-							placeholder="Title"
-							bind:value
-						/>
-					{/if}
-				</div>
-			</section>
-
-			<section class="space-x-2">
-				<button
-					class="btn variant-ghost-error rounded-lg"
-					on:click={async () => {
-						$draft = JSON.stringify({
-							title: '',
-							content: '',
-							files: []
-						})
-						await goto('/auth/admin/documents')
-					}}
-					>Discard
-				</button>
-
-				<button
-					class="btn variant-ghost-primary rounded-lg"
-					on:click={async () => {
-						if (Object.keys(view).length > 0) {
-							const state = view.state.doc.toString()
-							$draft = JSON.stringify({
-								title: '',
-								content: state,
-								files: []
-							})
-							value = {
-								title: '',
-								content: state,
-								files: []
-							}
-							toastStore.trigger(toasts.saveToast)
-						}
-					}}
-					>Save
-				</button>
-			</section>
+			<EditorHeader {value} {view} />
 		</svelte:fragment>
 
 		<svelte:fragment slot="sidebarLeft">
-			<Widgets {popups} />
+			<!-- <Widgets {popups} /> -->
+			<button class="btn variant-filled" use:popup={popupClick}>Click</button>
 		</svelte:fragment>
 
 		<!-- Router Slot -->
@@ -263,7 +132,7 @@
 
 <Toast />
 
-<div class="card card-hover p-4 w-72 shadow-xl" data-popup="insertImage">
+<!-- <div class="card card-hover p-4 w-72 shadow-xl" data-popup="p">
 	<div class="space-y-4">
 		<h4 class="h4">Insert Image</h4>
 
@@ -312,4 +181,9 @@
 
 		<div class="arrow card" />
 	</div>
+</div> -->
+
+<div class="card p-4 variant-filled-primary" data-popup="popupClick">
+	<p>Click Content</p>
+	<div class="arrow variant-filled-primary" />
 </div>
