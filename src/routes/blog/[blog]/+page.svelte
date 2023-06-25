@@ -1,18 +1,25 @@
 <script lang="ts">
+	import { TableOfContents } from '@skeletonlabs/skeleton'
 	import { format } from 'date-fns'
+	import { CodeBlock } from '@skeletonlabs/skeleton'
+	import hljs from 'highlight.js'
+	import 'highlight.js/styles/github-dark.css'
+	import { storeHighlightJs } from '@skeletonlabs/skeleton'
+
+	storeHighlightJs.set(hljs)
 
 	export let data: any
 </script>
 
-<section class="max-w-5xl w-full m-auto my-4 flex flex-col gap-4 p-2">
+<section class="m-auto my-4 flex w-full flex-col gap-4">
 	{#await data}
 		<p>loading...</p>
 	{:then blog}
-		<section id="header" class="font-mono">
-			<h1 class="text-4xl font-bold tracking-wide mb-1 text-info">
+		<section id="header" class="m-auto w-full max-w-5xl font-mono">
+			<h1 class="text-info mb-1 text-4xl font-bold tracking-wide">
 				{blog.title}
 			</h1>
-			<span class="text-current opacity-70 tracking-wide">
+			<span class="tracking-wide text-current opacity-70">
 				{format(new Date(blog.publish_date), 'MMMM do, yyyy')}
 				{@html `&#x2014;`}
 				{blog.read_time} minute read
@@ -21,15 +28,22 @@
 
 		<div
 			id="article_hero"
-			class="bg-neutral rounded-lg h-96 bg-no-repeat bg-cover bg-size-90 bg-center bg-fill shadow-lg"
+			class="bg-neutral bg-size-90 bg-fill m-auto h-96 w-full max-w-5xl rounded-lg bg-cover bg-center bg-no-repeat shadow-lg"
 			style={`background-image: url(${blog.hero_image})`}
 		/>
 
-		<div id="content" class="space-y-6 max-w-2xl w-full m-auto">
-			<section id="synopsis" class="rounded-lg italic font-medium bg-base-200 p-4 text-base-content">
-				<p>{@html blog.summary}</p>
-			</section>
-			{@html blog.html}
-		</div>
+		<section class="relative m-auto flex w-full max-w-5xl gap-6">
+			<div class="card variant-soft sticky top-4 h-fit min-w-[256px] p-2">
+				<TableOfContents target="#content" />
+			</div>
+
+			<article id="content" class="w-full max-w-2xl space-y-6">
+				<section id="synopsis" class="card p-2 italic">
+					<p>{@html blog.summary}</p>
+				</section>
+
+				{@html blog.html}
+			</article>
+		</section>
 	{/await}
 </section>

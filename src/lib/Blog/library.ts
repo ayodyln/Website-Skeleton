@@ -1,3 +1,4 @@
+
 export interface Post {
 	id: number // post ID
 	tags: string[] // tags
@@ -246,8 +247,8 @@ export const library: Post[] = [
             AWS Amplify requires some specific steps that are documented in this article.
             `,
 		html: `
-            <section>
-                <h2 class="text-3xl font-bold font-mono mb-2">Getting Started</h2>
+            <section id="html">
+                <h2 class="h2 font-bold font-mono mb-2">Getting Started</h2>
 
                 <div class="space-y-8">
                     <p>
@@ -255,15 +256,14 @@ export const library: Post[] = [
                         for installing npm packages. Then input the following into your CLI.
                     </p>
 
-                    <div class="mockup-code">
-                        <pre data-prefix="$"><code>npm create svelte@latest my-app</code></pre> 
-                        <pre data-prefix="$"><code>cd my-app</code></pre> 
-                        <pre data-prefix="$"><code>npm install</code></pre> 
-                        <pre data-prefix=">" class="text-warning"><code>Installing packages...</code></pre>
-                        <pre data-prefix=">" class="text-success"><code>Success!</code></pre>
+                    <div class="card p-4 mockup-code relative">
+                        <pre data-prefix="$ " class="before:content-[attr(data-prefix)]"><code>npm create svelte@latest my-app</code></pre> 
+                        <pre data-prefix="$ " class="before:content-[attr(data-prefix)]"><code>cd my-app</code></pre> 
+                        <pre data-prefix="$ " class="before:content-[attr(data-prefix)]"><code>npm install</code></pre> 
                         <br/>
-                        <pre data-prefix="$"><code>npm run dev</code></pre>
+                        <pre data-prefix="$ " class="before:content-[attr(data-prefix)]"><code>npm run dev</code></pre>
                     </div>
+
 
                     <p>
                         Svelte will render our UI we create for the application for the client. 
@@ -276,7 +276,7 @@ export const library: Post[] = [
 
                     <div class="space-y-4">
                         <div>
-                            <h3 class="font-mono text-2xl font-bold">Configuring AWS Amplify</h3>
+                            <h2 class="font-mono text-2xl font-bold">Configuring AWS Amplify</h2>
                             <p class="text-xs text-warning">* According to Amplify documentation</p>
                         </div>
                         
