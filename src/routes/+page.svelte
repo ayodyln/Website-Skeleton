@@ -5,7 +5,9 @@
 	import LatestPosts from '../components/pages/home/LatestPosts.svelte'
 
 	export let data
-	$: console.log(data)
+
+	let { supabase, session } = data
+	$: ({ supabase, session } = data)
 
 	let mostRecent: any[] = []
 	let featuredWork: any[] = []
@@ -17,14 +19,16 @@
 			let work = await fetch('api/projects')
 			let work_res = await work.json()
 			featuredWork = work_res.filter((project: any) => project.tags.includes('Featured'))
-			console.log(featuredWork)
 		} catch (error) {
 			console.log(error)
 		}
+
+		const { data, error } = await supabase.from('countries').select()
+		console.log(data)
 	})
 </script>
 
-<section>
+<section class="pb-10">
 	<Hero />
 
 	<section class="space-y-20">

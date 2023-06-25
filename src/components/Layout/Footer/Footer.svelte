@@ -1,5 +1,5 @@
 <script>
-	import { AppBar } from '@skeletonlabs/skeleton';
+	import { AppBar } from '@skeletonlabs/skeleton'
 </script>
 
 <AppBar>

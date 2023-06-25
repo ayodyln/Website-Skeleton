@@ -110,7 +110,7 @@
 	]
 </script>
 
-<section class="max-w-2xl m-auto flex flex-col gap-4 text-xl">
+<section class="max-w-3xl w-full m-auto flex flex-col gap-4 text-xl">
 	<p>
 		I am a web and app developer and UI/UX designer. My passion has been to bring rich applications
 		to life that is not only beautiful, but accessible to everyone. The application design and
