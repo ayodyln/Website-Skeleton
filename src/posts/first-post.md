@@ -8,12 +8,14 @@ categories:
 published: true
 ---
 
+<script lang="ts">
+    import CodeBlock from '../components/UI/CodeBlock.svelte'
+</script>
+
 ## Markdown
 
 Hey friends! 👋
 
-```ts
-function greet(name: string) {
-	console.log(`Hey ${name}! 👋`)
-}
-```
+<div class="border">
+    <CodeBlock />
+</div>

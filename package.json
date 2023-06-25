@@ -53,6 +53,7 @@
 		"aws-sdk": "^2.1387.0",
 		"date-fns": "^2.30.0",
 		"sass": "^1.63.3",
+		"shiki": "^0.14.2",
 		"svelte-splitpanes": "^0.7.14"
 	}
 }

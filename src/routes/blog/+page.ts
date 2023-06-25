@@ -1,4 +1,3 @@
-import { library } from '$lib/Blog/library.js'
 import type { Post } from '$lib/types'
 
 export const load = async ({ fetch }) => {

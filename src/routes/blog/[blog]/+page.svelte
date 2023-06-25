@@ -17,11 +17,18 @@
 	<meta property="og:type" content="article" />
 </svelte:head>
 
-<article>
+<article class="m-auto my-4 flex w-full max-w-5xl flex-col gap-4 border">
 	<!-- Title -->
 	<hgroup>
 		<h1>{data.meta.title}</h1>
+
+		<!-- Tags -->
 	</hgroup>
+
+	<!-- Post -->
+	<div>
+		<svelte:component this={data.content} />
+	</div>
 </article>
 
 <!-- <section class="m-auto my-4 flex w-full flex-col gap-4">
