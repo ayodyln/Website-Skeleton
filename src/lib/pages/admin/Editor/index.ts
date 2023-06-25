@@ -6,8 +6,7 @@ import { syntaxHighlighting } from '@codemirror/language'
 import { placeholder, keymap } from '@codemirror/view'
 import { tags } from '@lezer/highlight'
 import { HighlightStyle } from '@codemirror/language'
-import type { PopupSettingsMap, ToastSettingsMap } from '$lib/pages/admin/Editor/editor'
-import type { PopupSettings } from '@skeletonlabs/skeleton'
+import type { ToastSettingsMap } from '$lib/pages/admin/Editor/editor'
 
 // Svelte HTML Editor
 const myHighlightStyle = HighlightStyle.define([
@@ -15,7 +14,7 @@ const myHighlightStyle = HighlightStyle.define([
 	{ tag: tags.comment, color: '#f5d', fontStyle: 'italic' },
 	{ tag: tags.attributeName, color: 'red', fontStyle: 'italic' },
 	{ tag: tags.name, color: 'grey' },
-	{ tag: tags.angleBracket, color: 'red' }
+	{ tag: tags.angleBracket, color: 'yellow' }
 ])
 
 const svelteHTMLEditor = () =>
@@ -70,24 +69,4 @@ const toasts: ToastSettingsMap = {
 	}
 }
 
-const popups: PopupSettingsMap = {
-	insertImage: {
-		event: 'click',
-		target: 'insertImage',
-		placement: 'right',
-		state(event: { state: boolean }) {
-			if (event.state) {
-				console.log(true)
-			} else {
-				console.log(false)
-			}
-		}
-	},
-	insertHero: {
-		event: 'click',
-		target: 'insertHero',
-		placement: 'right'
-	}
-}
-
-export { svelteHTMLEditor, toasts, popups }
+export { svelteHTMLEditor, toasts }

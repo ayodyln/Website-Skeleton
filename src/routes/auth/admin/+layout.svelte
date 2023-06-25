@@ -22,7 +22,7 @@
 	regionPage="h-[calc(100vh-5rem)]"
 	slotSidebarLeft="max-h-[calc(100vh-5rem)] card rounded-none variant-soft-secondary p-2 space-y-4 flex flex-col justify-between transition-all ease-in duration-100 w-{sideBarState
 		? '56'
-		: '24'}"
+		: '16'}"
 	slotPageHeader="p-4 h-14"
 >
 	<svelte:fragment slot="sidebarLeft">
@@ -72,7 +72,7 @@
 			on:click={() => {
 				sideBarState = !sideBarState
 			}}
-			class="btn variant-soft w-full fill-current h-11"
+			class="btn variant-soft w-full fill-current h-11 p-0"
 		>
 			{#if sideBarState}
 				<svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512">
