@@ -1,17 +1,30 @@
 <script lang="ts">
 	import { TableOfContents } from '@skeletonlabs/skeleton'
 	import { format } from 'date-fns'
-	import { CodeBlock } from '@skeletonlabs/skeleton'
-	import hljs from 'highlight.js'
-	import 'highlight.js/styles/github-dark.css'
-	import { storeHighlightJs } from '@skeletonlabs/skeleton'
-
-	storeHighlightJs.set(hljs)
+	import { onMount } from 'svelte'
 
 	export let data: any
+
+	onMount(() => {
+		console.log(data)
+	})
 </script>
 
-<section class="m-auto my-4 flex w-full flex-col gap-4">
+<!-- SEO -->
+<svelte:head>
+	<title>{data.meta.title}</title>
+	<meta property="og:title" content={data.meta.title} />
+	<meta property="og:type" content="article" />
+</svelte:head>
+
+<article>
+	<!-- Title -->
+	<hgroup>
+		<h1>{data.meta.title}</h1>
+	</hgroup>
+</article>
+
+<!-- <section class="m-auto my-4 flex w-full flex-col gap-4">
 	{#await data}
 		<p>loading...</p>
 	{:then blog}
@@ -46,4 +59,4 @@
 			</article>
 		</section>
 	{/await}
-</section>
+</section> -->
