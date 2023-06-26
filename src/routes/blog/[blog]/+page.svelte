@@ -1,12 +1,24 @@
 <script lang="ts">
-	import { TableOfContents } from '@skeletonlabs/skeleton'
-	import { format } from 'date-fns'
+	import { browser } from '$app/environment'
 	import { onMount } from 'svelte'
 
 	export let data: any
 
+	$: readTimeVal = NaN
+
+	function readTime() {
+		if (browser) {
+			const text = document.getElementById('blog_post')?.innerText
+			const wpm = 225
+			const words = text?.trim().split(/\s+/).length
+			if (!words) return
+			readTimeVal = Math.ceil(words / wpm)
+		}
+	}
+
 	onMount(() => {
 		console.log(data)
+		readTime()
 	})
 </script>
 
@@ -17,53 +29,35 @@
 	<meta property="og:type" content="article" />
 </svelte:head>
 
-<article class="m-auto my-4 flex w-full max-w-5xl flex-col gap-4 border">
+<article id="blog_post" class="m-auto my-4 flex w-full max-w-5xl flex-col gap-4">
 	<!-- Title -->
 	<hgroup>
-		<h1>{data.meta.title}</h1>
+		<h1 class="h1 mb-1 font-mono font-bold tracking-wide">{data.meta.title}</h1>
+		<span class="text-lg">
+			{new Intl.DateTimeFormat('en-US', {
+				year: 'numeric',
+				month: 'long',
+				day: 'numeric'
+			}).format(new Date(data.meta.date))}
 
+			{@html `&#x2014;`}
+
+			{#if readTimeVal}
+				{readTimeVal} Minute Read
+			{/if}
+		</span>
 		<!-- Tags -->
 	</hgroup>
 
+	<!-- Article Hero -->
+	<div
+		id="article_hero"
+		style={`background-image: url(${data.meta.hero_image});`}
+		class="card h-96 w-full"
+	/>
+
 	<!-- Post -->
-	<div>
+	<div id="md⬇️">
 		<svelte:component this={data.content} />
 	</div>
 </article>
-
-<!-- <section class="m-auto my-4 flex w-full flex-col gap-4">
-	{#await data}
-		<p>loading...</p>
-	{:then blog}
-		<section id="header" class="m-auto w-full max-w-5xl font-mono">
-			<h1 class="text-info mb-1 text-4xl font-bold tracking-wide">
-				{blog.title}
-			</h1>
-			<span class="tracking-wide text-current opacity-70">
-				{format(new Date(blog.publish_date), 'MMMM do, yyyy')}
-				{@html `&#x2014;`}
-				{blog.read_time} minute read
-			</span>
-		</section>
-
-		<div
-			id="article_hero"
-			class="bg-neutral bg-size-90 bg-fill m-auto h-96 w-full max-w-5xl rounded-lg bg-cover bg-center bg-no-repeat shadow-lg"
-			style={`background-image: url(${blog.hero_image})`}
-		/>
-
-		<section class="relative m-auto flex w-full max-w-5xl gap-6">
-			<div class="card variant-soft sticky top-4 h-fit min-w-[256px] p-2">
-				<TableOfContents target="#content" />
-			</div>
-
-			<article id="content" class="w-full max-w-2xl space-y-6">
-				<section id="synopsis" class="card p-2 italic">
-					<p>{@html blog.summary}</p>
-				</section>
-
-				{@html blog.html}
-			</article>
-		</section>
-	{/await}
-</section> -->
