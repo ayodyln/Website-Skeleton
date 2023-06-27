@@ -1,7 +1,9 @@
-import { library } from '$lib/Blog/library.js'
+import type { Post } from '$lib/types'
 
-export const load = () => {
+export const load = async ({ fetch }) => {
+	const response = await fetch('api/posts')
+	const posts: Post[] = await response.json()
 	return {
-		library
+		posts
 	}
 }

@@ -25,13 +25,16 @@
 		"@typescript-eslint/parser": "^5.45.0",
 		"autoprefixer": "^10.4.14",
 		"codemirror": "^6.0.1",
+		"daisyui": "^3.1.6",
 		"eslint": "^8.28.0",
 		"eslint-config-prettier": "^8.5.0",
 		"eslint-plugin-svelte": "^2.26.0",
 		"highlight.js": "^11.8.0",
+		"mdsvex": "^0.11.0",
 		"postcss": "^8.4.24",
-		"prettier": "^2.8.0",
+		"prettier": "^2.8.8",
 		"prettier-plugin-svelte": "^2.8.1",
+		"prettier-plugin-tailwindcss": "^0.3.0",
 		"supabase": "^1.64.8",
 		"svelte": "^3.54.0",
 		"svelte-check": "^3.0.1",
@@ -50,6 +53,7 @@
 		"aws-sdk": "^2.1387.0",
 		"date-fns": "^2.30.0",
 		"sass": "^1.63.3",
+		"shiki": "^0.14.2",
 		"svelte-splitpanes": "^0.7.14"
 	}
 }
