@@ -31,13 +31,21 @@
 	})
 </script>
 
+<svelte:head>
+	<title>Home</title>
+	<meta
+		name="description"
+		content="Dylan Smith's portfolio, for UI/UX design and application developpment."
+	/>
+</svelte:head>
+
 <section class="pb-10">
 	<Hero />
 
 	<section class="space-y-20">
 		<div class="m-auto max-w-5xl">
 			<section class="min-h-[835px]">
-				<h2 class="h2 mb-8 opacity-50">Featured Work</h2>
+				<h2 class="h2 mb-8 font-mono opacity-50">Featured Work</h2>
 				{#if featuredWork.length > 0}
 					<DisplayWork work={featuredWork} />
 				{:else}
@@ -71,7 +79,7 @@
 
 		<div class="m-auto max-w-5xl">
 			<section>
-				<h2 class="h2 mb-8 opacity-50">Latest Posts</h2>
+				<h2 class="h2 mb-8 font-mono opacity-50">Latest Posts</h2>
 
 				<div id="posts" class="flex w-full flex-wrap gap-4">
 					{#each posts as post, i}
