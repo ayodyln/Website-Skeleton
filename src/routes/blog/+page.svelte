@@ -1,40 +1,49 @@
 <script lang="ts">
-	import type { Post } from '$lib/Blog/library'
 	import { onMount } from 'svelte'
-	import { closestTo } from 'date-fns'
-	import MostRecentPost from '../../components/pages/blog/MostRecentPost.svelte'
-	import LatestPosts from '../../components/pages/home/LatestPosts.svelte'
+	import type { Post } from '$lib/types'
+	import Logo from '../../components/UI/Logo.svelte'
+	import PostCard from '../../components/UI/PostCard.svelte'
 
-	export let data: any
+	export let data
 
-	let library: any[] | Post[] = []
-	let mostRecent: any
-	let filterTags: any[] = []
-	let libraryFilter: any[] = []
-	let activeTag: string = ''
+	$: posts = data.posts as Post[]
+	$: categories = [...new Set(posts.map((post: Post) => post.categories).flat())] as string[]
+	$: activeTag = '' as string
 
 	function filterHandler(tag: string) {
 		if (activeTag === tag) {
 			activeTag = ''
-			libraryFilter = []
 			return
 		}
-
 		activeTag = tag
-		libraryFilter = library.filter((post) => post.tags.includes(tag))
+
+		// libraryFilter = library.filter((post) => post.tags.includes(tag))
 	}
 
 	onMount(() => {
-		console.log(data)
-
-		// library = data.library
-		// const recentPost = closestTo(
-		// 	new Date(),
-		// 	library.map((post: any) => new Date(post.publish_date))
-		// )?.toISOString()
-		// mostRecent = library.find((post) => post.publish_date === recentPost)
-		// filterTags = [...new Set(library.map((post) => post.tags).flat())]
+		console.log(posts)
 	})
 </script>
 
+<section class="mx-auto my-4 w-full max-w-5xl space-y-4">
+	<div class="flex flex-wrap items-end gap-2">
+		<Logo style="w-10 fill-current" />
+		<h1 class="h1">Blog Posts</h1>
+	</div>
 
+	<div id="filter_bar" class="flex flex-wrap gap-2">
+		{#each categories as category}
+			<span
+				class="chip {activeTag === category ? 'variant-filled' : 'variant-soft'}"
+				on:click={() => filterHandler(category)}
+				on:keypress>{category}</span
+			>
+		{/each}
+	</div>
+
+	<div id="posts" class="flex w-full flex-wrap gap-4">
+		{#each posts as post, i}
+			<PostCard {post} />
+		{/each}
+	</div>
+</section>

@@ -24,4 +24,6 @@ export type Post = {
 	date: string
 	categories: Categories[]
 	published: boolean
+	hero_image: string
+	feature_image: string
 }

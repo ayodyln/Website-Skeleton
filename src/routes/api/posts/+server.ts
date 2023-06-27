@@ -21,6 +21,8 @@ async function getPosts() {
 		(first, second) => new Date(second.date).getTime() - new Date(first.date).getTime()
 	)
 
+	console.log(posts)
+
 	return posts
 }
 
