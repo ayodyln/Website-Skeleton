@@ -32,7 +32,7 @@
 </script>
 
 <svelte:head>
-	<title>Home</title>
+	<title>Dylan Smith - Web Deisgn & App Development Portfolio</title>
 	<meta
 		name="description"
 		content="Dylan Smith's portfolio, for UI/UX design and application developpment."
