@@ -110,7 +110,15 @@
 	]
 </script>
 
-<section class="max-w-3xl w-full m-auto flex flex-col gap-4 text-xl">
+<svelte:head>
+	<title>Dylan Smith - About</title>
+	<meta
+		name="description"
+		content="Dylan Smith's blog for everything UI/UX design and application development, along with case studies and other posts."
+	/>
+</svelte:head>
+
+<section class="m-auto flex w-full max-w-3xl flex-col gap-4 text-xl">
 	<p>
 		I am a web and app developer and UI/UX designer. My passion has been to bring rich applications
 		to life that is not only beautiful, but accessible to everyone. The application design and
@@ -124,13 +132,13 @@
 		industry is high.
 	</p>
 
-	<h3 class="opacity-50 text-2xl">Technologies I use:</h3>
+	<h3 class="text-2xl opacity-50">Technologies I use:</h3>
 	<Accordion
 		hover="hover:bg-white/50"
 		autocollapse={true}
 		duration={200}
 		spacing="space-y-2"
-		class="rounded-lg card shadow-lg "
+		class="card rounded-lg shadow-lg "
 	>
 		{#each tech as { title, icon, content }, i}
 			<AccordionItem>
@@ -149,8 +157,8 @@
 		{/each}
 	</Accordion>
 
-	<form action="?/contact" class="mt-10 card p-3 space-y-6 flex flex-col" method="POST">
-		<h2 class="text-3xl opacity-50 font-mono">Contact Me</h2>
+	<form action="?/contact" class="card mt-10 flex flex-col space-y-6 p-3" method="POST">
+		<h2 class="font-mono text-3xl opacity-50">Contact Me</h2>
 
 		<label class="input-group input-group-divider grid-cols-[auto_1fr_auto]">
 			<div class="input-group-shim">Email</div>
@@ -161,6 +169,6 @@
 			<input name="subject" type="text" />
 		</label>
 		<textarea name="message" class="textarea resize-none" rows="4" placeholder="Your Message..." />
-		<button class="variant-filled-secondary btn" type="submit">Submit</button>
+		<button class="btn variant-filled-secondary" type="submit">Submit</button>
 	</form>
 </section>

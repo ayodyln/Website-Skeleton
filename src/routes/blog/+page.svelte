@@ -25,6 +25,14 @@
 	})
 </script>
 
+<svelte:head>
+	<title>Dylan Smith - Blog</title>
+	<meta
+		name="description"
+		content="Dylan Smith's blog for everything UI/UX design and application development, along with case studies and other posts."
+	/>
+</svelte:head>
+
 <section class="mx-auto my-4 w-full max-w-5xl space-y-4">
 	<div class="flex flex-wrap items-end gap-2">
 		<Logo style="w-10 fill-current" />

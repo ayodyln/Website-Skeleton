@@ -21,6 +21,14 @@
 	})
 </script>
 
+<svelte:head>
+	<title>Dylan Smith - Work</title>
+	<meta
+		name="description"
+		content="Dylan Smith's UI/UX design and development work."
+	/>
+</svelte:head>
+
 <section id="projects" class="mx-auto my-4 flex w-full max-w-5xl flex-col gap-4">
 	<div class="flex flex-wrap items-end gap-2">
 		<Logo style="w-10 fill-current" />
@@ -61,7 +69,7 @@
 		/>
 	{/if}
 
-	<section id="featuredWork" class="space-y-4 mt-8">
+	<section id="featuredWork" class="mt-8 space-y-4">
 		{#if featured}
 			<DisplayWork work={featured} />
 		{:else}

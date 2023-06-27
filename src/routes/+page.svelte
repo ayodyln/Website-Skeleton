@@ -27,7 +27,7 @@
 		}
 
 		const { data, error } = await supabase.from('countries').select()
-		console.log(data)
+		// console.log(data)
 	})
 </script>
 
