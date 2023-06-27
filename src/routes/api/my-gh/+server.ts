@@ -1,9 +1,8 @@
 import type { RequestHandler } from '@sveltejs/kit'
 import { GitHub } from '$env/static/private'
-import { json, error } from '@sveltejs/kit'
 
-export const GET = (() => {
-	return new Response('Hello, world!')
+export const GET = (async () => {
+	return new Response(JSON.stringify(await getGitHubRepo()))
 }) satisfies RequestHandler
 
 async function getGitHubRepo() {
@@ -14,6 +13,7 @@ async function getGitHubRepo() {
 			}
 		})
 		const ghProjects = await gh.json()
+		console.log(ghProjects)
 		return ghProjects
 	} catch (error) {
 		console.error(error)

@@ -3,14 +3,14 @@
 	import { onMount } from 'svelte'
 	import DisplayWork from '../../components/UI/DisplayWork/DisplayWork.svelte'
 	import { techChip } from '../../components/UI/DisplayWork'
-	let unfeaturedProjects: any[] = []
+	import Logo from '../../components/UI/Logo.svelte'
 	let starredProject: any
 	let featured: any[]
 
 	export let data: PageData
 
 	onMount(async () => {
-		const projects = data.projects
+		const projects: any = data.projects
 		starredProject = projects.find((post: { tags: any[] }) =>
 			post.tags.find((tag: any) => tag === 'Star')
 		)
@@ -21,78 +21,51 @@
 	})
 </script>
 
-<div class="my-8">
-	<section class="h-96 max-w-5xl w-full m-auto">
-		{#if starredProject}
-			<a href={starredProject.path}>
-				<div
-					id="article_hero"
-					class="bg-neutral max-h-96 h-full rounded-lg bg-cover bg-no-repeat bg-center shadow-lg mx-auto text-start relative"
-					style={`background-image: url(${starredProject.hero_image}); background-position: right;`}
-				>
-					<span
-						class="absolute bottom-0 left-0 w-full p-4 bg-gradient-to-t from-surface-900 to-transparent h-60 flex justify-between items-end rounded-b-md text-white"
-					>
-						<div class="w-3/4 space-y-1">
-							<div
-								class="badge badge-sm badge-outline mb-2 bg-gradient-to-br variant-gradient-warning-error"
-							>
-								Featured Project
-							</div>
-							<h2 class="text-3xl font-mono">{starredProject.title}</h2>
-							<ul class="space-x-2">
-								{#each starredProject.tech as tech}
-									<a href={tech.URI} target="_blank" class="chip {techChip(tech.name)}"
-										>{tech.name}</a
-									>
-								{/each}
-							</ul>
-						</div>
-					</span>
-				</div>
-			</a>
-		{:else}
+<section id="projects" class="mx-auto my-4 flex w-full max-w-5xl flex-col gap-4">
+	<div class="flex flex-wrap items-end gap-2">
+		<Logo style="w-10 fill-current" />
+		<h1 class="h1">Projects</h1>
+	</div>
+
+	{#if starredProject}
+		<a href={starredProject.path}>
 			<div
 				id="article_hero"
-				class="bg-neutral h-full rounded-lg bg-cover bg-no-repeat bg-center shadow-lg max-w-4xl w-full mx-auto"
-			/>
-		{/if}
-	</section>
-</div>
+				class="bg-neutral relative mx-auto h-96 rounded-lg bg-cover bg-center bg-no-repeat text-start shadow-lg"
+				style={`background-image: url(${starredProject.hero_image}); background-position: right;`}
+			>
+				<span
+					class="absolute bottom-0 left-0 flex h-60 w-full items-end justify-between rounded-b-md bg-gradient-to-t from-surface-900 to-transparent p-4 text-white"
+				>
+					<div class="w-3/4 space-y-1">
+						<div
+							class="badge-sm badge-outline badge variant-gradient-warning-error mb-2 bg-gradient-to-br"
+						>
+							Featured Project
+						</div>
+						<h2 class="font-mono text-3xl">{starredProject.title}</h2>
+						<ul class="space-x-2">
+							{#each starredProject.tech as tech}
+								<a href={tech.URI} target="_blank" class="chip {techChip(tech.name)}">{tech.name}</a
+								>
+							{/each}
+						</ul>
+					</div>
+				</span>
+			</div>
+		</a>
+	{:else}
+		<div
+			id="article_hero"
+			class="bg-neutral mx-auto h-full w-full max-w-4xl rounded-lg bg-cover bg-center bg-no-repeat shadow-lg"
+		/>
+	{/if}
 
-<section class="max-w-5xl w-full m-auto h-full flex flex-col gap-20">
-	<section id="featuredWork" class="max-w-5xl w-full m-auto space-y-4 h-fit">
-		<!-- Featured Recent Work -->
+	<section id="featuredWork" class="space-y-4 mt-8">
 		{#if featured}
 			<DisplayWork work={featured} />
 		{:else}
 			<p>Loading...</p>
 		{/if}
-	</section>
-
-	<section id="featuredWork" class="max-w-5xl w-full m-auto space-y-4 h-auto">
-		<!-- Unfeatured projects -->
-		<!-- {#if unfeaturedProjects.length > 0}
-			<h2>All Projects</h2>
-			<div class="grid grid-cols-4 grid-rows-auto gap-2">
-				{#each unfeaturedProjects as project}
-					<div class="bg-neutral rounded-xl h-56 shadow-lg">
-						<div>h2</div>
-						<div>h2</div>
-					</div>
-				{/each}
-			</div>
-		{:else}
-			<div class="grid grid-cols-4 grid-rows-auto gap-2 animate-pulse">
-				{#each Array(10) as project}
-					<div class="bg-neutral rounded-xl h-56 shadow-lg">
-						<div>
-							<h3>Test Title</h3>
-							<span>tech</span>
-						</div>
-					</div>
-				{/each}
-			</div>
-		{/if} -->
 	</section>
 </section>
