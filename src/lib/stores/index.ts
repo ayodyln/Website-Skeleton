@@ -2,6 +2,8 @@ import { localStorageStore } from '@skeletonlabs/skeleton'
 import type { Writable } from 'svelte/store'
 import { browser } from '$app/environment'
 
+// ! Start of Draft
+
 const defaultValue = browser
 	? window.localStorage.getItem('draft')
 	: {
@@ -27,5 +29,7 @@ draft.subscribe((value) => {
 		window.localStorage.setItem('draft', JSON.stringify(value))
 	}
 })
+
+// ! End of Draft
 
 export { draft }

@@ -1,174 +1,49 @@
 <script lang="ts">
-	import { Accordion, AccordionItem } from '@skeletonlabs/skeleton'
-
-	const tech: any[] = [
-		{
-			title: `JavaScript`,
-			icon: `
-				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" class="w-16 fill-warning-500">
-					<path d="M6,42V6h36v36H6z" />
-					<path class="fill-black"
-						d="M29.538 32.947c.692 1.124 1.444 2.201 3.037 2.201 1.338 0 2.04-.665 2.04-1.585 0-1.101-.726-1.492-2.198-2.133l-.807-.344c-2.329-.988-3.878-2.226-3.878-4.841 0-2.41 1.845-4.244 4.728-4.244 2.053 0 3.528.711 4.592 2.573l-2.514 1.607c-.553-.988-1.151-1.377-2.078-1.377-.946 0-1.545.597-1.545 1.377 0 .964.6 1.354 1.985 1.951l.807.344C36.452 29.645 38 30.839 38 33.523 38 36.415 35.716 38 32.65 38c-2.999 0-4.702-1.505-5.65-3.368L29.538 32.947zM17.952 33.029c.506.906 1.275 1.603 2.381 1.603 1.058 0 1.667-.418 1.667-2.043V22h3.333v11.101c0 3.367-1.953 4.899-4.805 4.899-2.577 0-4.437-1.746-5.195-3.368L17.952 33.029z" />
-				</svg>
-			`,
-			content: `JavaScript is my primary language. I've been using it for years and I'm always learning new things about it.`
-		},
-		{
-			title: `NextJS`,
-			icon: `
-				<svg xmlns="http://www.w3.org/2000/svg" role="img" viewBox="0 0 394 79" class="w-36 fill-current">
-					<path d="M261.919 0.0330722H330.547V12.7H303.323V79.339H289.71V12.7H261.919V0.0330722Z"
-						fill="var(--geist-foreground)"></path>
-					<path
-						d="M149.052 0.0330722V12.7H94.0421V33.0772H138.281V45.7441H94.0421V66.6721H149.052V79.339H80.43V12.7H80.4243V0.0330722H149.052Z"
-						fill="var(--geist-foreground)"></path>
-					<path
-						d="M183.32 0.0661486H165.506L229.312 79.3721H247.178L215.271 39.7464L247.127 0.126654L229.312 0.154184L206.352 28.6697L183.32 0.0661486Z"
-						fill="var(--geist-foreground)"></path>
-					<path d="M201.6 56.7148L192.679 45.6229L165.455 79.4326H183.32L201.6 56.7148Z"
-						fill="var(--geist-foreground)"></path>
-					<path clip-rule="evenodd"
-						d="M80.907 79.339L17.0151 0H0V79.3059H13.6121V16.9516L63.8067 79.339H80.907Z"
-						fill="var(--geist-foreground)" fill-rule="evenodd"></path>
-					<path
-						d="M333.607 78.8546C332.61 78.8546 331.762 78.5093 331.052 77.8186C330.342 77.1279 329.991 76.2917 330 75.3011C329.991 74.3377 330.342 73.5106 331.052 72.8199C331.762 72.1292 332.61 71.7838 333.607 71.7838C334.566 71.7838 335.405 72.1292 336.115 72.8199C336.835 73.5106 337.194 74.3377 337.204 75.3011C337.194 75.9554 337.028 76.5552 336.696 77.0914C336.355 77.6368 335.922 78.064 335.377 78.373C334.842 78.6911 334.252 78.8546 333.607 78.8546Z"
-						fill="var(--geist-foreground)"></path>
-					<path
-						d="M356.84 45.4453H362.872V68.6846C362.863 70.8204 362.401 72.6472 361.498 74.1832C360.585 75.7191 359.321 76.8914 357.698 77.7185C356.084 78.5364 354.193 78.9546 352.044 78.9546C350.079 78.9546 348.318 78.6001 346.75 77.9094C345.182 77.2187 343.937 76.1826 343.024 74.8193C342.101 73.456 341.649 71.7565 341.649 69.7207H347.691C347.7 70.6114 347.903 71.3838 348.29 72.0291C348.677 72.6744 349.212 73.1651 349.895 73.5105C350.586 73.8559 351.38 74.0286 352.274 74.0286C353.243 74.0286 354.073 73.8286 354.746 73.4196C355.419 73.0197 355.936 72.4199 356.296 71.6201C356.646 70.8295 356.831 69.8479 356.84 68.6846V45.4453Z"
-						fill="var(--geist-foreground)"></path>
-					<path
-						d="M387.691 54.5338C387.544 53.1251 386.898 52.0254 385.773 51.2438C384.638 50.4531 383.172 50.0623 381.373 50.0623C380.11 50.0623 379.022 50.2532 378.118 50.6258C377.214 51.0075 376.513 51.5164 376.033 52.1617C375.554 52.807 375.314 53.5432 375.295 54.3703C375.295 55.061 375.461 55.6608 375.784 56.1607C376.107 56.6696 376.54 57.0968 377.103 57.4422C377.656 57.7966 378.274 58.0874 378.948 58.3237C379.63 58.56 380.313 58.76 380.995 58.9236L384.14 59.6961C385.404 59.9869 386.631 60.3778 387.802 60.8776C388.973 61.3684 390.034 61.9955 390.965 62.7498C391.897 63.5042 392.635 64.413 393.179 65.4764C393.723 66.5397 394 67.7848 394 69.2208C394 71.1566 393.502 72.8562 392.496 74.3285C391.491 75.7917 390.043 76.9369 388.143 77.764C386.252 78.582 383.965 79 381.272 79C378.671 79 376.402 78.6002 374.493 77.8004C372.575 77.0097 371.08 75.8463 370.001 74.3194C368.922 72.7926 368.341 70.9294 368.258 68.7391H374.235C374.318 69.8842 374.687 70.8386 375.314 71.6111C375.95 72.3745 376.78 72.938 377.795 73.3197C378.819 73.6923 379.962 73.8832 381.226 73.8832C382.545 73.8832 383.707 73.6832 384.712 73.2924C385.708 72.9016 386.492 72.3564 387.055 71.6475C387.627 70.9476 387.913 70.1206 387.922 69.1754C387.913 68.312 387.654 67.5939 387.156 67.0304C386.649 66.467 385.948 65.9944 385.053 65.6127C384.15 65.231 383.098 64.8856 381.899 64.5857L378.081 63.6223C375.323 62.9225 373.137 61.8592 371.541 60.4323C369.937 59.0054 369.143 57.115 369.143 54.7429C369.143 52.798 369.678 51.0894 370.758 49.6261C371.827 48.1629 373.294 47.0268 375.148 46.2179C377.011 45.4 379.114 45 381.456 45C383.836 45 385.92 45.4 387.719 46.2179C389.517 47.0268 390.929 48.1538 391.952 49.5897C392.976 51.0257 393.511 52.6707 393.539 54.5338H387.691Z"
-						fill="var(--geist-foreground)"></path>
-				</svg>
-			`,
-			content: `For over a year now, I've been studying and building applications with NextJS. My current job is building a 
-					a applications that involve this framework. I've also built a few personal projects with it.
-				`
-		},
-		{
-			title: `SvelteKit`,
-			icon: `
-				<svg id="svelte" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 688.774 139" class="w-56">
-					<defs>
-						<style>.cls-1{fill:#8d8d93;}.cls-2{fill:#4a4a55;}.cls-3{fill:#ff3e00;}.cls-4{fill:#fff;}</style>
-					</defs>
-					<g id="horizontal">
-						<path id="kit" class="fill-current"
-							d="M547.528,99.316,530.741,68.127,520.173,80.91V99.316h-8.862V39.664h8.862V68.553l23.009-28.889h10.226l-16.7,20.964,21.218,38.688Zm29.569,0V39.664h8.862V99.316Zm55.049-51.13v51.13h-8.863V48.186H606.411V39.664h42.607v8.522Z" />
-						<path id="svelte-2" data-name="svelte" class="fill-current"
-							d="M172.442,100.338a24.076,24.076,0,0,1-13.719-3.877,19.876,19.876,0,0,1-8.011-10.609l8.351-3.068a15.41,15.41,0,0,0,5.455,6.6,14.366,14.366,0,0,0,8.266,2.429,12.137,12.137,0,0,0,7.882-2.386,8.277,8.277,0,0,0,2.94-6.817,7.461,7.461,0,0,0-.81-3.452,10.314,10.314,0,0,0-1.832-2.6,12.342,12.342,0,0,0-3.153-2.088q-2.132-1.063-3.537-1.619t-4.133-1.491q-3.408-1.193-5.112-1.874a38.492,38.492,0,0,1-4.474-2.259,16.522,16.522,0,0,1-4.176-3.153,15.277,15.277,0,0,1-2.513-4.133,14.766,14.766,0,0,1,4-16.787q5.113-4.516,13.889-4.517,7.329,0,12.059,3.238a15.658,15.658,0,0,1,6.348,8.608l-8.18,2.726a9.521,9.521,0,0,0-3.963-4.388,13.306,13.306,0,0,0-6.945-1.663,10.706,10.706,0,0,0-6.69,1.875,6.29,6.29,0,0,0-2.428,5.284,5.511,5.511,0,0,0,1.874,4.09,12.869,12.869,0,0,0,3.92,2.642q2.048.852,6.222,2.3,2.554.939,3.791,1.406t3.622,1.576a25.1,25.1,0,0,1,3.664,2,32.066,32.066,0,0,1,2.983,2.429,12.706,12.706,0,0,1,2.6,3.11,17.342,17.342,0,0,1,1.533,3.834,17.58,17.58,0,0,1,.64,4.816q0,8.352-5.71,13.08T172.442,100.338Zm54.623-1.022L206.613,39.664h9.545L229.707,81.25a64.791,64.791,0,0,1,1.875,6.818,63.829,63.829,0,0,1,1.875-6.818l13.378-41.586h9.459L235.927,99.316Zm47.294,0V39.664h36.984v8.352H283.222V64.377h18.151v8.352H283.222V90.964h30v8.352Zm61.44,0V39.664h8.864v51.13h29.143v8.522Zm71.41-51.13v51.13h-8.863V48.186H381.474V39.664h42.608v8.522ZM442.4,99.316V39.664h36.984v8.352H451.266V64.377h18.15v8.352h-18.15V90.964h30v8.352Z" />
-						<g id="logo">
-							<path id="orange" class="cls-3"
-								d="M110.286,28.319c-10.4-14.885-30.941-19.3-45.792-9.835L38.412,35.108A29.921,29.921,0,0,0,24.893,55.151,31.514,31.514,0,0,0,28,75.382a29.987,29.987,0,0,0-4.476,11.183,31.888,31.888,0,0,0,5.447,24.116c10.4,14.887,30.942,19.3,45.791,9.835l26.083-16.624a29.92,29.92,0,0,0,13.519-20.043,31.529,31.529,0,0,0-3.106-20.232,30,30,0,0,0,4.474-11.182,31.878,31.878,0,0,0-5.447-24.116" />
-							<path id="white" class="cls-4"
-								d="M61.946,112.082a20.72,20.72,0,0,1-22.237-8.243,19.176,19.176,0,0,1-3.276-14.5,18.143,18.143,0,0,1,.623-2.435l.491-1.5,1.337.981a33.633,33.633,0,0,0,10.2,5.1l.969.294-.089.968a5.844,5.844,0,0,0,1.052,3.878,6.24,6.24,0,0,0,6.7,2.485,5.748,5.748,0,0,0,1.6-.7L85.4,81.781A5.43,5.43,0,0,0,87.85,78.15a5.794,5.794,0,0,0-.988-4.371,6.244,6.244,0,0,0-6.7-2.487,5.737,5.737,0,0,0-1.6.7l-9.954,6.345a19.047,19.047,0,0,1-5.3,2.326,20.72,20.72,0,0,1-22.237-8.243,19.171,19.171,0,0,1-3.277-14.5A17.992,17.992,0,0,1,45.932,45.87L72.013,29.247a19.011,19.011,0,0,1,5.3-2.329,20.719,20.719,0,0,1,22.237,8.243,19.176,19.176,0,0,1,3.277,14.5A18.453,18.453,0,0,1,102.2,52.1l-.491,1.5-1.336-.979a33.616,33.616,0,0,0-10.2-5.1l-.97-.294.09-.968a5.859,5.859,0,0,0-1.052-3.878,6.24,6.24,0,0,0-6.695-2.485,5.742,5.742,0,0,0-1.6.7L53.859,57.219a5.425,5.425,0,0,0-2.449,3.63,5.79,5.79,0,0,0,.986,4.372,6.245,6.245,0,0,0,6.7,2.487,5.773,5.773,0,0,0,1.6-.7l9.952-6.342a18.978,18.978,0,0,1,5.3-2.328A20.718,20.718,0,0,1,98.18,66.576a19.171,19.171,0,0,1,3.277,14.5,18,18,0,0,1-8.13,12.054L67.246,109.753a19,19,0,0,1-5.3,2.329" />
-						</g>
-					</g>
-				</svg>
-			`,
-			content: `Before this framework was released, I have been building applications for fun with it. The natural feeling from developing with this framework is amazing and has the ability to create fast and powerful web applications.`
-		},
-		{
-			title: `AWS Services`,
-			icon: `
-				<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-						viewBox="0 0 304 182" class="w-20 fill-current" xml:space="preserve">
-					<g>
-						<path class="st0" d="M86.4,66.4c0,3.7,0.4,6.7,1.1,8.9c0.8,2.2,1.8,4.6,3.2,7.2c0.5,0.8,0.7,1.6,0.7,2.3c0,1-0.6,2-1.9,3l-6.3,4.2
-							c-0.9,0.6-1.8,0.9-2.6,0.9c-1,0-2-0.5-3-1.4C76.2,90,75,88.4,74,86.8c-1-1.7-2-3.6-3.1-5.9c-7.8,9.2-17.6,13.8-29.4,13.8
-							c-8.4,0-15.1-2.4-20-7.2c-4.9-4.8-7.4-11.2-7.4-19.2c0-8.5,3-15.4,9.1-20.6c6.1-5.2,14.2-7.8,24.5-7.8c3.4,0,6.9,0.3,10.6,0.8
-							c3.7,0.5,7.5,1.3,11.5,2.2v-7.3c0-7.6-1.6-12.9-4.7-16c-3.2-3.1-8.6-4.6-16.3-4.6c-3.5,0-7.1,0.4-10.8,1.3c-3.7,0.9-7.3,2-10.8,3.4
-							c-1.6,0.7-2.8,1.1-3.5,1.3c-0.7,0.2-1.2,0.3-1.6,0.3c-1.4,0-2.1-1-2.1-3.1v-4.9c0-1.6,0.2-2.8,0.7-3.5c0.5-0.7,1.4-1.4,2.8-2.1
-							c3.5-1.8,7.7-3.3,12.6-4.5c4.9-1.3,10.1-1.9,15.6-1.9c11.9,0,20.6,2.7,26.2,8.1c5.5,5.4,8.3,13.6,8.3,24.6V66.4z M45.8,81.6
-							c3.3,0,6.7-0.6,10.3-1.8c3.6-1.2,6.8-3.4,9.5-6.4c1.6-1.9,2.8-4,3.4-6.4c0.6-2.4,1-5.3,1-8.7v-4.2c-2.9-0.7-6-1.3-9.2-1.7
-							c-3.2-0.4-6.3-0.6-9.4-0.6c-6.7,0-11.6,1.3-14.9,4c-3.3,2.7-4.9,6.5-4.9,11.5c0,4.7,1.2,8.2,3.7,10.6
-							C37.7,80.4,41.2,81.6,45.8,81.6z M126.1,92.4c-1.8,0-3-0.3-3.8-1c-0.8-0.6-1.5-2-2.1-3.9L96.7,10.2c-0.6-2-0.9-3.3-0.9-4
-							c0-1.6,0.8-2.5,2.4-2.5h9.8c1.9,0,3.2,0.3,3.9,1c0.8,0.6,1.4,2,2,3.9l16.8,66.2l15.6-66.2c0.5-2,1.1-3.3,1.9-3.9c0.8-0.6,2.2-1,4-1
-							h8c1.9,0,3.2,0.3,4,1c0.8,0.6,1.5,2,1.9,3.9l15.8,67l17.3-67c0.6-2,1.3-3.3,2-3.9c0.8-0.6,2.1-1,3.9-1h9.3c1.6,0,2.5,0.8,2.5,2.5
-							c0,0.5-0.1,1-0.2,1.6c-0.1,0.6-0.3,1.4-0.7,2.5l-24.1,77.3c-0.6,2-1.3,3.3-2.1,3.9c-0.8,0.6-2.1,1-3.8,1h-8.6c-1.9,0-3.2-0.3-4-1
-							c-0.8-0.7-1.5-2-1.9-4L156,23l-15.4,64.4c-0.5,2-1.1,3.3-1.9,4c-0.8,0.7-2.2,1-4,1H126.1z M254.6,95.1c-5.2,0-10.4-0.6-15.4-1.8
-							c-5-1.2-8.9-2.5-11.5-4c-1.6-0.9-2.7-1.9-3.1-2.8c-0.4-0.9-0.6-1.9-0.6-2.8v-5.1c0-2.1,0.8-3.1,2.3-3.1c0.6,0,1.2,0.1,1.8,0.3
-							c0.6,0.2,1.5,0.6,2.5,1c3.4,1.5,7.1,2.7,11,3.5c4,0.8,7.9,1.2,11.9,1.2c6.3,0,11.2-1.1,14.6-3.3c3.4-2.2,5.2-5.4,5.2-9.5
-							c0-2.8-0.9-5.1-2.7-7c-1.8-1.9-5.2-3.6-10.1-5.2L246,52c-7.3-2.3-12.7-5.7-16-10.2c-3.3-4.4-5-9.3-5-14.5c0-4.2,0.9-7.9,2.7-11.1
-							c1.8-3.2,4.2-6,7.2-8.2c3-2.3,6.4-4,10.4-5.2c4-1.2,8.2-1.7,12.6-1.7c2.2,0,4.5,0.1,6.7,0.4c2.3,0.3,4.4,0.7,6.5,1.1
-							c2,0.5,3.9,1,5.7,1.6c1.8,0.6,3.2,1.2,4.2,1.8c1.4,0.8,2.4,1.6,3,2.5c0.6,0.8,0.9,1.9,0.9,3.3v4.7c0,2.1-0.8,3.2-2.3,3.2
-							c-0.8,0-2.1-0.4-3.8-1.2c-5.7-2.6-12.1-3.9-19.2-3.9c-5.7,0-10.2,0.9-13.3,2.8c-3.1,1.9-4.7,4.8-4.7,8.9c0,2.8,1,5.2,3,7.1
-							c2,1.9,5.7,3.8,11,5.5l14.2,4.5c7.2,2.3,12.4,5.5,15.5,9.6c3.1,4.1,4.6,8.8,4.6,14c0,4.3-0.9,8.2-2.6,11.6
-							c-1.8,3.4-4.2,6.4-7.3,8.8c-3.1,2.5-6.8,4.3-11.1,5.6C264.4,94.4,259.7,95.1,254.6,95.1z"/>
-						<g>
-							<path class="st1" d="M273.5,143.7c-32.9,24.3-80.7,37.2-121.8,37.2c-57.6,0-109.5-21.3-148.7-56.7c-3.1-2.8-0.3-6.6,3.4-4.4
-								c42.4,24.6,94.7,39.5,148.8,39.5c36.5,0,76.6-7.6,113.5-23.2C274.2,133.6,278.9,139.7,273.5,143.7z"/>
-							<path class="st1" d="M287.2,128.1c-4.2-5.4-27.8-2.6-38.5-1.3c-3.2,0.4-3.7-2.4-0.8-4.5c18.8-13.2,49.7-9.4,53.3-5
-								c3.6,4.5-1,35.4-18.6,50.2c-2.7,2.3-5.3,1.1-4.1-1.9C282.5,155.7,291.4,133.4,287.2,128.1z"/>
-						</g>
-					</g>
-				</svg>
-			`,
-			content: `Using AWS Amplify and it's related services has enabled me as a developer to build applications with ease.
-			I have experience with other servies and comfortable to use anything because AWS has helped me grow as a developer.`
-		}
-	]
 </script>
 
 <svelte:head>
 	<title>Dylan Smith - About</title>
 	<meta
 		name="description"
-		content="Dylan Smith's blog for everything UI/UX design and application development, along with case studies and other posts."
+		content="Dylan Smith is a developer and UI/UX designer. Read more about him, experience, and technology he works with."
 	/>
 </svelte:head>
 
-<section class="m-auto flex w-full max-w-3xl flex-col gap-4 text-xl">
-	<p>
-		I am a web and app developer and UI/UX designer. My passion has been to bring rich applications
-		to life that is not only beautiful, but accessible to everyone. The application design and
-		development process is my specialization and I love to embrace the latest web technologies.
-	</p>
+<div class="mx-auto w-full max-w-2xl space-y-9">
+	<!-- My Story -->
+	<section class="space-y-4">
+		<h1 class="h1 font-mono">My story</h1>
 
-	<p>
-		Currently, I'm working towards graduating with my Bachelor's degree in Web Design and App
-		Development, emphasizing application development. In the coming months, I'll be graduated and
-		joining the industry. My excitement to put my skills to work and be surrounded by others in the
-		industry is high.
-	</p>
+		<p>
+			After graduating High School in 2017, I wanted to go to college and achieve a bachelor's
+			degree. At the time, I had no clue what degree or career I wanted to pursue. So, I needed to
+			explore the options and degrees that sparked my interest. Eventually finding myself in the Web
+			Design and App Development program at Utah Valley University (UVU), I found my passion for
+			bringing ideas to life. At the end of 2023, I'll be graduating with my bachelor's degree.
+		</p>
 
-	<h3 class="text-2xl opacity-50">Technologies I use:</h3>
-	<Accordion
-		hover="hover:bg-white/50"
-		autocollapse={true}
-		duration={200}
-		spacing="space-y-2"
-		class="card rounded-lg shadow-lg "
-	>
-		{#each tech as { title, icon, content }, i}
-			<AccordionItem>
-				<svelte:fragment slot="lead">
-					{@html icon}
-				</svelte:fragment>
-				<svelte:fragment slot="summary">
-					{#if title !== 'NextJS' && title !== 'SvelteKit' && title !== 'AWS Services'}
-						{title}
-					{/if}
-				</svelte:fragment>
-				<svelte:fragment slot="content">
-					{content}
-				</svelte:fragment>
-			</AccordionItem>
-		{/each}
-	</Accordion>
+		<p>
+			My specialization is application development and my primary programming language is
+			JavaScript. Everything about this field is exciting to me, and I will always be working to
+			improve my skills and knowledge to be a master at my craft. Having experience in multiple
+			modern frameworks and libraries, allows me to adapt to a project's needs and goals. Pairing
+			that with my skills in UX design enables me to bring rich applications to life with purpose
+			that are accessible to everyone.
+		</p>
+	</section>
 
-	<form action="?/contact" class="card mt-10 flex flex-col space-y-6 p-3" method="POST">
-		<h2 class="font-mono text-3xl opacity-50">Contact Me</h2>
+	<!-- My Values -->
+	<section class="space-y-4">
+		<h2 class="h2 font-mono">Values I live by</h2>
 
-		<label class="input-group input-group-divider grid-cols-[auto_1fr_auto]">
-			<div class="input-group-shim">Email</div>
-			<input name="email" type="email" placeholder="foo@bar.com" />
-		</label>
-		<label class="input-group input-group-divider grid-cols-[auto_1fr_auto]">
-			<div class="input-group-shim">Subject</div>
-			<input name="subject" type="text" />
-		</label>
-		<textarea name="message" class="textarea resize-none" rows="4" placeholder="Your Message..." />
-		<button class="btn variant-filled-secondary" type="submit">Submit</button>
-	</form>
-</section>
+		<!-- <p>
+			Collaboration with others is an oppurtunity I yearn for. Working on projects with a team
+			always enables me to learn from others and improve myself, as well have a great time with
+			others. My time at UVU, I've been fortunate enough to get to work on projects with my peers
+			and that taught me how to communicate with others. Then, my senior year I've been leading two
+			projects with 3-4 on each team. Which has taught me important skills in leading a team,
+			ensuring the project is successful. These two projects have really left an impact on me and
+			are why I strive to work with others to bring ideas to life.
+		</p> -->
+	</section>
+</div>
