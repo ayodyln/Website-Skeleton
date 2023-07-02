@@ -12,7 +12,7 @@
 <div class="mx-auto w-full max-w-2xl space-y-9">
 	<!-- My Story -->
 	<section class="space-y-4">
-		<h1 class="h1 font-mono">My story</h1>
+		<h1 class="h1 mb-8 font-mono">My story</h1>
 
 		<p>
 			After graduating High School in 2017, I wanted to go to college and achieve a bachelor's
@@ -24,7 +24,7 @@
 
 		<p>
 			My specialization is application development and my primary programming language is
-			JavaScript. Everything about this field is exciting to me, and I will always be working to
+			Javascript. Everything about this field is exciting to me, and I will always be working to
 			improve my skills and knowledge to be a master at my craft. Having experience in multiple
 			modern frameworks and libraries, allows me to adapt to a project's needs and goals. Pairing
 			that with my skills in UX design enables me to bring rich applications to life with purpose
@@ -33,17 +33,39 @@
 	</section>
 
 	<!-- My Values -->
-	<section class="space-y-4">
+	<section class="space-y-8">
 		<h2 class="h2 font-mono">Values I live by</h2>
 
-		<!-- <p>
-			Collaboration with others is an oppurtunity I yearn for. Working on projects with a team
-			always enables me to learn from others and improve myself, as well have a great time with
-			others. My time at UVU, I've been fortunate enough to get to work on projects with my peers
-			and that taught me how to communicate with others. Then, my senior year I've been leading two
-			projects with 3-4 on each team. Which has taught me important skills in leading a team,
-			ensuring the project is successful. These two projects have really left an impact on me and
-			are why I strive to work with others to bring ideas to life.
-		</p> -->
+		<div class="space-y-4">
+			<h4 class="h4">Collaboration</h4>
+
+			<p>
+				Working with others to bring ideas to life, are oppurtunities I yearn for. Collaborating on
+				teams has enabled me to learn from others and grow as a person, and personally it's exciting
+				to engage with others that have unique ideas and perspectives. Proper team work will always
+				produce more and better results than working alone on a project.
+			</p>
+		</div>
+
+		<div class="space-y-4">
+			<h4 class="h4">Respectful of others</h4>
+
+			<p>
+				Everyone has their own stories, backgrounds, and experiences that shape who they are, It's
+				important to recognize that and be respectful of others. Getting to know new people and
+				learning how to work with them and make new friends is a goal I strive for. So, I hope to
+				have many oppurtunities to work with others and be a part of a team.
+			</p>
+		</div>
+
+		<div class="space-y-4">
+			<h4 class="h4">Helping others learn</h4>
+
+			<p>
+				We are a part of a community that is always striving to grow and learn. If I can help anyone
+				by sharing what I know about anything application development and UX design, I will. Helping
+				others learn has shown me how much I know actually and I sometimes learn new things myself.
+			</p>
+		</div>
 	</section>
 </div>

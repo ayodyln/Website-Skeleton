@@ -40,7 +40,11 @@
 	})
 </script>
 
-<AppShell slotPageContent="flex-grow flex flex-col" slotHeader="h-fit">
+<AppShell
+	slotPageContent="flex-grow flex flex-col antialiased"
+	slotHeader="h-fit antialiased"
+	slotFooter="antialiased"
+>
 	<svelte:fragment slot="header">
 		<Header {session} {supabase} />
 	</svelte:fragment>

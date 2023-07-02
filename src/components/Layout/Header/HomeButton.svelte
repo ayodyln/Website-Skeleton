@@ -1,7 +1,7 @@
-<a href="/" data-sveltekit-preload-data="hover" class="card-hover">
+<a href="/" data-sveltekit-preload-data="hover" class="">
 	<span class="icon">
 		<svg
-			class="fill-current w-20"
+			class="fill-current w-20 hover:drop-shadow-xl"
 			viewBox="0 0 111 47"
 			xmlns="http://www.w3.org/2000/svg"
 		>
