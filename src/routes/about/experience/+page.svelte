@@ -45,8 +45,8 @@
 				<ul class="list-disc space-y-2">
 					<li>
 						Ensure the upkeep and quality of the lab I was responsible for. Updating all lab
-						equipment and provide any IT services for my lab. Also providing any help to students my
-						college with their questions about coding and lab equipment.
+						equipment and providing any IT services for my lab. Also providing help to students at
+						my college with their questions about coding and lab equipment.
 					</li>
 					<li>
 						Managed department equipment and inventory. Helping students borrow equipment for their
@@ -54,8 +54,8 @@
 					</li>
 					<li>
 						Developed applications that benefited the lab and department. Using the latest
-						Javascript technologies and frameworks, I developed a inventory manager system for the
-						department. Which enables the department to track their assets and automate processes.
+						Javascript technologies and frameworks, I developed an inventory manager system for the
+						department. Which enables the department to track its assets and automate processes.
 					</li>
 				</ul>
 			</section>
@@ -103,6 +103,8 @@
 							</svg>
 						</span>
 
+						Est.
+
 						{Intl.DateTimeFormat('en-US', {
 							month: 'long',
 							day: 'numeric',
@@ -119,13 +121,13 @@
 			<!-- Card Body -->
 			<section class="space-y-4">
 				<p>
-					Studying Web Design and Application Development, has given me the skills to create modern
-					UI/UX designs and applications. Being able to create mobile applications to web
-					applications and designing to content creation. My skills are very diverse and I'm always
-					furthering my education.
+					Studying Web Design and Application Development has given me the skills to create modern
+                    UI/UX designs and applications. Being able to create mobile applications to web
+                    applications and designing to content creation. My skills are very diverse and I'm always
+                    furthering my education.
 				</p>
 
-				<div class="flex items-center justify-between card p-4 variant-glass-tertiary">
+				<div class="card variant-glass-tertiary flex items-center justify-between p-4">
 					<span class="flex items-end gap-2">
 						<svg xmlns="http://www.w3.org/2000/svg" class="h-8 fill-current" viewBox="0 0 640 512">
 							<!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->

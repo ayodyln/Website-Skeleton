@@ -16,10 +16,10 @@
 
 		<p>
 			After graduating High School in 2017, I wanted to go to college and achieve a bachelor's
-			degree. At the time, I had no clue what degree or career I wanted to pursue. So, I needed to
-			explore the options and degrees that sparked my interest. Eventually finding myself in the Web
-			Design and App Development program at Utah Valley University (UVU), I found my passion for
-			bringing ideas to life. At the end of 2023, I'll be graduating with my bachelor's degree.
+            degree. At the time, I had no clue what degree or career I wanted to pursue. So, I needed to
+            explore the options and degrees that sparked my interest. Eventually finding myself on the Web
+            Design and App Development program at Utah Valley University (UVU), I found my passion for
+            bringing ideas to life. At the end of 2023, I'll be graduating with my bachelor's degree.
 		</p>
 
 		<p>
@@ -40,10 +40,10 @@
 			<h4 class="h4">Collaboration</h4>
 
 			<p>
-				Working with others to bring ideas to life, are oppurtunities I yearn for. Collaborating on
-				teams has enabled me to learn from others and grow as a person, and personally it's exciting
-				to engage with others that have unique ideas and perspectives. Proper team work will always
-				produce more and better results than working alone on a project.
+				Working with others to bring ideas to life, are opportunities I yearn for. Collaborating on
+                teams has enabled me to learn from others and grow as a person, and personally, it's exciting
+                to engage with others that have unique ideas and perspectives. Proper teamwork will always
+                produce more and better results than working alone on a project.
 			</p>
 		</div>
 
@@ -52,9 +52,9 @@
 
 			<p>
 				Everyone has their own stories, backgrounds, and experiences that shape who they are, It's
-				important to recognize that and be respectful of others. Getting to know new people and
-				learning how to work with them and make new friends is a goal I strive for. So, I hope to
-				have many oppurtunities to work with others and be a part of a team.
+                important to recognize that and be respectful of others. Getting to know new people and
+                learning how to work with them and make new friends is a goal I strive for. So, I hope to
+                have many opportunities to work with others and be a part of a team.
 			</p>
 		</div>
 
@@ -62,9 +62,9 @@
 			<h4 class="h4">Helping others learn</h4>
 
 			<p>
-				We are a part of a community that is always striving to grow and learn. If I can help anyone
-				by sharing what I know about anything application development and UX design, I will. Helping
-				others learn has shown me how much I know actually and I sometimes learn new things myself.
+				We are part of a community that is always striving to grow and learn. If I can help anyone
+                by sharing what I know about anything application development and UX design, I will. Helping
+                others learn has shown me how much I know actually and I sometimes learn new things myself.
 			</p>
 		</div>
 	</section>
