@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte'
-	import type { Post } from '$lib/types'
+	import type { Post } from '$lib/types/'
 	import Logo from '../../components/UI/Logo.svelte'
 	import PostCard from '../../components/UI/PostCard.svelte'
 

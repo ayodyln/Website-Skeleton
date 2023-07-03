@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { goto } from '$app/navigation'
-	import type { Article } from '$lib/types'
+	import type { Article } from '$lib/types/'
 	import { Paginator } from '@skeletonlabs/skeleton'
 	export let sourceData: Article[], checkAll: any, singleCheck: any, page: any
 

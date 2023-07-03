@@ -2,7 +2,7 @@
 	import Hero from '../components/pages/home/Hero.svelte'
 	import DisplayWork from '../components/UI/DisplayWork/DisplayWork.svelte'
 	import { onMount } from 'svelte'
-	import type { Post } from '$lib/types'
+	import type { Post } from '$lib/types/'
 	import PostCard from '../components/UI/PostCard.svelte'
 
 	export let data

@@ -27,3 +27,10 @@ export type Post = {
 	hero_image: string
 	feature_image: string
 }
+
+interface ContactResponse {
+	success: boolean | string
+	errors: { email?: string; name?: string; message?: string, subject?: string }
+}
+
+export type { ContactResponse }
