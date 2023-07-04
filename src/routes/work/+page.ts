@@ -1,10 +1,9 @@
-import { projects } from '$lib/Blog/library.js'
+import type { Project } from '$lib/types'
 
 export const load = async ({ fetch }) => {
-	try {
-
-		return { projects }
-	} catch (error) {
-		console.log(error)
+	const response = await fetch('api/projects')
+	const projects: Project[] = await response.json()
+	return {
+		projects
 	}
 }

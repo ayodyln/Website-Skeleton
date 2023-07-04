@@ -7,8 +7,8 @@
 	export let data
 
 	$: posts = data.posts as Post[]
-	$: categories = [...new Set(posts.map((post: Post) => post.categories).flat())] as string[]
-	$: activeTag = '' as string
+	$: categories = [...new Set(posts.map((post: Post) => post.categories).flat())]
+	$: activeTag = ''
 
 	function filterHandler(tag: string) {
 		if (activeTag === tag) {
@@ -42,8 +42,8 @@
 	<div id="filter_bar" class="flex flex-wrap gap-2">
 		{#each categories as category}
 			<span
-				class="chip {activeTag === category ? 'variant-filled' : 'variant-soft'}"
-				on:click={() => filterHandler(category)}
+				class="chip {activeTag === category.toString() ? 'variant-filled' : 'variant-soft'}"
+				on:click={() => filterHandler(category.toString())}
 				on:keypress>{category}</span
 			>
 		{/each}

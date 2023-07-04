@@ -2,7 +2,7 @@
 	import Hero from '../components/pages/home/Hero.svelte'
 	import DisplayWork from '../components/UI/DisplayWork/DisplayWork.svelte'
 	import { onMount } from 'svelte'
-	import type { Post } from '$lib/types/'
+	import type { Post, Project } from '$lib/types'
 	import PostCard from '../components/UI/PostCard.svelte'
 
 	export let data
@@ -12,13 +12,16 @@
 	let { supabase, session } = data
 	$: ({ supabase, session } = data)
 
-	let featuredWork: any[] = []
+	let featuredWork: Project[] = []
 
 	onMount(async () => {
 		try {
-			let work = await fetch('api/projects')
-			let work_res = await work.json()
-			featuredWork = work_res.filter((project: any) => project.tags.includes('Featured'))
+			// let work = await fetch('api/projects')
+			// let work_res = await work.json()
+			// featuredWork = work_res.filter((project: any) => project.tags.includes('Featured'))
+			const work = await fetch('api/projects')
+			const work_res = await work.json()
+			featuredWork = work_res.filter((project: any) => project.categories.includes('Featured'))
 
 			const postsReq = await fetch('api/posts')
 			posts = await postsReq.json()

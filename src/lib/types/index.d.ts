@@ -15,14 +15,12 @@ export interface Article {
 	updated_at: string
 }
 
-export type Categories = 'sveltekit' | 'svelte'
-
 export type Post = {
 	title: string
 	slug: string
 	description: string
 	date: string
-	categories: Categories[]
+	categories: Category[]
 	published: boolean
 	hero_image: string
 	feature_image: string
@@ -30,7 +28,39 @@ export type Post = {
 
 interface ContactResponse {
 	success: boolean | string
-	errors: { email?: string; name?: string; message?: string, subject?: string }
+	errors: { email?: string; name?: string; message?: string; subject?: string }
 }
 
-export type { ContactResponse }
+type Project = {
+	title: string
+	slug: string
+	description: string
+	date: string
+	categories: Category[]
+	tech: string[]
+	published: boolean
+	hero_image: string
+	feature_image: string
+	github: string
+}
+
+enum Category {
+	'SvelteKit',
+	'Svelte',
+	'JavaScript',
+	'CSS',
+	'HTML',
+	'NodeJS',
+	'ExpressJS',
+	'TailwindCSS',
+	'Rust',
+	'NextJS',
+	'Deno',
+	'Project',
+	'Blog',
+	'Post',
+	'Case Study',
+	'Favorite'
+}
+
+export type { ContactResponse, Project }

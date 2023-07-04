@@ -6,8 +6,8 @@ function techChip(tech: string) {
 			return 'variant-filled-warning'
 		case 'SvelteKit':
 			return 'bg-orange-600 text-black'
-		case 'TailWindCSS':
-			return 'bg-sky-400 text-black'
+		case 'TailwindCSS':
+			return 'variant-filled-secondary'
 		default:
 			return 'variant-filled'
 	}

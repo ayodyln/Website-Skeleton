@@ -1,14 +1,14 @@
-import { error } from '@sveltejs/kit';
-import { projects } from '$lib/Blog/library.js';
+import { error } from '@sveltejs/kit'
 
-export const load = ({ params }) => {
-	const project = projects.find((work) => {
-		const path = work.path.split('/');
-		if (path[path.length - 1] === params.project) return work;
-	});
-	console.log(project);
-
-	if (project) return project;
-
-	throw error(404, 'Not found');
-};
+export const load = async ({ params }) => {
+	try {
+		// Update later to be put into a remote database
+		const project = await import(`../../../projects/${params.project}.md`)
+		return {
+			content: project.default,
+			meta: project.metadata
+		}
+	} catch (e) {
+		throw error(404, `Could not find ${params.project}`)
+	}
+}

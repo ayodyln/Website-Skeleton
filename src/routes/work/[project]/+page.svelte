@@ -1,9 +1,13 @@
 <script lang="ts">
 	import { format } from 'date-fns'
 	export let data: any
+
+	$:console.log(data)
 </script>
 
-<section class="max-w-5xl w-full m-auto my-4 flex flex-col gap-4">
+<h1>{data.meta.title}</h1>
+
+<!-- <section class="max-w-5xl w-full m-auto my-4 flex flex-col gap-4">
 	{#await data}
 		<p>loading...</p>
 	{:then blog}
@@ -30,4 +34,4 @@
 			{@html blog.html}
 		</div>
 	{/await}
-</section>
+</section> -->

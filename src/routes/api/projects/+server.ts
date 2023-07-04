@@ -1,13 +1,30 @@
-import { error, json } from '@sveltejs/kit'
-import { projects } from '$lib/Blog/library'
-import { parseISO, compareDesc } from 'date-fns'
+import { json } from '@sveltejs/kit'
+import type { Project } from '$lib/types'
 
-export function GET() {
-	try {
-		const posts = projects.sort((a, b) => compareDesc(parseISO(a.publish_date), parseISO(b.publish_date)))
+export const GET = async () => {
+	const projects = await getProjects()
+	return json(projects)
+}
 
-		return json(posts)
-	} catch (e) {
-		throw error(404, 'Not Found')
+async function getProjects() {
+	let projects: Project[] = []
+
+	const paths = import.meta.glob('/src/projects/*.md', { eager: true })
+
+	for (const path in paths) {
+		const file = paths[path]
+		const slug = path.split('/').at(-1)?.replace('.md', '')
+
+		if (file && typeof file === 'object' && 'metadata' in file && slug) {
+			const metadata = file.metadata as Omit<Project, 'slug'>
+			const project = { ...metadata, slug } satisfies Project
+			project.published && projects.push(project)
+		}
 	}
+
+	projects = projects.sort(
+		(first, second) => new Date(second.date).getTime() - new Date(first.date).getTime()
+	)
+
+	return projects
 }
