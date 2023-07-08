@@ -28,10 +28,10 @@
 
 	<svelte:fragment slot="trail">
 		<nav>
-			<ul class="flex gap-2 items-center">
+			<ul class="flex items-center gap-2">
 				<li>
 					<a
-						class="btn btn-md"
+						class="btn"
 						class:variant-glass-surface={currentPage === '/work'}
 						href="/work"
 						data-sveltekit-preload-data="hover">Work</a
@@ -40,7 +40,7 @@
 
 				<li>
 					<a
-						class="btn btn-md"
+						class="btn"
 						class:variant-glass-surface={currentPage === '/blog'}
 						href="/blog"
 						data-sveltekit-preload-data="hover">Blog</a
@@ -49,11 +49,15 @@
 
 				<li>
 					<a
-						class="btn btn-md"
+						class="btn"
 						class:variant-glass-surface={currentPage === '/about'}
 						href="/about"
 						data-sveltekit-preload-data="hover">About</a
 					>
+				</li>
+
+				<li>
+					<a href="/resume.pdf" download class="btn variant-ghost">Resume</a>
 				</li>
 
 				<li class="ml-4">

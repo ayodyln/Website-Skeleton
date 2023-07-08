@@ -1,7 +1,7 @@
 <script lang="ts">
-	import { ConicGradient } from '@skeletonlabs/skeleton'
+	import { ConicGradient, Accordion, AccordionItem } from '@skeletonlabs/skeleton'
 	import type { ConicStop } from '@skeletonlabs/skeleton'
-
+	//
 	const conicStops: ConicStop[] = [
 		{ label: 'Primary', color: 'rgb(var(--color-tertiary-500))', start: 0, end: 95.75 },
 		{ label: 'Secondary', color: 'rgb(var(--color-tertiary-300))', start: 95.75, end: 100 }
@@ -14,7 +14,6 @@
 		<h2 class="h2 mb-8 font-mono">Where I have worked</h2>
 
 		<div id="experience_component" class="card p-4">
-			<!-- Card Header -->
 			<hgroup class="flex items-start justify-between">
 				<div class="flex flex-col gap-1.5">
 					<h3 class="h3 leading-6">Lab Aid - Student Employee</h3>
@@ -40,22 +39,39 @@
 
 			<div class="my-4 h-[2px] w-full rounded-lg bg-current opacity-20" />
 
-			<!-- Card Body -->
-			<section class="ml-8">
-				<ul class="list-disc space-y-2">
-					<li>
-						Ensure the upkeep and quality of the lab I was responsible for. Updating all lab
-						equipment and providing any IT services for my lab. Also providing help to students at
-						my college with their questions about coding and lab equipment.
+			<section class="space-y-4">
+				<p>
+					The Advanced Digital Media Sandbox lab, is meant to be a place where students in the
+					Digital Media program can study and use the lab equipment. It's using the latest equipment
+					and software to help students learn and grow in their fields of study. Providing services
+					to students and faculty that are in the development and design program tracks.
+				</p>
+
+				<ul class="mx-4 space-y-8">
+					<li class="space-y-2">
+						<h4 class="h4">Quality of Lab</h4>
+						<p>
+							Ensure the upkeep and quality of the lab I was responsible for. Updating all lab
+							equipment and providing any IT services for my lab. Also providing help to students at
+							my college with their questions about coding and lab equipment.
+						</p>
 					</li>
-					<li>
-						Managed department equipment and inventory. Helping students borrow equipment for their
-						projects and classes. Then returned the equipment and made sure it was in working order.
+					<li class="space-y-2">
+						<h4 class="h4">Equipment Mangament</h4>
+						<p>
+							Managed department equipment and inventory. Helping students borrow equipment for
+							their projects and classes. Then returned the equipment and made sure it was in
+							working order.
+						</p>
 					</li>
-					<li>
-						Developed applications that benefited the lab and department. Using the latest
-						Javascript technologies and frameworks, I developed an inventory manager system for the
-						department. Which enables the department to track its assets and automate processes.
+					<li class="space-y-2">
+						<h4 class="h4">Developed Software</h4>
+						<p>
+							Developed applications that benefited the lab and department. Using the latest
+							Javascript technologies and frameworks, I developed an inventory manager system for
+							the department. Which enables the department to track its assets and automate
+							processes.
+						</p>
 					</li>
 				</ul>
 			</section>
@@ -122,9 +138,9 @@
 			<section class="space-y-4">
 				<p>
 					Studying Web Design and Application Development has given me the skills to create modern
-                    UI/UX designs and applications. Being able to create mobile applications to web
-                    applications and designing to content creation. My skills are very diverse and I'm always
-                    furthering my education.
+					UI/UX designs and applications. Being able to create mobile applications to web
+					applications and designing to content creation. My skills are very diverse and I'm always
+					furthering my education.
 				</p>
 
 				<div class="card variant-glass-tertiary flex items-center justify-between p-4">
