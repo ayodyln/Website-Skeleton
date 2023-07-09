@@ -30,7 +30,6 @@
 </svelte:head>
 
 <article id="blog_post" class="m-auto my-4 flex w-full max-w-5xl flex-col gap-4">
-	<!-- Title -->
 	<hgroup>
 		<h1 class="h1 mb-2 font-mono font-bold tracking-wide">{data.meta.title}</h1>
 		<div class="flex items-center justify-between">

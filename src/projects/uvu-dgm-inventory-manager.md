@@ -19,8 +19,8 @@ feature_image: /articles/projects/dgm-checkout-app/DGM-Checkout-feature.jpg
 github: ''
 ---
 
-## Svelte
+<script lang="ts">
+    // 
+</script>
 
-Media inside the **static** folder is served from `/`.
-
-![Svelte](favicon.png)
+content

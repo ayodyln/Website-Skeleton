@@ -12,7 +12,7 @@
 		(project: any) =>
 			project.categories.includes('Featured') && !project.categories.includes('Favorite')
 	)
-	$: console.log(favoriteProject)
+	// $: console.log(favoriteProject)
 </script>
 
 <svelte:head>

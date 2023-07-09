@@ -1,37 +1,39 @@
 <script lang="ts">
-	import { format } from 'date-fns'
-	export let data: any
+	import { techChip } from '../../../components/UI/DisplayWork'
 
-	$:console.log(data)
+	export let data: any
 </script>
 
-<h1>{data.meta.title}</h1>
+<!-- SEO -->
+<svelte:head>
+	<title>{data.meta.title}</title>
+	<meta property="og:title" content={data.meta.title} />
+	<meta property="og:type" content="article" />
+</svelte:head>
 
-<!-- <section class="max-w-5xl w-full m-auto my-4 flex flex-col gap-4">
-	{#await data}
-		<p>loading...</p>
-	{:then blog}
-		<section id="header">
-			<h1 class="text-4xl font-bold">{blog.title}</h1>
-			<span class="text-current opacity-70">
-				{format(new Date(blog.publish_date), 'MMMM do, yyyy')}
-				{@html `&#x2014;`}
-				{blog.read_time} minute read
-			</span>
-		</section>
-
+<article class="mx-auto my-4 w-full max-w-5xl space-y-4">
+	<hgroup
+		class="h-96 overflow-hidden rounded-lg bg-cover bg-no-repeat"
+		style="background-image: url({data.meta.hero_image});"
+	>
 		<div
-			id="article_hero"
-			class="bg-primary rounded-lg h-96 bg-cover bg-no-repeat bg-center shadow-lg"
-			style={`background-image: url(${blog.hero_image})`}
-		/>
+			class="flex h-full w-[4000px] flex-col justify-end gap-4 bg-gradient-to-tr from-surface-900/90 from-20% to-transparent p-4 text-surface-50"
+		>
+			<h1 class="h1 font-mono">{data.meta.title}</h1>
 
-		<div id="content" class="space-y-6 max-w-2xl w-full m-auto">
-			<section id="synopsis" class="rounded-lg italic font-medium bg-primary p-4 text-base-content">
-				<p>{@html blog.summary}</p>
-			</section>
+			<h3>Client: Utah Valley University - Digital Media Department</h3>
 
-			{@html blog.html}
+			<div class="flex flex-wrap gap-2">
+				{#each data.meta.tech as tech}
+					{#if tech.toString() !== 'Favorite'}
+						<span class="chip {techChip(tech.toString())}">
+							{tech}
+						</span>
+					{/if}
+				{/each}
+			</div>
 		</div>
-	{/await}
-</section> -->
+	</hgroup>
+
+	<svelte:component this={data.content} />
+</article>

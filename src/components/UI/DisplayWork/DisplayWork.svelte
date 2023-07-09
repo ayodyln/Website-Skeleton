@@ -45,7 +45,7 @@
 				</div>
 
 				<div class="flex items-end justify-between">
-					<a href="/work/{project.slug}" class="btn btn-sm variant-ghost-primary">Read More...</a>
+					<a href="/work/{project.slug}" class="btn variant-ghost-primary">Read More...</a>
 
 					<div class="flex gap-4">
 						{#if project.github}
